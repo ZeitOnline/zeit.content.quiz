@@ -1,0 +1,30 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <adapter factory=".quiz.quizFactory" name="quiz" />
+
+  <class class=".quiz.Quiz">
+    <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    <implements interface="zeit.cms.content.interfaces.IDAVPropertiesInXML" />
+    <require
+      interface=".interfaces.IReadQuiz"
+      permission="zope.View" />
+    <require
+      set_schema=".interfaces.IReadQuiz"
+      permission="zeit.EditContent" />
+    <require
+      interface=".interfaces.IWriteQuiz"
+      permission="zeit.EditContent" />
+    <require
+      interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zope.View" />
+    <require
+      set_schema="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zeit.EditContent" />
+  </class>
+
+  <interface
+    interface=".interfaces.IQuiz"
+    type="zeit.cms.interfaces.ICMSContentType"
+    />
+
+</configure>

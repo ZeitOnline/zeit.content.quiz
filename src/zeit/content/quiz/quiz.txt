@@ -1,0 +1,11 @@
+===================
+ Quiz content type
+===================
+
+>>> import zope.interface.verify
+>>> import zeit.content.quiz.interfaces
+>>> import zeit.content.quiz.quiz
+
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IQuiz, zeit.content.quiz.quiz.Quiz())
+True
