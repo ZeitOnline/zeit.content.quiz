@@ -12,9 +12,7 @@ import zeit.content.quiz.interfaces
 QUIZ_TEMPLATE = u"""\
 <quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head/>
-    <body>
-        <container/>
-    </body>
+    <body/>
 </quiz>"""
 
 
@@ -27,3 +25,9 @@ class Quiz(zeit.cms.content.metadata.CommonMetadata):
 
 
 quizFactory = zeit.cms.content.adapter.xmlContentFactory(Quiz)
+
+
+resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
+    'quiz')
+resourceFactory = zope.component.adapter(
+    zeit.content.quiz.interfaces.IQuiz)(resourceFactory)

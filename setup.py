@@ -25,7 +25,8 @@ setup(
         'zope.interface',
         'zope.annotation',
         'zope.app.container',
-        
+        'zope.formlib',
+        'zope.cachedescriptors',
         ],
     extras_require={
         'test': [
