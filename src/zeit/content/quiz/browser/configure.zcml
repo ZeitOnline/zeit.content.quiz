@@ -32,6 +32,23 @@
     permission="zope.View"
     />
 
+  <browser:menuItem
+    for="..interfaces.IQuiz"
+    layer="zeit.cms.browser.interfaces.ICMSLayer"
+    menu="zeit-context-views"
+    title="View metadata"
+    action="@@view.html"
+    permission="zope.View"
+    filter="python:modules['zeit.cms.repository.interfaces'].IRepositoryContent.providedBy(context)"
+    />
+
+  <browser:defaultView
+    for="..interfaces.IQuiz"
+    layer="zeit.cms.browser.interfaces.ICMSLayer"
+    name="view.html"
+    />
+
+
   <gocept:pagelet
     for="..interfaces.IQuiz"
     name="questions.html"
