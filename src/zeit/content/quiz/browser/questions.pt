@@ -8,4 +8,13 @@
     <div class="subtitle" tal:content="view/metadata/subtitle" />
   </div>
 
+  <ul tal:content="structure provider:quiz-add-menu" />
+
+  Questions:
+  <ul>
+    <li tal:repeat="q context/values">
+      <a tal:attributes="href q/@@absolute_url"
+         tal:content="q/__name__" />
+    </li>
+
 </div>

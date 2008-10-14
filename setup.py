@@ -21,12 +21,18 @@ setup(
     namespace_packages = ['zeit', 'zeit.content'],
     install_requires=[
         'setuptools',
+        'z3c.menu.ready2go',
         'zeit.cms',
-        'zope.interface',
         'zope.annotation',
         'zope.app.container',
-        'zope.formlib',
         'zope.cachedescriptors',
+        'zope.component',
+        'zope.event',
+        'zope.formlib',
+        'zope.interface',
+        'zope.lifecycleevent',
+        'zope.schema',
+        'zope.traversing',
         ],
     extras_require={
         'test': [

@@ -10,8 +10,8 @@ contain answers.  Let's Create a browser first:
 >>> browser.addHeader('Authorization', 'Basic user:userpw')
 
 
-Adding a quiz
-=============
+Add a quiz
+==========
 
 To add a quiz we go to a folder:
 
@@ -51,6 +51,27 @@ There is no read only view of the metadata:
 >>> browser.getLink('View metadata')
 Traceback (most recent call last):
 LinkNotFoundError
+
+Add a question
+--------------
+
+A question can be added using the questions view:
+
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('Add question').click()
+>>> browser.getControl('Title').value = 'first question'
+>>> browser.getControl('Question').value = '<a/>'
+>>> browser.getControl('Add').click()
+
+Adding a question redirects (for the moment) to the questions overview
+where a link to the question is shown:
+
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
+>>> browser.getLink('first question')
+<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question'>
+
+
 
 
 Checkin

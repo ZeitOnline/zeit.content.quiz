@@ -2,6 +2,14 @@
  Quiz content type
 ===================
 
+Functional test setup:
+
+>>> import zope.app.component.hooks
+>>> old_site = zope.app.component.hooks.getSite()
+>>> zope.app.component.hooks.setSite(getRootFolder())
+
+Interface test:
+
 >>> import zope.interface.verify
 >>> import zeit.content.quiz.interfaces
 >>> import zeit.content.quiz.quiz
@@ -9,3 +17,7 @@
 >>> zope.interface.verify.verifyObject(
 ...     zeit.content.quiz.interfaces.IQuiz, zeit.content.quiz.quiz.Quiz())
 True
+
+
+Clean up:
+>>> zope.app.component.hooks.setSite(old_site)

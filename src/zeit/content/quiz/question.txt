@@ -1,0 +1,12 @@
+===========================
+ Question sub content type
+===========================
+
+>>> import zope.interface.verify
+>>> import zeit.content.quiz.interfaces
+>>> import zeit.content.quiz.question
+
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IQuestion, 
+...     zeit.content.quiz.question.Question())
+True

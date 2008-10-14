@@ -1,5 +1,8 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
+  <include package="z3c.menu.ready2go" />
+
+
   <adapter factory=".quiz.quizFactory" name="quiz" />
   <adapter factory=".quiz.resourceFactory" />
 
@@ -28,6 +31,33 @@
     type="zeit.cms.interfaces.ICMSContentType"
     />
 
+  <adapter factory=".quiz.local_content_adapter" />
+
   <include package=".browser" />
+
+
+  <adapter factory=".question.questionFactory" name="question" />
+  <adapter factory=".question.resourceFactory" />
+
+  <class class=".question.Question">
+    <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    <implements interface="zeit.cms.content.interfaces.IDAVPropertiesInXML" />
+    <require
+      interface=".interfaces.IReadQuestion"
+      permission="zope.View" />
+    <require
+      set_schema=".interfaces.IReadQuestion"
+      permission="zeit.EditContent" />
+    <require
+      interface=".interfaces.IWriteQuestion"
+      permission="zeit.EditContent" />
+    <require
+      interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zope.View" />
+    <require
+      set_schema="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zeit.EditContent" />
+  </class>
+
 
 </configure>
