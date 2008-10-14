@@ -19,8 +19,8 @@ QuizLayer = zope.app.testing.functional.ZCMLLayer(
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(zope.testing.doctest.DocFileSuite(
-            'quiz.txt'))
+            'question.txt'))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
-            'README.txt',
+            'quiz.txt',
             layer=QuizLayer))
     return suite
