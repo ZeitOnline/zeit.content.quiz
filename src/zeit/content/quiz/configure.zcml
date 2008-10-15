@@ -3,6 +3,7 @@
   <include package="z3c.menu.ready2go" />
 
 
+  <!-- Quiz -->
   <adapter factory=".container.xml_source" />
   <adapter factory=".quiz.quizFactory" name="quiz" />
   <adapter factory=".quiz.resourceFactory" />
@@ -31,8 +32,6 @@
     interface=".interfaces.IQuiz"
     type="zeit.cms.interfaces.ICMSContentType"
     />
-
-  <adapter factory=".quiz.local_content_adapter" />
 
   <include package=".browser" />
 

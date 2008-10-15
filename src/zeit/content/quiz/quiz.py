@@ -39,18 +39,3 @@ resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
     'quiz')
 resourceFactory = zope.component.adapter(
     zeit.content.quiz.interfaces.IQuiz)(resourceFactory)
-
-
-@zope.component.adapter(zeit.content.quiz.interfaces.IQuiz)
-@zope.interface.implementer(zeit.cms.workingcopy.interfaces.ILocalContent)
-def local_content_adapter(context):
-    repository = zope.component.getUtility(
-        zeit.cms.repository.interfaces.IRepository)
-    content = repository.getCopyOf(context.uniqueId)
-    repository_properties = zeit.connector.interfaces.IWebDAVProperties(
-        context)
-    zope.interface.directlyProvides(
-        content, zeit.cms.workingcopy.interfaces.ILocalContent)
-    new_properties = zeit.connector.interfaces.IWebDAVProperties(content)
-    new_properties.update(repository_properties)
-    return content
