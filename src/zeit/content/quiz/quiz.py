@@ -26,6 +26,11 @@ class Quiz(zeit.content.quiz.container.Container,
 
     default_template = QUIZ_TEMPLATE
 
+    def _iter_xml_children(self):
+        for child in self.xml['body'].getchildren():
+            if child.tag == 'question':
+                yield child
+
 
 quizFactory = zeit.cms.content.adapter.xmlContentFactory(Quiz)
 

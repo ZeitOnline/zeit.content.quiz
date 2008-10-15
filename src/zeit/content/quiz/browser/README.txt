@@ -60,7 +60,8 @@ A question can be added using the questions view:
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('Add question').click()
 >>> browser.getControl('Title').value = 'first question'
->>> browser.getControl('Question').value = '<a/>'
+>>> browser.getControl('Text').value = '<strong>test</strong>er'
+>>> browser.handleErrors = False
 >>> browser.getControl('Add').click()
 
 Adding a question redirects (for the moment) to the questions overview

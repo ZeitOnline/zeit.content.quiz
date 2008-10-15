@@ -46,7 +46,6 @@ class IReadQuestion(IReadContainer):
     """Read methods for question."""
 
     title = zope.schema.TextLine(title=_('Title'), required=False)
-    text = zeit.cms.content.field.XMLTree(title=_('Question'))
 
 
 class IWriteQuestion(IWriteContainer):

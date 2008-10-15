@@ -4,7 +4,7 @@
   xmlns:gocept="http://namespaces.gocept.com/zcml"
   i18n_domain="zeit.cms">
 
-  <!-- Add view -->
+  <!-- quiz -->
   <browser:page
     for="zeit.cms.repository.interfaces.IFolder"
     permission="zope.ManageContent"
@@ -13,7 +13,6 @@
     menu="zeit-add-menu" title="Quiz"
     />
   
-  <!-- Edit view -->
   <browser:page
     name="edit.html"
     for="..interfaces.IQuiz"
@@ -23,7 +22,6 @@
     menu="zeit-context-views" title="Edit metadata"
     />
 
-  <!-- View view -->
   <browser:page
     name="view.html"
     for="..interfaces.IQuiz"
@@ -47,7 +45,6 @@
     layer="zeit.cms.browser.interfaces.ICMSLayer"
     name="view.html"
     />
-
 
   <gocept:pagelet
     for="..interfaces.IQuiz"
@@ -79,12 +76,22 @@
     weight="1"
     />
 
+  <!-- question -->
   <gocept:pagelet
     for="..interfaces.IQuiz"
     name="addQuestion.html"
     class=".question.AddForm"
     layer="zeit.cms.browser.interfaces.ICMSLayer"
     permission="zeit.EditContent"
+    />
+
+  <browser:page
+    name="edit.html"
+    for="..interfaces.IQuestion"
+    class=".question.EditForm"
+    layer="zeit.cms.browser.interfaces.ICMSLayer"
+    permission="zeit.EditContent"
+    menu="zeit-context-views" title="Edit"
     />
 
 </configure>

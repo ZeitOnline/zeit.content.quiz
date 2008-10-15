@@ -39,6 +39,7 @@
 
   <adapter factory=".question.questionFactory" name="question" />
   <adapter factory=".question.resourceFactory" />
+  <adapter factory=".question.QuestionHTMLContent" />
 
   <class class=".question.Question">
     <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
@@ -51,6 +52,12 @@
       permission="zeit.EditContent" />
     <require
       interface=".interfaces.IWriteQuestion"
+      permission="zeit.EditContent" />
+    <require
+      interface="zeit.wysiwyg.interfaces.IHTMLContent"
+      permission="zope.View" />
+    <require
+      set_schema="zeit.wysiwyg.interfaces.IHTMLContent"
       permission="zeit.EditContent" />
     <require
       interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
