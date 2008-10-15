@@ -5,9 +5,9 @@
 
 import zope.interface
 
-import zeit.cms.content.xmlsupport
-
+import zeit.cms.content.property
 import zeit.content.quiz.interfaces
+import zeit.content.quiz.container
 
 
 QUESTION_TEMPLATE = u"""\
@@ -17,13 +17,14 @@ QUESTION_TEMPLATE = u"""\
 </question>"""
 
 
-class Question(zeit.cms.content.xmlsupport.XMLContentBase,
-               zeit.cms.repository.repository.Container):
+class Question(zeit.content.quiz.container.Container):
 
     zope.interface.implements(zeit.content.quiz.interfaces.IQuestion)
 
-    title = u''
-    text = None
+    title = zeit.cms.content.property.Structure(
+        '.body.title')
+    text = zeit.cms.content.property.ObjectPathProperty(
+        '.body.text')
     default_template = QUESTION_TEMPLATE
 
 

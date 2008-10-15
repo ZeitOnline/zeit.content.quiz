@@ -3,6 +3,7 @@
   <include package="z3c.menu.ready2go" />
 
 
+  <adapter factory=".container.xml_source" />
   <adapter factory=".quiz.quizFactory" name="quiz" />
   <adapter factory=".quiz.resourceFactory" />
 

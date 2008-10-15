@@ -88,3 +88,17 @@ We now have a view tab:
 <?xml ...
 <!DOCTYPE ...
 <title> kochen – View quiz metadata </title>...
+
+
+Checkout
+========
+
+Check out the quiz again:
+
+>>> browser.getLink('Checkout').click()
+
+The question we created before checking in the quiz is still there:
+
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('first question')
+<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question'>

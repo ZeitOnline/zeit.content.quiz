@@ -17,7 +17,7 @@ import zeit.content.quiz.question
 class AddForm(zope.formlib.form.AddForm):
 
     form_fields = zope.formlib.form.Fields(
-        zeit.content.quiz.interfaces.IQuestion).omit('__name__')
+        zeit.content.quiz.interfaces.IQuestion).omit('__name__', 'xml')
 
     def createAndAdd(self, data):
         question = zeit.content.quiz.question.Question()

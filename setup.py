@@ -23,6 +23,7 @@ setup(
         'setuptools',
         'z3c.menu.ready2go',
         'zeit.cms',
+        'zeit.connector',
         'zope.annotation',
         'zope.app.container',
         'zope.cachedescriptors',

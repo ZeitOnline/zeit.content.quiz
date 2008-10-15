@@ -6,9 +6,10 @@
 import zope.interface
 
 import zeit.cms.content.metadata
-import zeit.cms.repository.repository
 
 import zeit.content.quiz.interfaces
+import zeit.content.quiz.container
+
 
 QUIZ_TEMPLATE = u"""\
 <quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">
@@ -17,7 +18,7 @@ QUIZ_TEMPLATE = u"""\
 </quiz>"""
 
 
-class Quiz(zeit.cms.repository.repository.Container,
+class Quiz(zeit.content.quiz.container.Container,
            zeit.cms.content.metadata.CommonMetadata):
     """Quiz"""
 
