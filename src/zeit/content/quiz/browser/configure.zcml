@@ -8,7 +8,7 @@
   <browser:page
     for="zeit.cms.repository.interfaces.IFolder"
     permission="zope.ManageContent"
-    class=".form.AddQuiz"
+    class=".quiz.AddQuiz"
     name="zeit.content.quiz.Add"
     menu="zeit-add-menu" title="Quiz"
     />
@@ -18,7 +18,7 @@
     name="edit.html"
     for="..interfaces.IQuiz"
     layer="zeit.cms.browser.interfaces.ICMSLayer"
-    class=".form.EditQuiz"
+    class=".quiz.EditQuiz"
     permission="zeit.EditContent"
     menu="zeit-context-views" title="Edit metadata"
     />
@@ -28,7 +28,7 @@
     name="view.html"
     for="..interfaces.IQuiz"
     layer="zeit.cms.browser.interfaces.ICMSLayer"
-    class=".form.DisplayQuiz"
+    class=".quiz.DisplayQuiz"
     permission="zope.View"
     />
 
