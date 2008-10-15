@@ -18,6 +18,12 @@ import zeit.content.quiz.interfaces
 class Container(zeit.cms.content.xmlsupport.XMLContentBase,
                 zope.app.container.ordered.OrderedContainer):
     """Container that does not put its children in the repository.
+
+    >>> import zope.interface.verify
+    >>> zope.interface.verify.verifyClass(
+    ...     zeit.content.quiz.interfaces.IContainer, Container)
+    True
+
     """
 
     zope.interface.implements(zeit.content.quiz.interfaces.IContainer)
