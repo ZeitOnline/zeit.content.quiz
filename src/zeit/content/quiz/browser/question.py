@@ -29,6 +29,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
     factory = zeit.content.quiz.question.Question
     checkout = False
+    cancel_next_view = 'questions.html'
 
     def nextURL(self):
         url = zope.component.getMultiAdapter(

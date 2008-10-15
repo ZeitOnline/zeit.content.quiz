@@ -55,23 +55,44 @@ LinkNotFoundError
 Add a question
 --------------
 
-A question can be added using the questions view:
+A question can be added using the questions view. 
 
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('Add question').click()
->>> browser.getControl('Title').value = 'first question'
->>> browser.getControl('Text').value = '<strong>test</strong>er'
->>> browser.getControl('Add').click()
+
+The user can decide to abort adding a question, then he is sent back
+to the questions view:
+
+>>> browser.getControl('Cancel').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
 Adding a question redirects (for the moment) to the questions overview
 where a link to the question is shown:
 
+>>> browser.getLink('Add question').click()
+>>> browser.getControl('Title').value = 'first question'
+>>> browser.getControl('Text').value = '<p>test</p>er'
+>>> browser.getControl('Add').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 >>> browser.getLink('first question')
 <Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
 
+Clicking on the links opens an edit form which contains the previously
+entered values:
 
+>>> browser.getLink('first question').click()
+>>> browser.getControl('Title').value
+'first question'
+>>> browser.getControl('Text').value
+'<p>test</p>er\r\n'
+
+These values can be changed:
+
+>>> browser.getControl('Title').value = '1st question'
+>>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
+>>> browser.getControl('Apply').click()
 
 
 Checkin
@@ -97,8 +118,15 @@ Check out the quiz again:
 
 >>> browser.getLink('Checkout').click()
 
-The question we created before checking in the quiz is still there:
+The question we created before checking in the quiz is still there and
+still has the same values:
 
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('first question')
 <Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
+>>> browser.getLink('first question').click()
+>>> browser.getControl('Title').value
+'1st question'
+>>> browser.getControl('Text').value
+'<p><em>foo</em> bar</p>\r\n'
+
