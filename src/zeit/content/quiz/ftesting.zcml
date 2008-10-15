@@ -17,6 +17,9 @@
 
   <include package="zeit.cms" file="principals-testing.zcml" />
 
+  <include package="zeit.wysiwyg" />
+  <include package="zeit.wysiwyg.browser" />
+
   <include package="zeit.content.quiz" />
 
 </configure>

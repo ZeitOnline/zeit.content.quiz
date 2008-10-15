@@ -61,7 +61,6 @@ A question can be added using the questions view:
 >>> browser.getLink('Add question').click()
 >>> browser.getControl('Title').value = 'first question'
 >>> browser.getControl('Text').value = '<strong>test</strong>er'
->>> browser.handleErrors = False
 >>> browser.getControl('Add').click()
 
 Adding a question redirects (for the moment) to the questions overview
@@ -70,7 +69,7 @@ where a link to the question is shown:
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 >>> browser.getLink('first question')
-<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question'>
+<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
 
 
 
@@ -102,4 +101,4 @@ The question we created before checking in the quiz is still there:
 
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('first question')
-<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question'>
+<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
