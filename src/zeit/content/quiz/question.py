@@ -25,6 +25,13 @@ QUESTION_TEMPLATE = u"""\
 
 
 class Question(zeit.content.quiz.container.Container):
+    """A question in a quiz.
+
+    >>> import zope.interface.verify
+    >>> zope.interface.verify.verifyObject(
+    ...     zeit.content.quiz.interfaces.IQuestion, Question())
+    True
+    """
 
     zope.interface.implements(zeit.content.quiz.interfaces.IQuestion)
 
