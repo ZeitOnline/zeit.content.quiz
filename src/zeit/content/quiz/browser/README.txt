@@ -55,7 +55,7 @@ LinkNotFoundError
 Add a question
 --------------
 
-A question can be added using the questions view. 
+A question can be added using the questions view:
 
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('Add question').click()
@@ -94,12 +94,55 @@ These values can be changed:
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 
+Add an answer
+-------------
 
-Checkin
-=======
+An answer can be added in the edit view of a question:
 
-Check in the quiz:
+>>> browser.getLink('first question').click()
+>>> browser.getLink('Add answer').click()
 
+The user can decide to abort adding a answer, then he is sent back
+to the answers view:
+
+>>> browser.getControl('Cancel').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
+
+Adding an answer redirects (for the moment) to the answers overview
+where a link to the answer is shown:
+
+>>> browser.getLink('Add answer').click()
+>>> browser.getControl('Title').value = 'first answer'
+>>> browser.getControl('Text').value = '<p>test</p>er'
+>>> browser.getControl('Add').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
+>>> browser.getLink('first answer')
+<Link text='first answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
+
+Clicking on the links opens an edit form which contains the previously
+entered values:
+
+>>> browser.getLink('first answer').click()
+>>> browser.getControl('Title').value
+'first answer'
+>>> browser.getControl('Text').value
+'<p>test</p>er\r\n'
+
+These values can be changed:
+
+>>> browser.getControl('Title').value = '1st answer'
+>>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
+>>> browser.getControl('Apply').click()
+
+
+Check-in
+========
+
+To check-in the quiz we have to go back to the quiz:
+
+>>> browser.getLink('kochen').click()
 >>> browser.getLink('Checkin').click()
 
 We now have a view tab:
@@ -130,3 +173,13 @@ still has the same values:
 >>> browser.getControl('Text').value
 '<p><em>foo</em> bar</p>\r\n'
 
+The answer is still there and has the same values:
+
+>>> browser.getLink('Answers').click()
+>>> browser.getLink('first answer')
+<Link text='first answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
+>>> browser.getLink('first answer').click()
+>>> browser.getControl('Title').value
+'1st answer'
+>>> browser.getControl('Text').value
+'<p><em>foh</em> bah</p>\r\n'

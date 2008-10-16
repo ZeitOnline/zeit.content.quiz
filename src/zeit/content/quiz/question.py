@@ -3,8 +3,11 @@
 # See also LICENSE.txt
 # $Id$
 
+import zope.component
 import zope.interface
 
+import zeit.cms.connector
+import zeit.cms.content.adapter
 import zeit.cms.content.property
 import zeit.wysiwyg.html
 

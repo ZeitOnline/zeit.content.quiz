@@ -2,7 +2,6 @@
 
   <include package="z3c.menu.ready2go" />
 
-
   <!-- Quiz -->
   <adapter factory=".container.xml_source" />
   <adapter factory=".quiz.quizFactory" name="quiz" />
@@ -33,9 +32,7 @@
     type="zeit.cms.interfaces.ICMSContentType"
     />
 
-  <include package=".browser" />
-
-
+  <!-- Question -->
   <adapter factory=".question.questionFactory" name="question" />
   <adapter factory=".question.resourceFactory" />
   <adapter factory=".question.QuestionHTMLContent" />
@@ -66,5 +63,34 @@
       permission="zeit.EditContent" />
   </class>
 
+  <!-- Answer -->
+  <adapter factory=".answer.answerFactory" name="answer" />
+  <adapter factory=".answer.resourceFactory" />
+  <adapter factory=".answer.AnswerHTMLContent" />
+
+  <class class=".answer.Answer">
+    <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    <implements interface="zeit.cms.content.interfaces.IDAVPropertiesInXML" />
+    <require
+      interface=".interfaces.IAnswer"
+      permission="zope.View" />
+    <require
+      set_schema=".interfaces.IAnswer"
+      permission="zeit.EditContent" />
+    <require
+      interface="zeit.wysiwyg.interfaces.IHTMLContent"
+      permission="zope.View" />
+    <require
+      set_schema="zeit.wysiwyg.interfaces.IHTMLContent"
+      permission="zeit.EditContent" />
+    <require
+      interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zope.View" />
+    <require
+      set_schema="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
+      permission="zeit.EditContent" />
+  </class>
+
+  <include package=".browser" />
 
 </configure>

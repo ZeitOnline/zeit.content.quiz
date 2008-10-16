@@ -1,0 +1,13 @@
+<div id="full-content-area"
+  i18n:domain="zeit.cms">
+
+  <ul tal:content="structure provider:question-add-menu" />
+
+  <p>Answers:</p>
+  <ul>
+    <li tal:repeat="q context/values">
+      <a tal:attributes="href string:${q/@@absolute_url}/@@edit.html"
+         tal:content="q/__name__" />
+    </li>
+  </ul>
+</div>

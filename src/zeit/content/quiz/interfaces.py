@@ -54,3 +54,9 @@ class IWriteQuestion(IWriteContainer):
 
 class IQuestion(IReadQuestion, IWriteQuestion):
     """Question content type."""
+
+
+class IAnswer(zeit.cms.content.interfaces.IXMLContent):
+    """Answer content type."""
+    
+    title = zope.schema.TextLine(title=_('Title'), required=False)

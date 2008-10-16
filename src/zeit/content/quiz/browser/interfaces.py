@@ -8,3 +8,6 @@ import z3c.menu.ready2go
 
 class IQuizAddMenu(z3c.menu.ready2go.IAddMenu):
     """Add menu at quiz."""
+
+class IQuestionAddMenu(z3c.menu.ready2go.IAddMenu):
+    """Add menu at question."""

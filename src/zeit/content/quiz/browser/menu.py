@@ -10,3 +10,7 @@ import z3c.menu.ready2go.manager
 QuizAddMenu = zope.viewlet.manager.ViewletManager(
     'left', z3c.menu.ready2go.IAddMenu,
     bases=(z3c.menu.ready2go.manager.MenuManager,))
+
+QuestionAddMenu = zope.viewlet.manager.ViewletManager(
+    'left', z3c.menu.ready2go.IAddMenu,
+    bases=(z3c.menu.ready2go.manager.MenuManager,))

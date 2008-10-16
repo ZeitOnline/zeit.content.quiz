@@ -22,6 +22,8 @@ def test_suite():
             'question.txt'))
     suite.addTest(zope.testing.doctest.DocTestSuite(
             'zeit.content.quiz.container'))
+    suite.addTest(zope.testing.doctest.DocTestSuite(
+            'zeit.content.quiz.answer'))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
             'quiz.txt',
             layer=QuizLayer))

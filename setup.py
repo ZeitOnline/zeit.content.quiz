@@ -26,6 +26,7 @@ setup(
         'zeit.connector',
         'zope.annotation',
         'zope.app.container',
+        'zope.app.pagetemplate',
         'zope.cachedescriptors',
         'zope.component',
         'zope.event',
