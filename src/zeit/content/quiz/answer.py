@@ -6,13 +6,12 @@
 import zope.component
 import zope.interface
 
-import zeit.cms.connector
-import zeit.cms.content.adapter
 import zeit.cms.content.property
 import zeit.cms.content.xmlsupport
 import zeit.wysiwyg.html
 
 import zeit.content.quiz.interfaces
+import zeit.content.quiz.container
 
 
 ANSWER_TEMPLATE = u"""\
@@ -31,7 +30,7 @@ class Answer(zeit.cms.content.xmlsupport.XMLContentBase):
     >>> zope.interface.verify.verifyObject(
     ...     zeit.content.quiz.interfaces.IAnswer, Answer())
     True
-    
+
     """
     zope.interface.implements(zeit.content.quiz.interfaces.IAnswer)
 
@@ -39,14 +38,13 @@ class Answer(zeit.cms.content.xmlsupport.XMLContentBase):
 
     default_template = ANSWER_TEMPLATE
 
+    def __init__(self, xml_source=None, xml=None):
+        super(Answer, self).__init__(xml_source)
+        if xml is not None:
+            self.xml = xml
 
-answerFactory = zeit.cms.content.adapter.xmlContentFactory(Answer)
 
-
-resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
-    'answer')
-resourceFactory = zope.component.adapter(
-    zeit.content.quiz.interfaces.IAnswer)(resourceFactory)
+answerFactory = zeit.content.quiz.container.xml_tree_content_adapter(Answer)
 
 
 class AnswerHTMLContent(zeit.wysiwyg.html.HTMLContentBase):

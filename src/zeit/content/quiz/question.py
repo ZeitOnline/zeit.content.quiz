@@ -6,8 +6,6 @@
 import zope.component
 import zope.interface
 
-import zeit.cms.connector
-import zeit.cms.content.adapter
 import zeit.cms.content.property
 import zeit.wysiwyg.html
 
@@ -31,8 +29,8 @@ class Question(zeit.content.quiz.container.Container):
     >>> zope.interface.verify.verifyObject(
     ...     zeit.content.quiz.interfaces.IQuestion, Question())
     True
-    """
 
+    """
     zope.interface.implements(zeit.content.quiz.interfaces.IQuestion)
 
     title = zeit.cms.content.property.Structure('.body.title')
@@ -45,13 +43,8 @@ class Question(zeit.content.quiz.container.Container):
                 yield child
 
 
-questionFactory = zeit.cms.content.adapter.xmlContentFactory(Question)
-
-
-resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
-    'question')
-resourceFactory = zope.component.adapter(
-    zeit.content.quiz.interfaces.IQuestion)(resourceFactory)
+questionFactory = zeit.content.quiz.container.xml_tree_content_adapter(
+    Question)
 
 
 class QuestionHTMLContent(zeit.wysiwyg.html.HTMLContentBase):

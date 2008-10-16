@@ -15,11 +15,7 @@ from zeit.cms.i18n import MessageFactory as _
 
 class IReadContainer(zeit.cms.content.interfaces.IXMLContent,
                      zope.app.container.interfaces.IReadContainer):
-
-    def copy_xml_tree():
-        """Return a copy of self.xml with copies of the XML representations of
-        the container's children filled in.
-        """
+    pass
 
 
 class IWriteContainer(zope.app.container.interfaces.IWriteContainer):

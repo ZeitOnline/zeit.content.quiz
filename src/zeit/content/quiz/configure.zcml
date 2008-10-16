@@ -3,7 +3,6 @@
   <include package="z3c.menu.ready2go" />
 
   <!-- Quiz -->
-  <adapter factory=".container.xml_source" />
   <adapter factory=".quiz.quizFactory" name="quiz" />
   <adapter factory=".quiz.resourceFactory" />
 
@@ -34,7 +33,6 @@
 
   <!-- Question -->
   <adapter factory=".question.questionFactory" name="question" />
-  <adapter factory=".question.resourceFactory" />
   <adapter factory=".question.QuestionHTMLContent" />
 
   <class class=".question.Question">
@@ -65,7 +63,6 @@
 
   <!-- Answer -->
   <adapter factory=".answer.answerFactory" name="answer" />
-  <adapter factory=".answer.resourceFactory" />
   <adapter factory=".answer.AnswerHTMLContent" />
 
   <class class=".answer.Answer">

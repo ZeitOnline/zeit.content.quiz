@@ -20,6 +20,7 @@ setup(
     license='gocept proprietary',
     namespace_packages = ['zeit', 'zeit.content'],
     install_requires=[
+        'lxml',
         'setuptools',
         'z3c.menu.ready2go',
         'zeit.cms',
