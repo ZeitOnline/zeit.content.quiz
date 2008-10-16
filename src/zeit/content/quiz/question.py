@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import zope.app.container.interfaces
 import zope.component
 import zope.interface
 
@@ -22,16 +23,21 @@ QUESTION_TEMPLATE = u"""\
 </question>"""
 
 
-class Question(zeit.content.quiz.container.Container):
+class Question(zeit.content.quiz.container.Container,
+               zeit.content.quiz.container.Contained):
     """A question in a quiz.
 
     >>> import zope.interface.verify
     >>> zope.interface.verify.verifyObject(
     ...     zeit.content.quiz.interfaces.IQuestion, Question())
     True
+    >>> zope.interface.verify.verifyObject(
+    ...     zope.app.container.interfaces.IContained, Question())
+    True
 
     """
-    zope.interface.implements(zeit.content.quiz.interfaces.IQuestion)
+    zope.interface.implements(zeit.content.quiz.interfaces.IQuestion,
+                              zope.app.container.interfaces.IContained)
 
     title = zeit.cms.content.property.Structure('.body.title')
 

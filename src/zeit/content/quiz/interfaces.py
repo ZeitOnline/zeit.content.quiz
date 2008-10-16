@@ -13,24 +13,18 @@ import zeit.cms.content.field
 from zeit.cms.i18n import MessageFactory as _
 
 
-class IReadContainer(zeit.cms.content.interfaces.IXMLContent,
-                     zope.app.container.interfaces.IReadContainer):
-    pass
+class IContainer(zope.app.container.interfaces.IContainer,
+                 zeit.cms.content.interfaces.IXMLRepresentation):
+    """Container that stores its children inside its own xml representation."""
 
 
-class IWriteContainer(zope.app.container.interfaces.IWriteContainer):
-    pass
-
-
-class IContainer(IReadContainer, IWriteContainer):
-    pass
-
-
-class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata, IReadContainer):
+class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata, 
+                zeit.cms.content.interfaces.IXMLContent,
+                zope.app.container.interfaces.IReadContainer):
     """Read methods for quiz."""
 
 
-class IWriteQuiz(IWriteContainer):
+class IWriteQuiz(zope.app.container.interfaces.IWriteContainer):
     """Write methods for quiz."""
 
 
@@ -38,13 +32,14 @@ class IQuiz(IReadQuiz, IWriteQuiz):
     """Quiz content type."""
 
 
-class IReadQuestion(IReadContainer):
+class IReadQuestion(zope.app.container.interfaces.IReadContainer,
+                    zeit.cms.content.interfaces.IXMLRepresentation):
     """Read methods for question."""
 
     title = zope.schema.TextLine(title=_('Title'), required=False)
 
 
-class IWriteQuestion(IWriteContainer):
+class IWriteQuestion(zope.app.container.interfaces.IWriteContainer):
     """Write methods for question."""
 
 
@@ -52,7 +47,7 @@ class IQuestion(IReadQuestion, IWriteQuestion):
     """Question content type."""
 
 
-class IAnswer(zeit.cms.content.interfaces.IXMLContent):
+class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation):
     """Answer content type."""
     
     title = zope.schema.TextLine(title=_('Title'), required=False)

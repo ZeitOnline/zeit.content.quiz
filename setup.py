@@ -34,6 +34,7 @@ setup(
         'zope.formlib',
         'zope.interface',
         'zope.lifecycleevent',
+        'zope.location',
         'zope.schema',
         'zope.traversing',
         ],

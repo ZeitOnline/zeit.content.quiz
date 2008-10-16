@@ -3,11 +3,11 @@
 # See also LICENSE.txt
 # $Id$
 
+import zope.app.container.interfaces
 import zope.component
 import zope.interface
 
 import zeit.cms.content.property
-import zeit.cms.content.xmlsupport
 import zeit.wysiwyg.html
 
 import zeit.content.quiz.interfaces
@@ -23,25 +23,24 @@ ANSWER_TEMPLATE = u"""\
 </answer>"""
 
 
-class Answer(zeit.cms.content.xmlsupport.XMLContentBase):
+class Answer(zeit.content.quiz.container.Contained):
     """A possible answer to a question of a quiz.
 
     >>> import zope.interface.verify
     >>> zope.interface.verify.verifyObject(
     ...     zeit.content.quiz.interfaces.IAnswer, Answer())
     True
+    >>> zope.interface.verify.verifyObject(
+    ...     zope.app.container.interfaces.IContained, Answer())
+    True
 
     """
-    zope.interface.implements(zeit.content.quiz.interfaces.IAnswer)
+    zope.interface.implements(zeit.content.quiz.interfaces.IAnswer,
+                              zope.app.container.interfaces.IContained)
 
     title = zeit.cms.content.property.Structure('.body.title')
 
     default_template = ANSWER_TEMPLATE
-
-    def __init__(self, xml_source=None, xml=None):
-        super(Answer, self).__init__(xml_source)
-        if xml is not None:
-            self.xml = xml
 
 
 answerFactory = zeit.content.quiz.container.xml_tree_content_adapter(Answer)
