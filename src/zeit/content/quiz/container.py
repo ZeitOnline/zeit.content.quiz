@@ -27,7 +27,7 @@ class Container(UserDict.DictMixin):
 
     def __getitem__(self, name):
         for xml_child in self._iter_xml_children():
-            if name == xml_child.get('__name__'):
+            if name == xml_child.get('name'):
                 child = zope.component.getAdapter(
                     xml_child, zeit.cms.interfaces.ICMSContent,
                     name=xml_child.tag)
@@ -38,19 +38,19 @@ class Container(UserDict.DictMixin):
     
     def __setitem__(self, name, obj):
         zope.location.locate(obj, self, name)
-        obj.xml.set('__name__', name)
+        obj.xml.set('name', name)
         self._append_xml_child(obj)
 
     def __delitem__(self, name):
         for xml_child in self._iter_xml_children():
-            if name == xml_child.get('__name__'):
+            if name == xml_child.get('name'):
                 xml_child.getparent().remove(xml_child)
                 break
         else:
             raise KeyError(name)
 
     def keys(self):
-        return [xml_child.get('__name__')
+        return [xml_child.get('name')
                 for xml_child in self._iter_xml_children()]
 
     def _iter_xml_children(self):
