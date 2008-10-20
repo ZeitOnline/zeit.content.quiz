@@ -37,7 +37,7 @@ class AddQuiz(QuizFormBase,
 
     title = _("Add quiz")
     factory = zeit.content.quiz.quiz.Quiz
-    next_view = 'questions.html'
+    next_view = 'addQuestion.html'
     form_fields = QuizFormBase.form_fields.omit(
         'automaticMetadataUpdateDisabled')
 

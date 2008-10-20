@@ -29,14 +29,61 @@ We set the most important values:
 >>> browser.getControl(name='form.authors.0.').value = 'Hans Sachs'
 >>> browser.getControl(name="form.actions.add").click()
 
-After adding the quiz we're at the questions page where we can add
-questions later on, for now the page is empty:
+After adding the quiz we're at the add page for questions:
 
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@addQuestion.html'
+
+Add a question
+--------------
+
+First of all, the user can decide to abort adding a question and go back to
+the questions overview of the quiz:
+
+>>> browser.getControl('Cancel').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
-We can edit the metadata of the quiz on the edit tab:
+Let's now add a question. After that, we get redirected to the question's add
+form for an answer:
 
+>>> browser.getLink('Add question').click()
+>>> browser.getControl('Title').value = 'first question'
+>>> browser.getControl('Text').value = '<p>test</p>er'
+>>> browser.getControl('Add').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@addAnswer.html'
+
+Add an answer
+-------------
+
+Again, the user can decide to abort adding a answer, then he is sent back to
+the answers view of the question:
+
+>>> browser.getControl('Cancel').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
+
+Adding an answer redirects to the add form for the next answer:
+
+>>> browser.getLink('Add answer').click()
+>>> browser.getControl('Title').value = 'first answer'
+>>> browser.getControl('Text').value = '<p>test</p>er'
+>>> browser.getControl('Add').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@addAnswer.html'
+
+
+Editing a quiz
+==============
+
+Editing quiz metadata
+---------------------
+
+We can edit the metadata of the quiz on its edit tab. We have to move to the
+quiz first; let's do so by using the breadcrumb menu:
+
+>>> browser.getLink('kochen').click()
 >>> browser.getLink('Edit metadata').click()
 >>> browser.getControl('Title').value
 'Koch-Quiz'
@@ -45,37 +92,18 @@ We can edit the metadata of the quiz on the edit tab:
 <!DOCTYPE ...
 <title> kochen – Edit quiz </title>...
 
-
 There is no read only view of the metadata:
 
 >>> browser.getLink('View metadata')
 Traceback (most recent call last):
 LinkNotFoundError
 
-Add a question
---------------
+Editing a question
+------------------
 
-A question can be added using the questions view:
+Exisiting questions can be reached from the Questions tab:
 
 >>> browser.getLink('Questions').click()
->>> browser.getLink('Add question').click()
-
-The user can decide to abort adding a question, then he is sent back
-to the questions view:
-
->>> browser.getControl('Cancel').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
-
-Adding a question redirects (for the moment) to the questions overview
-where a link to the question is shown:
-
->>> browser.getLink('Add question').click()
->>> browser.getControl('Title').value = 'first question'
->>> browser.getControl('Text').value = '<p>test</p>er'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 >>> browser.getLink('first question')
 <Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
 
@@ -94,30 +122,11 @@ These values can be changed:
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 
-Add an answer
--------------
+Editing an answer
+-----------------
 
-An answer can be added in the edit view of a question:
+After editing the question, we're on its answers overview tab:
 
->>> browser.getLink('first question').click()
->>> browser.getLink('Add answer').click()
-
-The user can decide to abort adding a answer, then he is sent back
-to the answers view:
-
->>> browser.getControl('Cancel').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
-
-Adding an answer redirects (for the moment) to the answers overview
-where a link to the answer is shown:
-
->>> browser.getLink('Add answer').click()
->>> browser.getControl('Title').value = 'first answer'
->>> browser.getControl('Text').value = '<p>test</p>er'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
 >>> browser.getLink('first answer')
 <Link text='first answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
 

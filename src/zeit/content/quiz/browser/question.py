@@ -30,21 +30,15 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
     factory = zeit.content.quiz.question.Question
     checkout = False
+    next_view = 'addAnswer.html'
     cancel_next_view = 'questions.html'
-
-    def nextURL(self):
-        url = zope.component.getMultiAdapter(
-            (self.context, self.request),
-            zope.traversing.browser.interfaces.IAbsoluteURL)()
-        return url + '/@@questions.html'
 
     def suggestName(self, object):
         return object.title
 
 
 class EditForm(FormBase, zeit.cms.browser.form.EditForm):
-    
-    redirect_to_parent_after_edit = True
-    redirect_to_view = 'questions.html'
+
+    redirect_to_view = 'answers.html'
     template = zope.app.pagetemplate.ViewPageTemplateFile(
         os.path.join(os.path.dirname(__file__), 'question-edit-form.pt'))

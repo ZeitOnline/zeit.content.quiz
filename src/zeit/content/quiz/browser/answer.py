@@ -37,7 +37,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
         url = zope.component.getMultiAdapter(
             (self.context, self.request),
             zope.traversing.browser.interfaces.IAbsoluteURL)()
-        return url + '/@@answers.html'
+        return url + '/@@addAnswer.html'
 
     def suggestName(self, object):
         return object.title
