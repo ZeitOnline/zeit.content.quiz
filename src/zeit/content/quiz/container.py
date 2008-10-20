@@ -54,10 +54,10 @@ class Container(UserDict.DictMixin):
                 for xml_child in self._iter_xml_children()]
 
     def _iter_xml_children(self):
-        return iter(self.xml['body'].getchildren())
+        return iter(self.xml.getchildren())
 
     def _append_xml_child(self, child):
-        self.xml['body'].append(child.xml)
+        self.xml.append(child.xml)
 
 
 class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,

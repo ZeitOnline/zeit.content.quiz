@@ -16,10 +16,7 @@ import zeit.content.quiz.container
 
 ANSWER_TEMPLATE = u"""\
 <answer xmlns:py="http://codespeak.net/lxml/objectify/pytype">
-    <head/>
-    <body>
-      <text/>
-    </body>
+  <text/>
 </answer>"""
 
 
@@ -38,7 +35,7 @@ class Answer(zeit.content.quiz.container.Contained):
     zope.interface.implements(zeit.content.quiz.interfaces.IAnswer,
                               zope.app.container.interfaces.IContained)
 
-    title = zeit.cms.content.property.Structure('.body.title')
+    title = zeit.cms.content.property.Structure('.title')
 
     default_template = ANSWER_TEMPLATE
 
@@ -52,4 +49,4 @@ class AnswerHTMLContent(zeit.wysiwyg.html.HTMLContentBase):
     zope.component.adapts(zeit.content.quiz.interfaces.IAnswer)
 
     def get_tree(self):
-        return self.context.xml['body']['text']
+        return self.context.xml['text']

@@ -16,8 +16,6 @@ import zeit.content.quiz.container
 
 QUIZ_TEMPLATE = u"""\
 <quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">
-    <head/>
-    <body/>
 </quiz>"""
 
 
@@ -30,7 +28,7 @@ class Quiz(zeit.content.quiz.container.Container,
     default_template = QUIZ_TEMPLATE
 
     def _iter_xml_children(self):
-        for child in self.xml['body'].getchildren():
+        for child in self.xml.getchildren():
             if child.tag == 'question':
                 yield child
 

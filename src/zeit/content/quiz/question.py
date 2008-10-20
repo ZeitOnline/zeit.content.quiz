@@ -16,10 +16,7 @@ import zeit.content.quiz.container
 
 QUESTION_TEMPLATE = u"""\
 <question xmlns:py="http://codespeak.net/lxml/objectify/pytype">
-    <head/>
-    <body>
-      <text/>
-    </body>
+  <text/>
 </question>"""
 
 
@@ -39,12 +36,12 @@ class Question(zeit.content.quiz.container.Container,
     zope.interface.implements(zeit.content.quiz.interfaces.IQuestion,
                               zope.app.container.interfaces.IContained)
 
-    title = zeit.cms.content.property.Structure('.body.title')
+    title = zeit.cms.content.property.Structure('.title')
 
     default_template = QUESTION_TEMPLATE
 
     def _iter_xml_children(self):
-        for child in self.xml['body'].getchildren():
+        for child in self.xml.getchildren():
             if child.tag == 'answer':
                 yield child
 
@@ -59,4 +56,4 @@ class QuestionHTMLContent(zeit.wysiwyg.html.HTMLContentBase):
     zope.component.adapts(zeit.content.quiz.interfaces.IQuestion)
 
     def get_tree(self):
-        return self.context.xml['body']['text']
+        return self.context.xml['text']
