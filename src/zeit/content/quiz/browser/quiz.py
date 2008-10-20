@@ -3,8 +3,10 @@
 # See also LICENSE.txt
 # $Id$
 
+import gocept.form.action
 import zope.cachedescriptors.property
 import zope.formlib.form
+import zope.traversing.browser.interfaces
 
 import zeit.cms.browser.form
 import zeit.cms.content.browser.form
@@ -52,3 +54,30 @@ class DisplayQuiz(QuizFormBase,
                   zeit.cms.content.browser.form.CommonMetadataDisplayForm):
 
     title = _("View quiz metadata")
+
+
+class EditFormBase(zeit.cms.browser.form.EditForm):
+
+    @zope.formlib.form.action(
+        _('Apply'), condition=zope.formlib.form.haveInputWidgets)
+    def handle_edit_action(self, action, data):
+        self.applyChanges(data)
+
+    @gocept.form.action.confirm(
+        _('Delete'),
+        name='delete',
+        confirm_message=_('Really delete?'),
+        condition=zope.formlib.form.haveInputWidgets,
+        )
+    def handle_delete(self, action, data):
+        parent = self.context.__parent__
+        del parent[self.context.__name__]
+        candidate = parent
+        while not IQuiz.providedBy(candidate):
+            candidate = candidate.__parent__
+        else:
+            quiz = candidate
+        next_url = zope.component.getMultiAdapter(
+            (quiz, self.request),
+            zope.traversing.browser.interfaces.IAbsoluteURL)()
+        self.request.response.redirect(next_url + '/@@questions.html')

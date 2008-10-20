@@ -10,12 +10,13 @@ import zope.component
 import zope.event
 import zope.formlib.form
 import zope.lifecycleevent
-import zope.traversing.browser.interfaces
+from zeit.cms.i18n import MessageFactory as _
 
 import zeit.wysiwyg.interfaces
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.question
+import zeit.content.quiz.browser.quiz
 
 class FormBase(object):
 
@@ -37,7 +38,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
         return object.title or u''
 
 
-class EditForm(FormBase, zeit.cms.browser.form.EditForm):
+class EditForm(zeit.content.quiz.browser.quiz.EditFormBase, FormBase):
 
     redirect_to_view = 'answers.html'
     template = zope.app.pagetemplate.ViewPageTemplateFile(
