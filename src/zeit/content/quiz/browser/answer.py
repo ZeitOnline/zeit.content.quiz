@@ -22,7 +22,7 @@ class FormBase(object):
 
     form_fields = (
         zope.formlib.form.Fields(
-            zeit.content.quiz.interfaces.IAnswer).select('title') +
+            zeit.content.quiz.interfaces.IAnswer).select('title', 'correct') +
         zope.formlib.form.FormFields(
             zeit.wysiwyg.interfaces.IHTMLContent))
 

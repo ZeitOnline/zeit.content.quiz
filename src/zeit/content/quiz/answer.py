@@ -36,6 +36,7 @@ class Answer(zeit.content.quiz.container.Contained):
                               zope.app.container.interfaces.IContained)
 
     title = zeit.cms.content.property.Structure('.title')
+    correct = zeit.cms.content.property.ObjectPathProperty('.correct')
 
     default_template = ANSWER_TEMPLATE
 

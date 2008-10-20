@@ -49,5 +49,6 @@ class IQuestion(IReadQuestion, IWriteQuestion):
 
 class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation):
     """Answer content type."""
-    
+
     title = zope.schema.TextLine(title=_('Title'), required=False)
+    correct = zope.schema.Bool(title=_('Correct?'))

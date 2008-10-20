@@ -68,6 +68,7 @@ Adding an answer redirects to the add form for the next answer:
 
 >>> browser.getLink('Add answer').click()
 >>> browser.getControl('Title').value = 'first answer'
+>>> browser.getControl('Correct?').click()
 >>> browser.getControl('Text').value = '<p>test</p>er'
 >>> browser.getControl('Add').click()
 >>> browser.url
@@ -136,12 +137,17 @@ entered values:
 >>> browser.getLink('first answer').click()
 >>> browser.getControl('Title').value
 'first answer'
+>>> browser.getControl('Correct?').selected
+True
 >>> browser.getControl('Text').value
 '<p>test</p>er\r\n'
 
 These values can be changed:
 
 >>> browser.getControl('Title').value = '1st answer'
+>>> browser.getControl('Correct?').click()
+>>> browser.getControl('Correct?').selected
+False
 >>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
 >>> browser.getControl('Apply').click()
 
