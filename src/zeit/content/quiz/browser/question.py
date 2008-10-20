@@ -34,7 +34,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
     cancel_next_view = 'questions.html'
 
     def suggestName(self, object):
-        return object.title
+        return object.title or u''
 
 
 class EditForm(FormBase, zeit.cms.browser.form.EditForm):

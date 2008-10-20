@@ -146,6 +146,45 @@ These values can be changed:
 >>> browser.getControl('Apply').click()
 
 
+Questions and answers without a title
+-------------------------------------
+
+Questions and answers do not have to have a title. We can add both without
+filling in the title field:
+
+>>> browser.handleErrors = False
+
+>>> browser.getLink('kochen').click()
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('Add question').click()
+>>> browser.getControl('Text').value = '<p>zweiter Test</p>er'
+>>> browser.getControl('Add').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
+
+>>> browser.getControl('Text').value = '<p>zweiter Test</p>er'
+>>> browser.getControl('Add').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
+
+Later, we can also edit both without filling in the title:
+
+>>> browser.getLink('kochen').click()
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('Question', index=1).click()
+>>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
+>>> browser.getControl('Apply').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html'
+
+>>> browser.getLink('Answers').click()
+>>> browser.getLink('Answer', index=1).click()
+>>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
+>>> browser.getControl('Apply').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html'
+
+
 Check-in
 ========
 
