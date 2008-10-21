@@ -121,10 +121,16 @@ These values can be changed:
 
 >>> browser.getControl('Title').value = '1st question'
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
->>> browser.getControl('Apply').click()
+
+We note that this question view does not have a check-in link:
+
+>>> browser.getLink('Checkin')
+Traceback (most recent call last):
+LinkNotFoundError
 
 After editing the question, we're on the questions overview tab of the quiz:
 
+>>> browser.getControl('Apply').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
@@ -149,10 +155,16 @@ These values can be changed:
 >>> browser.getControl('Correct?').selected
 False
 >>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
->>> browser.getControl('Apply').click()
+
+We note that the answer view does not have a check-in link either:
+
+>>> browser.getLink('Checkin')
+Traceback (most recent call last):
+LinkNotFoundError
 
 After editing the answer, we're on the questions overview tab as well:
 
+>>> browser.getControl('Apply').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
