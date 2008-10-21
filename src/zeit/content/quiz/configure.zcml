@@ -49,12 +49,6 @@
       interface=".interfaces.IWriteQuestion"
       permission="zeit.EditContent" />
     <require
-      interface="zeit.wysiwyg.interfaces.IHTMLContent"
-      permission="zope.View" />
-    <require
-      set_schema="zeit.wysiwyg.interfaces.IHTMLContent"
-      permission="zeit.EditContent" />
-    <require
       interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
       permission="zope.View" />
     <require
@@ -74,12 +68,6 @@
       permission="zope.View" />
     <require
       set_schema=".interfaces.IAnswer"
-      permission="zeit.EditContent" />
-    <require
-      interface="zeit.wysiwyg.interfaces.IHTMLContent"
-      permission="zope.View" />
-    <require
-      set_schema="zeit.wysiwyg.interfaces.IHTMLContent"
       permission="zeit.EditContent" />
     <require
       interface="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
