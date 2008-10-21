@@ -56,25 +56,6 @@
     menu="zeit-context-views" title="Questions"
     />
 
-  <!-- add menu at quiz -->
-  <browser:viewletManager
-    name="quiz-add-menu"
-    provides=".interfaces.IQuizAddMenu"
-    class=".menu.QuizAddMenu"
-    layer="zeit.cms.browser.interfaces.ICMSLayer"
-    permission="zope.Public"
-    />
-  
-  <browser:viewlet
-    name="Add question"
-    viewName="@@addQuestion.html"
-    for="..interfaces.IQuiz"
-    manager=".interfaces.IQuizAddMenu"
-    class="z3c.menu.ready2go.item.AddMenuItem"
-    permission="zeit.EditContent"
-    layer="zeit.cms.browser.interfaces.ICMSLayer"
-    />
-
   <!-- question -->
   <gocept:pagelet
     for="..interfaces.IQuiz"
