@@ -191,6 +191,27 @@ Later, we can also edit both without filling in the title:
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html'
 
 
+Deleting questions and answers
+==============================
+
+Deleting a question or answer is done using a button on the item's edit form.
+
+Deleting questions
+------------------
+
+Let's delete the untitled question we just added:
+
+>>> browser.open(
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
+>>> browser.getLink('Question', index=1).click()
+>>> browser.getControl('Delete').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
+>>> browser.getLink('Question', index=1)
+Traceback (most recent call last):
+LinkNotFoundError
+
+
 Check-in
 ========
 

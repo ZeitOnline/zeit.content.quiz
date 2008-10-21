@@ -73,7 +73,7 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
         parent = self.context.__parent__
         del parent[self.context.__name__]
         candidate = parent
-        while not IQuiz.providedBy(candidate):
+        while not zeit.content.quiz.interfaces.IQuiz.providedBy(candidate):
             candidate = candidate.__parent__
         else:
             quiz = candidate
