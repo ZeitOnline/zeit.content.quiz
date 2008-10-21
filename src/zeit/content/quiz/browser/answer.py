@@ -16,6 +16,7 @@ import zeit.wysiwyg.interfaces
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.answer
+import zeit.content.quiz.browser.quiz
 
 
 class FormBase(object):
@@ -43,7 +44,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
         return object.title or u''
 
 
-class EditForm(FormBase, zeit.cms.browser.form.EditForm):
-    
+class EditForm(zeit.content.quiz.browser.quiz.EditFormBase, FormBase):
+
     redirect_to_parent_after_edit = True
     redirect_to_view = 'answers.html'

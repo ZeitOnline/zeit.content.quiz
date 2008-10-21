@@ -196,6 +196,23 @@ Deleting questions and answers
 
 Deleting a question or answer is done using a button on the item's edit form.
 
+Deleting answers
+----------------
+
+Let's delete the untitled answer we just added:
+
+>>> browser.open(
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html')
+>>> browser.getLink('Answer', index=1).click()
+>>> browser.getControl('Delete').click()
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
+>>> browser.open(
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html')
+>>> browser.getLink('Answer', index=1)
+Traceback (most recent call last):
+LinkNotFoundError
+
 Deleting questions
 ------------------
 

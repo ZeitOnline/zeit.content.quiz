@@ -57,6 +57,8 @@ class DisplayQuiz(QuizFormBase,
 
 
 class EditFormBase(zeit.cms.browser.form.EditForm):
+    """Base class for edit views of various sub-objects of a quiz.
+    """
 
     @zope.formlib.form.action(
         _('Apply'), condition=zope.formlib.form.haveInputWidgets)
