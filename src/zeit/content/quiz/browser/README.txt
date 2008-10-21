@@ -29,16 +29,21 @@ We set the most important values:
 >>> browser.getControl(name='form.authors.0.').value = 'Hans Sachs'
 >>> browser.getControl(name="form.actions.add").click()
 
-After adding the quiz we're at the add page for questions:
+After adding the quiz we're at its metadata view.
 
 >>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@addQuestion.html'
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@edit.html'
 
 Add a question
 --------------
 
-First of all, the user can decide to abort adding a question and go back to
-the questions overview of the quiz:
+We go to the questions overview of the quiz and add a question:
+
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('Add question').click()
+
+Suppose we did so by mistake; after we cancel adding the question, we are
+taken back to the questions overview:
 
 >>> browser.getControl('Cancel').click()
 >>> browser.url
