@@ -56,6 +56,9 @@ class DisplayQuiz(QuizFormBase,
     title = _("View quiz metadata")
 
 
+# quiz content
+
+
 class EditFormBase(zeit.cms.browser.form.EditForm):
     """Base class for edit views of various sub-objects of a quiz.
     """
@@ -83,3 +86,9 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
             (quiz, self.request),
             zope.traversing.browser.interfaces.IAbsoluteURL)()
         self.request.response.redirect(next_url + '/@@questions.html')
+
+
+def display_title(context, request):
+    """Registered as a view on IQuizContent.
+    """
+    return context.title or context.__name__

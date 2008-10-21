@@ -32,11 +32,17 @@ class IQuiz(IReadQuiz, IWriteQuiz):
     """Quiz content type."""
 
 
-class IReadQuestion(zope.app.container.interfaces.IReadContainer,
-                    zeit.cms.content.interfaces.IXMLRepresentation):
-    """Read methods for question."""
+class IQuizContent(zope.interface.Interface):
+    """Sub-objects of a quiz.
+    """
 
     title = zope.schema.TextLine(title=_('Title'), required=False)
+
+
+class IReadQuestion(zope.app.container.interfaces.IReadContainer,
+                    zeit.cms.content.interfaces.IXMLRepresentation,
+                    IQuizContent):
+    """Read methods for question."""
 
 
 class IWriteQuestion(zope.app.container.interfaces.IWriteContainer):
@@ -47,8 +53,7 @@ class IQuestion(IReadQuestion, IWriteQuestion):
     """Question content type."""
 
 
-class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation):
+class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     """Answer content type."""
 
-    title = zope.schema.TextLine(title=_('Title'), required=False)
     correct = zope.schema.Bool(title=_('Correct?'))

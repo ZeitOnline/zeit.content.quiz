@@ -257,9 +257,9 @@ The question we created before checking in the quiz is still there and
 still has the same values:
 
 >>> browser.getLink('Questions').click()
->>> browser.getLink('first question')
-<Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
->>> browser.getLink('first question').click()
+>>> browser.getLink('1st question')
+<Link text='1st question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
+>>> browser.getLink('1st question').click()
 >>> browser.getControl('Title').value
 '1st question'
 >>> browser.getControl('Text').value

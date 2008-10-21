@@ -140,5 +140,13 @@
     menu="zeit-context-views" title="Edit"
     />
 
+  <!-- quiz content -->
+
+  <view
+     name="display_title"
+     for="..interfaces.IQuizContent"
+     factory=".quiz.display_title"
+     type="zeit.cms.browser.interfaces.ICMSLayer"
+     />
 
 </configure>
