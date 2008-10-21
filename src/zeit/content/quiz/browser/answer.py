@@ -10,7 +10,6 @@ import zope.component
 import zope.event
 import zope.formlib.form
 import zope.lifecycleevent
-import zope.traversing.browser.interfaces
 
 import zeit.wysiwyg.interfaces
 
@@ -27,24 +26,31 @@ class FormBase(object):
         zope.formlib.form.FormFields(
             zeit.wysiwyg.interfaces.IHTMLContent))
 
+    def questions_url(self):
+        quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
+        url = zope.component.getMultiAdapter(
+            (quiz, self.request), name="absolute_url")()
+        return url + '/@@questions.html'
+
 
 class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
     factory = zeit.content.quiz.answer.Answer
     checkout = False
-    cancel_next_view = 'answers.html'
 
     def nextURL(self):
         url = zope.component.getMultiAdapter(
-            (self.context, self.request),
-            zope.traversing.browser.interfaces.IAbsoluteURL)()
+            (self.context, self.request), name="absolute_url")()
         return url + '/@@addAnswer.html'
+
+    def cancelNextURL(self):
+        return self.questions_url()
 
     def suggestName(self, object):
         return object.title or u''
 
 
-class EditForm(zeit.content.quiz.browser.quiz.EditFormBase, FormBase):
+class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
 
-    redirect_to_parent_after_edit = True
-    redirect_to_view = 'answers.html'
+    def nextURL(self):
+        return self.questions_url()

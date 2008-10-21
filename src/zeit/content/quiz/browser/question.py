@@ -3,9 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
-import os.path
 import zope.app.container.interfaces
-import zope.app.pagetemplate
 import zope.component
 import zope.event
 import zope.formlib.form
@@ -40,6 +38,5 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
 class EditForm(zeit.content.quiz.browser.quiz.EditFormBase, FormBase):
 
-    redirect_to_view = 'answers.html'
-    template = zope.app.pagetemplate.ViewPageTemplateFile(
-        os.path.join(os.path.dirname(__file__), 'question-edit-form.pt'))
+    redirect_to_parent_after_edit = True
+    redirect_to_view = 'questions.html'

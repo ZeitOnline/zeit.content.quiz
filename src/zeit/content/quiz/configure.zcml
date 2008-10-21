@@ -5,6 +5,7 @@
   <!-- Quiz -->
   <adapter factory=".quiz.quizFactory" name="quiz" />
   <adapter factory=".quiz.resourceFactory" />
+  <adapter factory=".quiz.quiz_for_content" />
 
   <class class=".quiz.Quiz">
     <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />

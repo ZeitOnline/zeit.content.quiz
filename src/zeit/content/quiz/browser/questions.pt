@@ -11,10 +11,22 @@
   <ul tal:content="structure provider:quiz-add-menu" />
 
   <p>Questions:</p>
-  <ul>
+  <ol>
     <li tal:repeat="question context/values">
       <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
          tal:content="question/@@display_title" />
+      <ul>
+        <li>
+          <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html">
+            Add answer</a>
+        </li>
+      </ul>
+      <ol tal:condition="python:len(question)">
+        <li tal:repeat="answer question/values">
+          <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
+             tal:content="answer/@@display_title" />
+        </li>
+      </ol>
     </li>
-  </ul>
+  </ol>
 </div>

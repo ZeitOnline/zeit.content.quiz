@@ -93,35 +93,6 @@
     menu="zeit-context-views" title="Edit"
     />
 
-  <gocept:pagelet
-    for="..interfaces.IQuestion"
-    name="answers.html"
-    template="answers.pt"
-    layer="zeit.cms.browser.interfaces.ICMSLayer"
-    permission="zeit.EditContent"
-    menu="zeit-context-views" title="Answers"
-    />
-
-
-  <!-- add menu at question -->
-  <browser:viewletManager
-    name="question-add-menu"
-    provides=".interfaces.IQuestionAddMenu"
-    class=".menu.QuestionAddMenu"
-    layer="zeit.cms.browser.interfaces.ICMSLayer"
-    permission="zope.Public"
-    />
-  
-  <browser:viewlet
-    name="Add answer"
-    viewName="@@addAnswer.html"
-    for="..interfaces.IQuestion"
-    manager=".interfaces.IQuestionAddMenu"
-    class="z3c.menu.ready2go.item.AddMenuItem"
-    permission="zeit.EditContent"
-    layer="zeit.cms.browser.interfaces.ICMSLayer"
-    />
-
   <!-- answer -->
   <gocept:pagelet
     for="..interfaces.IQuestion"

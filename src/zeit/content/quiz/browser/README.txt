@@ -62,7 +62,7 @@ the answers view of the question:
 
 >>> browser.getControl('Cancel').click()
 >>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@answers.html'
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
 Adding an answer redirects to the add form for the next answer:
 
@@ -158,8 +158,6 @@ Questions and answers without a title
 Questions and answers do not have to have a title. We can add both without
 filling in the title field:
 
->>> browser.handleErrors = False
-
 >>> browser.getLink('kochen').click()
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('Add question').click()
@@ -181,14 +179,13 @@ Later, we can also edit both without filling in the title:
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 >>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html'
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
->>> browser.getLink('Answers').click()
->>> browser.getLink('Answer', index=1).click()
+>>> browser.getLink('Answer').click()
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 >>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html'
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
 
 Deleting questions and answers
@@ -202,14 +199,14 @@ Deleting answers
 Let's delete the untitled answer we just added:
 
 >>> browser.open(
-...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html')
->>> browser.getLink('Answer', index=1).click()
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
+>>> browser.getLink('Answer').click()
 >>> browser.getControl('Delete').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 >>> browser.open(
-...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@answers.html')
->>> browser.getLink('Answer', index=1)
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
+>>> browser.getLink('Answer')
 Traceback (most recent call last):
 LinkNotFoundError
 
@@ -267,10 +264,11 @@ still has the same values:
 
 The answer is still there and has the same values:
 
->>> browser.getLink('Answers').click()
->>> browser.getLink('first answer')
-<Link text='first answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
->>> browser.getLink('first answer').click()
+>>> browser.getLink('kochen').click()
+>>> browser.getLink('Questions').click()
+>>> browser.getLink('1st answer')
+<Link text='1st answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
+>>> browser.getLink('1st answer').click()
 >>> browser.getControl('Title').value
 '1st answer'
 >>> browser.getControl('Text').value

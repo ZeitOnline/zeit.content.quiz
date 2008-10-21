@@ -40,3 +40,12 @@ resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
     'quiz')
 resourceFactory = zope.component.adapter(
     zeit.content.quiz.interfaces.IQuiz)(resourceFactory)
+
+
+@zope.component.adapter(zeit.content.quiz.interfaces.IQuizContent)
+@zope.interface.implementer(zeit.content.quiz.interfaces.IQuiz)
+def quiz_for_content(context):
+    candidate = context
+    while not zeit.content.quiz.interfaces.IQuiz.providedBy(candidate):
+        candidate = candidate.__parent__
+    return candidate

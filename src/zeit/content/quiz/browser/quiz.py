@@ -77,11 +77,7 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
     def handle_delete(self, action, data):
         parent = self.context.__parent__
         del parent[self.context.__name__]
-        candidate = parent
-        while not zeit.content.quiz.interfaces.IQuiz.providedBy(candidate):
-            candidate = candidate.__parent__
-        else:
-            quiz = candidate
+        quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
         next_url = zope.component.getMultiAdapter(
             (quiz, self.request),
             zope.traversing.browser.interfaces.IAbsoluteURL)()
