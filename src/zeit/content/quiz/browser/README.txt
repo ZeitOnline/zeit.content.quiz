@@ -123,13 +123,13 @@ These values can be changed:
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 
+After editing the question, we're on the questions overview tab of the quiz:
+
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
+
 Editing an answer
 -----------------
-
-After editing the question, we're on its answers overview tab:
-
->>> browser.getLink('first answer')
-<Link text='first answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
 
 Clicking on the links opens an edit form which contains the previously
 entered values:
@@ -151,6 +151,10 @@ False
 >>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
 >>> browser.getControl('Apply').click()
 
+After editing the answer, we're on the questions overview tab as well:
+
+>>> browser.url
+'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
 Questions and answers without a title
 -------------------------------------
@@ -158,8 +162,6 @@ Questions and answers without a title
 Questions and answers do not have to have a title. We can add both without
 filling in the title field:
 
->>> browser.getLink('kochen').click()
->>> browser.getLink('Questions').click()
 >>> browser.getLink('Add question').click()
 >>> browser.getControl('Text').value = '<p>zweiter Test</p>er'
 >>> browser.getControl('Add').click()
