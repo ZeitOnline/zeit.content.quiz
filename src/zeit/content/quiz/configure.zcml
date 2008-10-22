@@ -59,7 +59,6 @@
 
   <!-- Answer -->
   <adapter factory=".answer.answerFactory" name="answer" />
-  <adapter factory=".answer.AnswerHTMLContent" />
 
   <class class=".answer.Answer">
     <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />

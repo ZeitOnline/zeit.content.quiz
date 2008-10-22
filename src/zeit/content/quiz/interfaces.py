@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import zc.form.field
 import zope.app.container.interfaces
 import zope.interface
 import zope.schema
@@ -78,3 +79,6 @@ class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     """Answer content type."""
 
     correct = zope.schema.Bool(title=_('Correct?'))
+    answer = zc.form.field.HTMLSnippet(title=_("Text"), required=False)
+    explanation = zc.form.field.HTMLSnippet(title=_("Explanation"), 
+                                            required=False)

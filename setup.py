@@ -21,7 +21,9 @@ setup(
     namespace_packages = ['zeit', 'zeit.content'],
     install_requires=[
         'lxml',
+        'rwproperty',
         'setuptools',
+        'zc.form',
         'zeit.cms',
         'zeit.connector',
         'zope.annotation',
@@ -40,10 +42,12 @@ setup(
     extras_require={
         'test': [
             'z3c.etestbrowser',
-            'zope.testing',
-            'zope.app.zcmlfiles',
-            'zope.app.securitypolicy',
             'zeit.connector',
+            'zope.app.securitypolicy',
+            'zope.app.zcmlfiles',
+            'zope.publisher',
+            'zope.security',
+            'zope.testing',
             ],
         },
     )

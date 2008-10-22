@@ -1,0 +1,33 @@
+========
+ Answer
+========
+
+Interface test for anwer:
+
+>>> import zeit.content.quiz.interfaces
+>>> import zeit.content.quiz.answer
+>>> import zope.interface.verify
+>>> import zope.publisher.browser
+
+Set up
+======
+
+>>> request = zope.publisher.browser.TestRequest()
+>>> zope.security.management.newInteraction(request)
+
+Test
+====
+
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IAnswer, zeit.content.quiz.answer.Answer())
+True
+>>> zope.interface.verify.verifyObject(
+...     zope.app.container.interfaces.IContained, 
+...     zeit.content.quiz.answer.Answer())
+True
+
+
+Clean up
+========
+
+>>> zope.security.management.endInteraction()

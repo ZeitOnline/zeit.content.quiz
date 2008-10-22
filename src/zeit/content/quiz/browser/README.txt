@@ -75,6 +75,7 @@ Adding an answer redirects to the add form for the next answer:
 >>> browser.getControl('Title').value = 'first answer'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Text').value = '<p>test</p>er'
+>>> browser.getControl('Explanation').value = '<p>This is right.</p>'
 >>> browser.getControl('Add').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@addAnswer.html'
@@ -152,6 +153,8 @@ entered values:
 True
 >>> browser.getControl('Text').value
 '<p>test</p>er\r\n'
+>>> browser.getControl('Explanation').value
+'<p>This is right.</p>\r\n'
 
 These values can be changed:
 
@@ -160,6 +163,8 @@ These values can be changed:
 >>> browser.getControl('Correct?').selected
 False
 >>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
+>>> browser.getControl('Explanation').value = '<p><em>This is really right.</em></p>'
+
 
 We note that the answer view does not have a check-in link either:
 
@@ -349,3 +354,5 @@ The answer is still there and has the same values:
 '1st answer'
 >>> browser.getControl('Text').value
 '<p><em>foh</em> bah</p>\r\n'
+>>> browser.getControl('Explanation').value
+'<p>\r\n  <em>This is really right.</em>\r\n</p>\r\n'
