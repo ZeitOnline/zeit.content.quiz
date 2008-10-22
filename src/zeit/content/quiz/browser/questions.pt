@@ -17,13 +17,17 @@
     </li>
   </ul>
 
-  <tal:questions condition="python:len(context)">
+  <form method="POST"
+        tal:attributes="action view/@@absolute_url"
+        tal:condition="python:len(context)">
     <p>Questions:</p>
 
     <ol class="questions">
       <li tal:repeat="question context/values">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
            tal:content="question/@@display_title" />
+        <input type="hidden" name="__quiz__:list"
+               tal:attributes="value question/__name__" />
         <ul>
           <li>
             <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html">
@@ -35,9 +39,14 @@
           <li tal:repeat="answer question/values">
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
                tal:content="answer/@@display_title" />
+            <input type="hidden"
+                   tal:attributes="name string:${question/__name__}:list;
+                                   value answer/__name__" />
           </li>
         </ol>
       </li>
     </ol>
-  </tal:questions>
+
+    <input type="submit" name="apply" value="Apply" i18n:attributes="value" />
+  </form>
 </div>

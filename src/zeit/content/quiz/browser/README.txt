@@ -207,6 +207,25 @@ Later, we can also edit both without filling in the title:
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
 
+Re-ordering questions and answers
+=================================
+
+We can re-order questions and answers by using Drag-and-drop and then
+submitting the form contained in the questions overview. In order to see the
+effect on answers, we have to create another one:
+
+>>> browser.getLink('Add answer', index=0).click()
+>>> browser.getControl('Title').value = '2nd answer'
+>>> browser.getControl('Add').click()
+
+Before any re-ordering, questions and answers are listed in the questions
+overview in the same order they were created:
+
+>>> browser.getLink('kochen').click()
+>>> browser.getLink('Questions').click()
+>>> print browser.contents
+
+
 Deleting questions and answers
 ==============================
 

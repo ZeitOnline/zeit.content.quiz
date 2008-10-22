@@ -13,21 +13,41 @@ import zeit.cms.content.field
 from zeit.cms.i18n import MessageFactory as _
 
 
-class IContainer(zeit.cms.content.interfaces.IXMLRepresentation):
-    """Container that stores its children inside its own xml representation."""
+class IReadContainer(zope.app.container.interfaces.IReadContainer,
+                     zeit.cms.content.interfaces.IXMLRepresentation):
+    """Read-only container that stores its children inside its own xml
+    representation."""
 
     def content_modified():
         """Notify the container that content has changed."""
 
 
+class IWriteContainer(zope.app.container.interfaces.IWriteContainer):
+    """Writeable container that stores its children inside its own xml
+    representation."""
+
+    def updateOrder(order):
+        """Revise the order of keys, replacing the current ordering.
+
+        order is a list or a tuple containing the set of existing keys in
+        the new order. `order` must contain ``len(keys())`` items and cannot
+        contain duplicate keys.
+
+        Raises ``TypeError`` if order is not a tuple or a list.
+
+        Raises ``ValueError`` if order contains an invalid set of keys.
+
+        Analogous to zope.app.container.interfaces.IOrderedContainer.
+        """
+
+
 class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata, 
                 zeit.cms.content.interfaces.IXMLContent,
-                zope.app.container.interfaces.IReadContainer,
-                IContainer):
+                IReadContainer):
     """Read methods for quiz."""
 
 
-class IWriteQuiz(zope.app.container.interfaces.IWriteContainer):
+class IWriteQuiz(IWriteContainer):
     """Write methods for quiz."""
 
 
@@ -42,14 +62,11 @@ class IQuizContent(zope.interface.Interface):
     title = zope.schema.TextLine(title=_('Title'), required=False)
 
 
-class IReadQuestion(zope.app.container.interfaces.IReadContainer,
-                    zeit.cms.content.interfaces.IXMLRepresentation,
-                    IQuizContent,
-                    IContainer):
+class IReadQuestion(IQuizContent, IReadContainer):
     """Read methods for question."""
 
 
-class IWriteQuestion(zope.app.container.interfaces.IWriteContainer):
+class IWriteQuestion(IWriteContainer):
     """Write methods for question."""
 
 

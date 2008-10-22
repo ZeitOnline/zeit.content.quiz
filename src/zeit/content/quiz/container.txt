@@ -31,6 +31,11 @@ need concrete implementations of them for this demonstration:
 >>> from zeit.content.quiz.test import \
 ...     PersistentContainer, Container, Contained
 
+>>> import zope.component
+>>> contained_factory = zeit.content.quiz.container.xml_tree_content_adapter(
+...     Contained)
+>>> zope.component.provideAdapter(contained_factory, name='contained')
+
 
 Persistence
 ===========
@@ -98,3 +103,65 @@ False
 >>> pc._p_changed
 True
 >>> transaction.commit()
+
+
+Updating the order of items
+===========================
+
+The container defined here is ordered since its items are ordered in the XML
+tree that stores them. We can update the order by passing a sequence of keys.
+
+The set of keys passed to the ``updateOrder`` method must be the same as the
+currently used keys, and no duplicates are allowed:
+
+>>> pc['foo'] = Contained()
+>>> pc['bar'] = Contained()
+>>> pc['baz'] = Contained()
+>>> pc.keys()
+['foo', 'bar', 'baz']
+
+>>> pc.updateOrder(object())
+Traceback (most recent call last):
+TypeError: iteration over non-sequence
+
+>>> pc.updateOrder(['foo', 'bar', 'foo'])
+Traceback (most recent call last):
+ValueError: Duplicate keys.
+
+>>> pc.updateOrder(['foo', 'bar', 'baz', 'foo'])
+Traceback (most recent call last):
+ValueError: Duplicate keys.
+
+>>> pc.updateOrder(['foo', 'bar'])
+Traceback (most recent call last):
+ValueError: New order has different keys than are currently used.
+
+>>> pc.updateOrder(['foo', 'bar', 'asdf'])
+Traceback (most recent call last):
+ValueError: New order has different keys than are currently used.
+
+>>> pc.updateOrder(['foo', 'bar', 'baz', 'asdf'])
+Traceback (most recent call last):
+ValueError: New order has different keys than are currently used.
+
+If we pass a valid key sequence, the order gets updated:
+
+>>> pc.updateOrder(['foo', 'bar', 'baz'])
+>>> pc.keys()
+['foo', 'bar', 'baz']
+
+>>> pc.updateOrder(['bar', 'baz', 'foo'])
+>>> pc.keys()
+['bar', 'baz', 'foo']
+
+>>> pc.updateOrder(['foo', 'baz', 'bar'])
+>>> pc.keys()
+['foo', 'baz', 'bar']
+
+
+Clean up
+========
+
+>>> gsm = zope.component.getGlobalSiteManager()
+>>> gsm.unregisterAdapter(contained_factory, name='contained')
+True

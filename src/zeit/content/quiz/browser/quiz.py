@@ -25,6 +25,16 @@ class Questions(object):
     def metadata(self):
         return zeit.cms.content.interfaces.ICommonMetadata(self.context)
 
+    def update(self):
+        super(Questions, self).update()
+        if 'apply' not in self.request.form:
+            return
+        questions = self.request.form.get('__quiz__')
+        self.context.updateOrder(questions)
+        for q_name in questions:
+            answers = self.request.form.get(q_name, ())
+            self.context[q_name].updateOrder(answers)
+
 
 class QuizFormBase(object):
 

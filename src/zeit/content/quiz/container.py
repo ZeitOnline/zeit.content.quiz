@@ -18,15 +18,15 @@ class Container(UserDict.DictMixin):
 
     >>> import zope.interface.verify
     >>> zope.interface.verify.verifyClass(
-    ...     zeit.content.quiz.interfaces.IContainer, Container)
+    ...     zeit.content.quiz.interfaces.IReadContainer, Container)
     True
     >>> zope.interface.verify.verifyClass(
-    ...     zope.app.container.interfaces.IContainer, Container)
+    ...     zeit.content.quiz.interfaces.IWriteContainer, Container)
     True
 
     """
-    zope.interface.implements(zope.app.container.interfaces.IContainer,
-                              zeit.content.quiz.interfaces.IContainer)
+    zope.interface.implements(zeit.content.quiz.interfaces.IReadContainer,
+                              zeit.content.quiz.interfaces.IWriteContainer)
 
     def __getitem__(self, name):
         for xml_child in self._iter_xml_children():
@@ -69,6 +69,18 @@ class Container(UserDict.DictMixin):
 
     def _get_persistent_container(self):
         raise NotImplementedError
+
+    def updateOrder(self, order):
+        new_keys = set(order)
+        if len(new_keys) != len(order):
+            raise ValueError("Duplicate keys.")
+        if new_keys != set(self.keys()):
+            raise ValueError(
+                "New order has different keys than are currently used.")
+        children = dict(self.items())
+        for key in order:
+            # ElementTree does the Right Thing.
+            self[key] = children[key]
 
 
 class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,

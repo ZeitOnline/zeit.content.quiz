@@ -50,7 +50,6 @@ zeit.content.quiz.Sorter = Class.extend({
                 hoverclass: 'questionsort-hover',
             });
         });
-    
     },
 });
 
