@@ -13,14 +13,17 @@ import zeit.cms.content.field
 from zeit.cms.i18n import MessageFactory as _
 
 
-class IContainer(zope.app.container.interfaces.IContainer,
-                 zeit.cms.content.interfaces.IXMLRepresentation):
+class IContainer(zeit.cms.content.interfaces.IXMLRepresentation):
     """Container that stores its children inside its own xml representation."""
+
+    def content_modified():
+        """Notify the container that content has changed."""
 
 
 class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata, 
                 zeit.cms.content.interfaces.IXMLContent,
-                zope.app.container.interfaces.IReadContainer):
+                zope.app.container.interfaces.IReadContainer,
+                IContainer):
     """Read methods for quiz."""
 
 
@@ -41,7 +44,8 @@ class IQuizContent(zope.interface.Interface):
 
 class IReadQuestion(zope.app.container.interfaces.IReadContainer,
                     zeit.cms.content.interfaces.IXMLRepresentation,
-                    IQuizContent):
+                    IQuizContent,
+                    IContainer):
     """Read methods for question."""
 
 

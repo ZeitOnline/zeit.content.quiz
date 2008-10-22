@@ -3,12 +3,11 @@
 
 import UserDict
 import lxml.objectify
-import zope.app.container.ordered
+import zope.app.container.interfaces
 import zope.component
 import zope.interface
 import zope.lifecycleevent
 
-import zeit.cms.content.interfaces
 import zeit.cms.content.xmlsupport
 
 import zeit.content.quiz.interfaces
@@ -21,10 +20,13 @@ class Container(UserDict.DictMixin):
     >>> zope.interface.verify.verifyClass(
     ...     zeit.content.quiz.interfaces.IContainer, Container)
     True
+    >>> zope.interface.verify.verifyClass(
+    ...     zope.app.container.interfaces.IContainer, Container)
+    True
 
     """
-    zope.interface.implements(zeit.content.quiz.interfaces.IContainer,
-                              zeit.cms.content.interfaces.IXMLRepresentation)
+    zope.interface.implements(zope.app.container.interfaces.IContainer,
+                              zeit.content.quiz.interfaces.IContainer)
 
     def __getitem__(self, name):
         for xml_child in self._iter_xml_children():
@@ -41,7 +43,7 @@ class Container(UserDict.DictMixin):
         zope.location.locate(obj, self, name)
         obj.xml.set('name', name)
         self._append_xml_child(obj)
-        self._persistent_container_changed()
+        self.content_modified()
 
     def __delitem__(self, name):
         for xml_child in self._iter_xml_children():
@@ -50,7 +52,7 @@ class Container(UserDict.DictMixin):
                 break
         else:
             raise KeyError(name)
-        self._persistent_container_changed()
+        self.content_modified()
 
     def keys(self):
         return [xml_child.get('name')
@@ -62,7 +64,7 @@ class Container(UserDict.DictMixin):
     def _append_xml_child(self, child):
         self.xml.append(child.xml)
 
-    def _persistent_container_changed(self):
+    def content_modified(self):
         self._get_persistent_container()._p_changed = True
 
     def _get_persistent_container(self):
@@ -81,7 +83,7 @@ class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,
 
 @zope.component.adapter(Contained, zope.lifecycleevent.IObjectModifiedEvent)
 def content_modified(context, event):
-    context.__parent__._persistent_container_changed()
+    context.__parent__.content_modified()
 
 
 def xml_tree_content_adapter(factory):
