@@ -32,6 +32,9 @@ class Quiz(zeit.content.quiz.container.Container,
             if child.tag == 'question':
                 yield child
 
+    def _get_persistent_container(self):
+        return self
+
 
 quizFactory = zeit.cms.content.adapter.xmlContentFactory(Quiz)
 

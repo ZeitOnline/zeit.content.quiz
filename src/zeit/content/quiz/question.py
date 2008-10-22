@@ -45,6 +45,9 @@ class Question(zeit.content.quiz.container.Container,
             if child.tag == 'answer':
                 yield child
 
+    def _get_persistent_container(self):
+        return zeit.content.quiz.interfaces.IQuiz(self)
+
 
 questionFactory = zeit.content.quiz.container.xml_tree_content_adapter(
     Question)

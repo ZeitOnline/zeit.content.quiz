@@ -5,10 +5,36 @@
 import os
 import unittest
 
+import persistent
 import zope.app.testing.functional
 import zope.testing.doctest
 
 import zeit.cms.testing
+import zeit.content.quiz.container
+
+
+class PersistentContainer(persistent.Persistent,
+                          zeit.content.quiz.container.Container,
+                          zeit.cms.content.xmlsupport.XMLRepresentationBase):
+
+    default_template = "<persistentcontainer />"
+
+    def _get_persistent_container(self):
+        return self
+
+
+class Container(zeit.content.quiz.container.Container,
+                zeit.content.quiz.container.Contained):
+
+    default_template = "<container />"
+
+    def _get_persistent_container(self):
+        return self.__parent__
+
+
+class Contained(zeit.content.quiz.container.Contained):
+
+    default_template = "<contained />"
 
 
 QuizLayer = zope.app.testing.functional.ZCMLLayer(
@@ -26,5 +52,6 @@ def test_suite():
             'zeit.content.quiz.answer'))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
             'quiz.txt',
+            'container.txt',
             layer=QuizLayer))
     return suite

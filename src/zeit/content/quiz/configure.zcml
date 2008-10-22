@@ -30,6 +30,9 @@
     type="zeit.cms.interfaces.ICMSContentType"
     />
 
+  <!-- non-persistent container -->
+  <subscriber handler=".container.content_modified" />
+
   <!-- Question -->
   <adapter factory=".question.questionFactory" name="question" />
   <adapter factory=".question.QuestionHTMLContent" />

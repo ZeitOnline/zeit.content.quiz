@@ -1,0 +1,100 @@
+=====================================================
+Container with children that aren't in the repository
+=====================================================
+
+Containers and content implemented in this module are abstract. Therefore, we
+need concrete implementations of them for this demonstration:
+
+>>> import persistent
+>>> import zeit.content.quiz.container
+
+>>> class PersistentContainer(
+...     persistent.Persistent,
+...     zeit.content.quiz.container.Container,
+...     zeit.cms.content.xmlsupport.XMLRepresentationBase):
+...
+...     default_template = "<persistentcontainer />"
+...     def _get_persistent_container(self):
+...         return self
+
+>>> class Container(zeit.content.quiz.container.Container,
+...                 zeit.content.quiz.container.Contained):
+...
+...     default_template = "<container />"
+...     def _get_persistent_container(self):
+...         return self.__parent__
+
+>>> class Contained(zeit.content.quiz.container.Contained):
+...
+...     default_template = "<contained />"
+
+>>> from zeit.content.quiz.test import \
+...     PersistentContainer, Container, Contained
+
+
+Persistence
+===========
+
+Let's create a persistent container:
+
+>>> import transaction
+>>> root = getRootFolder()
+>>> pc = PersistentContainer()
+>>> root['pc'] = pc
+>>> transaction.commit()
+
+Now we add to it a non-persistent container which will be stored within the
+XML tree of the persistent one. We must ensure that it gets written to the
+ZODB if the non-persistent object was modified during the transaction.
+
+>>> npc = Container()
+>>> pc._p_changed
+False
+>>> pc['npc'] = npc
+>>> pc._p_changed
+True
+>>> transaction.commit()
+
+>>> import zope.event
+>>> import zope.lifecycleevent
+>>> pc._p_changed
+False
+>>> zope.event.notify(zope.lifecycleevent.ObjectModifiedEvent(npc))
+>>> pc._p_changed
+True
+>>> transaction.commit()
+
+We'll test deletion of the non-persistent container later; let's first add
+some content to it and see that change notification works from deeper inside
+the containment as well:
+
+>>> obj = Contained()
+>>> pc._p_changed
+False
+>>> npc['obj'] = obj
+>>> pc._p_changed
+True
+>>> transaction.commit()
+
+>>> pc._p_changed
+False
+>>> zope.event.notify(zope.lifecycleevent.ObjectModifiedEvent(obj))
+>>> pc._p_changed
+True
+>>> transaction.commit()
+
+Finally, we remove the non-persistent items:
+
+>>> pc._p_changed
+False
+>>> del npc['obj']
+>>> pc._p_changed
+True
+>>> transaction.commit()
+
+>>> pc._p_changed
+False
+>>> del pc['npc']
+>>> pc._p_changed
+True
+>>> transaction.commit()

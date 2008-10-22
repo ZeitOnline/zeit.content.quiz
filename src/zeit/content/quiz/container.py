@@ -6,6 +6,7 @@ import lxml.objectify
 import zope.app.container.ordered
 import zope.component
 import zope.interface
+import zope.lifecycleevent
 
 import zeit.cms.content.interfaces
 import zeit.cms.content.xmlsupport
@@ -35,11 +36,12 @@ class Container(UserDict.DictMixin):
                 return child
         else:
             raise KeyError(name)
-    
+
     def __setitem__(self, name, obj):
         zope.location.locate(obj, self, name)
         obj.xml.set('name', name)
         self._append_xml_child(obj)
+        self._persistent_container_changed()
 
     def __delitem__(self, name):
         for xml_child in self._iter_xml_children():
@@ -48,6 +50,7 @@ class Container(UserDict.DictMixin):
                 break
         else:
             raise KeyError(name)
+        self._persistent_container_changed()
 
     def keys(self):
         return [xml_child.get('name')
@@ -59,6 +62,12 @@ class Container(UserDict.DictMixin):
     def _append_xml_child(self, child):
         self.xml.append(child.xml)
 
+    def _persistent_container_changed(self):
+        self._get_persistent_container()._p_changed = True
+
+    def _get_persistent_container(self):
+        raise NotImplementedError
+
 
 class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,
                 zope.app.container.contained.Contained):
@@ -68,7 +77,12 @@ class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,
         super(Contained, self).__init__(xml_source=xml_source)
         if xml is not None:
             self.xml = xml
-    
+
+
+@zope.component.adapter(Contained, zope.lifecycleevent.IObjectModifiedEvent)
+def content_modified(context, event):
+    context.__parent__._persistent_container_changed()
+
 
 def xml_tree_content_adapter(factory):
 
