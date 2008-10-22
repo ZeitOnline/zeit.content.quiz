@@ -1,6 +1,8 @@
 <div id="full-content-area"
   i18n:domain="zeit.cms">
 
+  <tal:replace replace="resource_library:zeit.content.quiz" />
+
   <div class="wysiwyg-header">
     <div class="supertitle" tal:content="view/metadata/supertitle" />:
     <div class="title" tal:content="view/metadata/title" />
@@ -18,7 +20,7 @@
   <tal:questions condition="python:len(context)">
     <p>Questions:</p>
 
-    <ol>
+    <ol class="questions">
       <li tal:repeat="question context/values">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
            tal:content="question/@@display_title" />
@@ -28,7 +30,8 @@
               Add answer</a>
           </li>
         </ul>
-        <ol tal:condition="python:len(question)">
+        <ol tal:condition="python:len(question)"
+            class="answers">
           <li tal:repeat="answer question/values">
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
                tal:content="answer/@@display_title" />
