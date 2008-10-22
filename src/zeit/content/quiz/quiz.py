@@ -9,6 +9,7 @@ import zope.interface
 import zeit.cms.connector
 import zeit.cms.content.adapter
 import zeit.cms.content.metadata
+import zeit.cms.interfaces
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
@@ -23,7 +24,8 @@ class Quiz(zeit.content.quiz.container.Container,
            zeit.cms.content.metadata.CommonMetadata):
     """Quiz"""
 
-    zope.interface.implements(zeit.content.quiz.interfaces.IQuiz)
+    zope.interface.implements(zeit.content.quiz.interfaces.IQuiz,
+                              zeit.cms.interfaces.IEditorialContent)
 
     default_template = QUIZ_TEMPLATE
 
