@@ -24,7 +24,7 @@ setup(
         'rwproperty',
         'setuptools',
         'zc.form',
-        'zeit.cms',
+        'zeit.cms>1.2.3',
         'zeit.connector',
         'zope.annotation',
         'zope.app.container',
