@@ -56,7 +56,9 @@
     menu="zeit-context-views" title="Questions"
     />
 
-  <resourceLibrary name="zeit.content.quiz" require="zeit.cms.DragAndDrop">
+  <resourceLibrary
+     name="zeit.content.quiz"
+     require="zeit.cms.DragAndDrop mochikit.Sortable">
     <directory source="resources" include="quiz.js quiz.css" />
   </resourceLibrary>
 

@@ -22,7 +22,7 @@
         tal:condition="python:len(context)">
     <p>Questions:</p>
 
-    <ol class="questions">
+    <ol class="questions" id="sortable-questions">
       <li tal:repeat="question context/values">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
            tal:content="question/@@display_title" />
@@ -35,6 +35,7 @@
           </li>
         </ul>
         <ol tal:condition="python:len(question)"
+            tal:attributes="id string:sortable-answers-${repeat/question/index}"
             class="answers">
           <li tal:repeat="answer question/values">
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
