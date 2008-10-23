@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import lxml.objectify
 import zope.app.container.interfaces
 import zope.component
 import zope.interface
@@ -15,9 +16,7 @@ import zeit.content.quiz.container
 
 
 QUESTION_TEMPLATE = u"""\
-<question xmlns:py="http://codespeak.net/lxml/objectify/pytype">
-  <text/>
-</question>"""
+<question xmlns:py="http://codespeak.net/lxml/objectify/pytype" />"""
 
 
 class Question(zeit.content.quiz.container.Container,
@@ -59,4 +58,9 @@ class QuestionHTMLContent(zeit.wysiwyg.html.HTMLContentBase):
     zope.component.adapts(zeit.content.quiz.interfaces.IQuestion)
 
     def get_tree(self):
-        return self.context.xml['text']
+        try:
+            node = self.context.xml['text']
+        except AttributeError:
+            node = lxml.objectify.Element('text')
+            self.context.xml.append(node)
+        return node
