@@ -156,24 +156,33 @@ True
 >>> browser.getControl('Explanation').value
 '<p>This is right.</p>\r\n'
 
-These values can be changed:
-
->>> browser.getControl('Title').value = '1st answer'
->>> browser.getControl('Correct?').click()
->>> browser.getControl('Correct?').selected
-False
->>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
->>> browser.getControl('Explanation').value = '<p><em>This is really right.</em></p>'
-
-
 We note that the answer view does not have a check-in link either:
 
 >>> browser.getLink('Checkin')
 Traceback (most recent call last):
 LinkNotFoundError
 
+These values can be changed:
+
+>>> browser.getControl('Title').value = '1st answer'
+>>> browser.getControl('Correct?').click()
+>>> browser.getControl('Correct?').selected
+False
+>>> browser.getControl('Text').value = ''
+>>> browser.getControl('Explanation').value = '<p><em>This is really right.</em></p>'
+
+As the text field is required we get an error message when we click on
+apply:
+
+>>> browser.getControl('Apply').click()
+>>> print browser.contents
+<?xml version="1.0"?>
+<!DOCTYPE...
+<li class="error">Text: Required input is missing.</li>...
+
 After editing the answer, we're on the questions overview tab as well:
 
+>>> browser.getControl('Text').value = '<p><em>foh</em> bah</p>'
 >>> browser.getControl('Apply').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
@@ -222,6 +231,7 @@ effect on answers, we have to create another one:
 
 >>> browser.getLink('Add answer', index=0).click()
 >>> browser.getControl('Title').value = '2nd answer'
+>>> browser.getControl('Text').value = '<p>foobar</p>'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Correct?').selected
 True
