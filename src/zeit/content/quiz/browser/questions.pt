@@ -40,6 +40,8 @@
           <li tal:repeat="answer question/values">
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
                tal:content="answer/@@display_title" />
+            <tal:correct condition="answer/correct"
+                         i18n:translate="">(correct)</tal:correct>
             <input type="hidden"
                    tal:attributes="name string:${question/__name__}:list;
                                    value answer/__name__" />

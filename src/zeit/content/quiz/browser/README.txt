@@ -207,6 +207,7 @@ Later, we can also edit both without filling in the title:
 
 >>> browser.getLink('Answer').click()
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
+>>> browser.getControl('Correct?').click()
 >>> browser.getControl('Apply').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
@@ -221,6 +222,9 @@ effect on answers, we have to create another one:
 
 >>> browser.getLink('Add answer', index=0).click()
 >>> browser.getControl('Title').value = '2nd answer'
+>>> browser.getControl('Correct?').click()
+>>> browser.getControl('Correct?').selected
+True
 >>> browser.getControl('Add').click()
 
 Before any re-ordering, questions and answers are listed in the questions
@@ -235,15 +239,15 @@ overview in the same order they were created:
   ...1st question... 
     <input type="hidden" name="__quiz__:list" value="first question" />...
   <ol class="answers" id="sortable-answers-0">
-    ...1st answer...
+    ...1st answer</a>
       <input type="hidden" name="first question:list" value="first answer" />
-    ...2nd answer...
+    ...2nd answer</a> (correct)
       <input type="hidden" name="first question:list" value="2nd answer" />...
   </ol>
   ...Question...
     <input type="hidden" name="__quiz__:list" value="Question" />...
   <ol class="answers" id="sortable-answers-1">
-    ...Answer...
+    ...Answer</a> (correct)
       <input type="hidden" name="Question:list" value="Answer" />...
   </ol>...
 </ol>...
