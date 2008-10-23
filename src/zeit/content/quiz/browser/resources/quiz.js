@@ -13,12 +13,11 @@ if (typeof(zeit.content.quiz) == 'undefined') {
 zeit.content.quiz.Sorter = Class.extend({
     // sort questions and answers
 
-    construct: function(class_name) {
+    construct: function(class_names) {
         var othis = this;
         othis.dragging = false;
-        var list = getFirstElementByTagAndClassName('ol', class_name);
 
-        forEach(list.getElementsByTagName('li'), function(item) {
+        function handle(item) {
             new Draggable(item, {
                 ghosting: true
             });
@@ -49,10 +48,21 @@ zeit.content.quiz.Sorter = Class.extend({
                 },
                 hoverclass: 'questionsort-hover',
             });
+        }
+
+        forEach(class_names, function(class_name) {
+            forEach(getElementsByTagAndClassName('ol', class_name),
+                    function(list) {
+                forEach(list.childNodes, function(node) {
+                    if (node.nodeName == 'LI') {
+                        handle(node);
+                    };
+                });
+            });
         });
     },
 });
 
 connect(window, "onload", function() {
-    new zeit.content.quiz.Sorter('questions');
+    new zeit.content.quiz.Sorter(['questions', 'answers']);
 });
