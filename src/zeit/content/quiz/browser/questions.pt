@@ -3,16 +3,9 @@
 
   <tal:replace replace="resource_library:zeit.content.quiz" />
 
-  <div class="wysiwyg-header">
-    <div class="supertitle" tal:content="view/metadata/supertitle" />:
-    <div class="title" tal:content="view/metadata/title" />
-    <div class="byline" tal:content="view/metadata/byline" />
-    <div class="subtitle" tal:content="view/metadata/subtitle" />
-  </div>
-
   <form method="POST" class="edit-form"
     tal:attributes="action view/@@absolute_url">
-
+    <div class="field-group">
     <ol class="questions" id="sortable-questions">
       <li tal:repeat="question context/values" class="question">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
@@ -55,6 +48,7 @@
         </a>
       </li>
     </ol>
+    </div>
 
     <div id="actionsView">
       <input type="submit" name="apply" value="Apply sorting"
