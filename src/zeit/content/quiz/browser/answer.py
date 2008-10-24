@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import gocept.form.grouped
 import os.path
 import zope.app.container.interfaces
 import zope.app.pagetemplate
@@ -22,11 +23,6 @@ import zeit.content.quiz.browser.quiz
 
 class FormBase(object):
 
-    form_fields = (
-        zope.formlib.form.Fields(
-            zeit.content.quiz.interfaces.IAnswer).select(
-            'title', 'correct', 'answer', 'explanation'))
-
     def questions_url(self):
         quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
         url = zope.component.getMultiAdapter(
@@ -39,6 +35,11 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
     title = _("Add answer")
     factory = zeit.content.quiz.answer.Answer
     checkout = False
+
+    form_fields = (
+        zope.formlib.form.Fields(
+            zeit.content.quiz.interfaces.IAnswer).select(
+            'title', 'correct', 'answer', 'explanation'))
 
     def nextURL(self):
         url = zope.component.getMultiAdapter(
@@ -55,6 +56,23 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
 
     title = _("Edit answer")
+
+    form_fields = (
+        zope.formlib.form.Fields(
+            zeit.content.quiz.interfaces.IQuestion, prefix='q', 
+            for_display=True).select(
+            'q.title', 'q.question') + 
+        zope.formlib.form.Fields(
+            zeit.content.quiz.interfaces.IAnswer).select(
+            'title', 'correct', 'answer', 'explanation'))
+
+    field_groups = (
+        gocept.form.grouped.Fields(
+            title=_(u'Question'),
+            fields=('q.title', 'q.question')),
+        gocept.form.grouped.RemainingFields(
+            title=_(u'Answer')),
+        )
 
     def nextURL(self):
         return self.questions_url()

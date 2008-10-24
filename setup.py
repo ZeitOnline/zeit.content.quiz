@@ -20,6 +20,7 @@ setup(
     license='gocept proprietary',
     namespace_packages = ['zeit', 'zeit.content'],
     install_requires=[
+        'gocept.form',
         'lxml',
         'rwproperty',
         'setuptools',

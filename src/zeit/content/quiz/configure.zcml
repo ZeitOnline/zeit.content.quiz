@@ -61,6 +61,7 @@
 
   <!-- Answer -->
   <adapter factory=".answer.answerFactory" name="answer" />
+  <adapter factory=".answer.get_question" />
 
   <class class=".answer.Answer">
     <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
