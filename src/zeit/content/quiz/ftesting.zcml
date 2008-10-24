@@ -21,5 +21,6 @@
   <include package="zeit.wysiwyg.browser" />
 
   <include package="zeit.content.quiz" />
+  <include package="zeit.content.quiz.browser" />
 
 </configure>

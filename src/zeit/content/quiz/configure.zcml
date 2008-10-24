@@ -1,4 +1,6 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:i18n="http://namespaces.zope.org/i18n">
 
   <!-- Quiz -->
   <adapter factory=".quiz.quizFactory" name="quiz" />
@@ -77,6 +79,6 @@
       permission="zeit.EditContent" />
   </class>
 
-  <include package=".browser" />
+  <i18n:registerTranslations directory="locales" />
 
 </configure>

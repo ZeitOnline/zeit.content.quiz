@@ -63,7 +63,7 @@ class EditQuiz(QuizFormBase,
 class DisplayQuiz(QuizFormBase,
                   zeit.cms.content.browser.form.CommonMetadataDisplayForm):
 
-    title = _("View quiz metadata")
+    title = _("View quiz")
 
 
 # quiz content
