@@ -34,6 +34,12 @@ After adding the quiz we're at its metadata view.
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@edit.html'
 
+The quiz has assets:
+
+>>> browser.getLink('Edit assets')
+<Link text='Edit assets' ...>
+
+
 Add a question
 --------------
 

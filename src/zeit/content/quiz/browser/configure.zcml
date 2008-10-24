@@ -5,6 +5,10 @@
   i18n_domain="zeit.cms">
 
   <!-- quiz -->
+  <class class="zeit.content.quiz.quiz.Quiz">
+    <implements interface="zeit.cms.content.browser.interfaces.IAssetViews" />
+  </class>
+  
   <browser:page
     for="zeit.cms.repository.interfaces.IFolder"
     permission="zope.ManageContent"
