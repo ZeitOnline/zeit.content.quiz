@@ -70,6 +70,8 @@ class IReadQuestion(IQuizContent, IReadContainer):
 class IWriteQuestion(IWriteContainer):
     """Write methods for question."""
 
+    question = zc.form.field.HTMLSnippet(title=_("Text"), required=False)
+
 
 class IQuestion(IReadQuestion, IWriteQuestion):
     """Question content type."""

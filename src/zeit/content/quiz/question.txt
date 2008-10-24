@@ -1,0 +1,38 @@
+==========
+ Question
+==========
+
+Interface test for question:
+
+>>> import zeit.content.quiz.interfaces
+>>> import zeit.content.quiz.question
+>>> import zope.interface.verify
+>>> import zope.publisher.browser
+
+Set up
+======
+
+The HTML-Property needs an interaction:
+
+>>> request = zope.publisher.browser.TestRequest()
+>>> zope.security.management.newInteraction(request)
+
+Test
+====
+
+>>> import zope.interface.verify
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IQuestion, 
+...     zeit.content.quiz.question.Question())
+True
+>>> zope.interface.verify.verifyObject(
+...     zope.app.container.interfaces.IContained,
+...     zeit.content.quiz.question.Question())
+True
+
+
+Clean up
+========
+
+>>> zope.security.management.endInteraction()
+

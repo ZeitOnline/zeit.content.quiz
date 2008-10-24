@@ -10,25 +10,25 @@ import zope.component
 import zope.interface
 
 import zeit.cms.content.property
-import zeit.wysiwyg.html
-import zeit.wysiwyg.interfaces
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
-
+import zeit.content.quiz.quiz
 
 ANSWER_TEMPLATE = u"""
 <answer xmlns:py="http://codespeak.net/lxml/objectify/pytype" />"""
 
 
-class Answer(zeit.content.quiz.container.Contained):
+class Answer(zeit.content.quiz.container.Contained,
+             zeit.content.quiz.quiz.ContentBase):
     """A possible answer to a question of a quiz.
 
     """
     zope.interface.implements(zeit.content.quiz.interfaces.IAnswer,
                               zope.app.container.interfaces.IContained)
 
-    title = zeit.cms.content.property.Structure('.title')
+    default_template = ANSWER_TEMPLATE
+
     correct = zeit.cms.content.property.ObjectPathProperty('.correct')
 
     @rwproperty.getproperty
@@ -47,19 +47,12 @@ class Answer(zeit.content.quiz.container.Contained):
     def explanation(self, value):
         return self.convert.from_html(self.get_node('explanation'), value)
 
-    @property
-    def convert(self):
-        return zeit.wysiwyg.interfaces.IHTMLConverter(self)
-
-    def get_node(self, name):
-        try:
-            node = self.xml[name]
-        except AttributeError:
-            node = lxml.objectify.Element(name)
-            self.xml.append(node)
-        return node
-
-    default_template = ANSWER_TEMPLATE
 
 
 answerFactory = zeit.content.quiz.container.xml_tree_content_adapter(Answer)
+
+
+@zope.component.adapter(zeit.content.quiz.interfaces.IAnswer)
+@zope.interface.implementer(zeit.content.quiz.interfaces.IQuestion)
+def get_question(context):
+    return context.__parent__

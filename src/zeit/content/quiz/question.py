@@ -4,6 +4,7 @@
 # $Id$
 
 import lxml.objectify
+import rwproperty
 import zope.app.container.interfaces
 import zope.component
 import zope.interface
@@ -13,6 +14,7 @@ import zeit.wysiwyg.html
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
+import zeit.content.quiz.quiz
 
 
 QUESTION_TEMPLATE = u"""\
@@ -20,24 +22,22 @@ QUESTION_TEMPLATE = u"""\
 
 
 class Question(zeit.content.quiz.container.Container,
-               zeit.content.quiz.container.Contained):
+               zeit.content.quiz.container.Contained,
+               zeit.content.quiz.quiz.ContentBase):
     """A question in a quiz.
-
-    >>> import zope.interface.verify
-    >>> zope.interface.verify.verifyObject(
-    ...     zeit.content.quiz.interfaces.IQuestion, Question())
-    True
-    >>> zope.interface.verify.verifyObject(
-    ...     zope.app.container.interfaces.IContained, Question())
-    True
-
     """
     zope.interface.implements(zeit.content.quiz.interfaces.IQuestion,
                               zope.app.container.interfaces.IContained)
 
-    title = zeit.cms.content.property.Structure('.title')
-
     default_template = QUESTION_TEMPLATE
+
+    @rwproperty.getproperty
+    def question(self):
+        return self.convert.to_html(self.get_node('text'))
+
+    @rwproperty.setproperty
+    def question(self, value):
+        return self.convert.from_html(self.get_node('text'), value)
 
     def _iter_xml_children(self):
         for child in self.xml.getchildren():

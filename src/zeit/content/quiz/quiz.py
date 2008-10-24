@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import lxml.objectify
 import zope.component
 import zope.interface
 
@@ -10,6 +11,7 @@ import zeit.cms.connector
 import zeit.cms.content.adapter
 import zeit.cms.content.metadata
 import zeit.cms.interfaces
+import zeit.wysiwyg.interfaces
 
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
@@ -54,3 +56,21 @@ def quiz_for_content(context):
     while not zeit.content.quiz.interfaces.IQuiz.providedBy(candidate):
         candidate = candidate.__parent__
     return candidate
+
+
+class ContentBase(object):
+    """Base class for questions and answers."""
+    
+    title = zeit.cms.content.property.Structure('.title')
+
+    def get_node(self, name):
+        try:
+            node = self.xml[name]
+        except AttributeError:
+            node = lxml.objectify.Element(name)
+            self.xml.append(node)
+        return node
+
+    @property
+    def convert(self):
+        return zeit.wysiwyg.interfaces.IHTMLConverter(self)

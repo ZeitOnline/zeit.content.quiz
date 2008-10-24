@@ -2,7 +2,7 @@
  Answer
 ========
 
-Interface test for anwer:
+Interface test for answer:
 
 >>> import zeit.content.quiz.interfaces
 >>> import zeit.content.quiz.answer
@@ -11,6 +11,8 @@ Interface test for anwer:
 
 Set up
 ======
+
+The HTML-Properties need an interaction:
 
 >>> request = zope.publisher.browser.TestRequest()
 >>> zope.security.management.newInteraction(request)
