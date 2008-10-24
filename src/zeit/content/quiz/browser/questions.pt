@@ -33,14 +33,16 @@
               value answer/__name__" />
           </li>
           <li class="add">
-            <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html">
+            <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html"
+              i18n:translate="">
               Add answer
             </a>
           </li>
         </ol>
       </li>
       <li class="add">
-        <a tal:attributes="href string:${context/@@absolute_url}/@@addQuestion.html">
+        <a tal:attributes="href string:${context/@@absolute_url}/@@addQuestion.html"
+          i18n:translate="">
           Add question
         </a>
       </li>
