@@ -7,7 +7,9 @@ MochiKit.Signal.connect(window, 'onload', function() {
         forEach(getElementsByTagAndClassName('ol', class_name),
                 function(list) {
             MochiKit.Sortable.Sortable.create(
-                list.id, {hoverclass: 'questionsort-hover',
+                list.id, {
+                hoverclass: 'questionsort-hover',
+                only: ['question', 'answer'],
             });
         });
     });

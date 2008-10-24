@@ -1,4 +1,4 @@
-<div id="full-content-area"
+<div id="edit-form"
   i18n:domain="zeit.cms">
 
   <tal:replace replace="resource_library:zeit.content.quiz" />
@@ -10,46 +10,45 @@
     <div class="subtitle" tal:content="view/metadata/subtitle" />
   </div>
 
-  <ul>
-    <li>
-      <a tal:attributes="href string:${context/@@absolute_url}/@@addQuestion.html">
-        Add question</a>
-    </li>
-  </ul>
-
-  <form method="POST"
-        tal:attributes="action view/@@absolute_url"
-        tal:condition="python:len(context)">
-    <p>Questions:</p>
+  <form method="POST" class="edit-form"
+    tal:attributes="action view/@@absolute_url">
 
     <ol class="questions" id="sortable-questions">
-      <li tal:repeat="question context/values">
+      <li tal:repeat="question context/values" class="question">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
-           tal:content="question/@@display_title" />
+          tal:content="question/@@display_title" />
         <input type="hidden" name="__quiz__:list"
-               tal:attributes="value question/__name__" />
-        <ul>
-          <li>
-            <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html">
-              Add answer</a>
-          </li>
-        </ul>
-        <ol tal:condition="python:len(question)"
-            tal:attributes="id string:sortable-answers-${repeat/question/index}"
-            class="answers">
-          <li tal:repeat="answer question/values">
+          tal:attributes="value question/__name__" />
+        <ol class="answers"
+          tal:attributes="id string:sortable-answers-${repeat/question/index}">
+          <li class="answer"
+            tal:repeat="answer question/values">
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
-               tal:content="answer/@@display_title" />
+              tal:content="answer/@@display_title" />
             <tal:correct condition="answer/correct"
-                         i18n:translate="">(correct)</tal:correct>
+              i18n:translate="">(correct)</tal:correct>
             <input type="hidden"
-                   tal:attributes="name string:${question/__name__}:list;
-                                   value answer/__name__" />
+              tal:attributes="
+              name string:${question/__name__}:list;
+              value answer/__name__" />
+          </li>
+          <li class="add">
+            <a tal:attributes="href string:${question/@@absolute_url}/@@addAnswer.html">
+              Add answer
+            </a>
           </li>
         </ol>
       </li>
+      <li class="add">
+        <a tal:attributes="href string:${context/@@absolute_url}/@@addQuestion.html">
+          Add question
+        </a>
+      </li>
     </ol>
 
-    <input type="submit" name="apply" value="Apply" i18n:attributes="value" />
+    <div id="actionsView">
+      <input type="submit" name="apply" value="Apply sorting" i18n:attributes="value" />
+    </div>
+
   </form>
 </div>

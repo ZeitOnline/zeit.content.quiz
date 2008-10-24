@@ -2,3 +2,21 @@
 .questionsort-hover {
     border-bottom: 2px solid red !important;
 }
+
+.questions {
+    list-style: none;
+    padding-left: 0;
+}
+
+.question > a {
+    font-size: 1.2em;
+}
+
+.question {
+    margin-bottom: 1em;
+}
+
+.answers {
+    list-style: none;
+    padding-left: 2em;
+}
