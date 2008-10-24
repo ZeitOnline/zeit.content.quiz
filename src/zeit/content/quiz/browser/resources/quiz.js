@@ -8,7 +8,6 @@ MochiKit.Signal.connect(window, 'onload', function() {
                 function(list) {
             MochiKit.Sortable.Sortable.create(
                 list.id, {
-                hoverclass: 'questionsort-hover',
                 only: ['question', 'answer'],
             });
         });
