@@ -15,7 +15,7 @@ import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
 import zeit.content.quiz.quiz
 
-ANSWER_TEMPLATE = u"""
+ANSWER_TEMPLATE = u"""\
 <answer xmlns:py="http://codespeak.net/lxml/objectify/pytype" />"""
 
 
@@ -27,9 +27,9 @@ class Answer(zeit.content.quiz.container.Contained,
     zope.interface.implements(zeit.content.quiz.interfaces.IAnswer,
                               zope.app.container.interfaces.IContained)
 
-    default_template = ANSWER_TEMPLATE
-
     correct = zeit.cms.content.property.ObjectPathProperty('.correct')
+
+    default_template = ANSWER_TEMPLATE
 
     @rwproperty.getproperty
     def answer(self):

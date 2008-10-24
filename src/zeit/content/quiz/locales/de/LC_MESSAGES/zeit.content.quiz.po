@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zeit.content.quiz\n"
-"POT-Creation-Date: Fri Oct 24 12:55:47 2008\n"
+"POT-Creation-Date: Fri Oct 24 13:47:31 2008\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Christian Zagrodnick <cz@gocept.com>\n"
 "Language-Team: \n"
@@ -12,6 +12,7 @@ msgstr ""
 "X-Poedit-Country: GERMANY\n"
 
 #: src/zeit/content/quiz/browser/answer.py:39
+#: src/zeit/content/quiz/browser/questions.pt:44
 msgid "Add answer"
 msgstr "Antwort hinzufügen"
 
@@ -41,6 +42,7 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: src/zeit/content/quiz/browser/question.py:31
+#: src/zeit/content/quiz/browser/questions.pt:52
 msgid "Add question"
 msgstr "Frage hinzufügen"
 
@@ -48,11 +50,15 @@ msgstr "Frage hinzufügen"
 msgid "Edit question"
 msgstr "Frage bearbeiten"
 
-#: src/zeit/content/quiz/browser/questions.pt:28
+#: src/zeit/content/quiz/browser/questions.pt:26
 msgid "(correct)"
-msgstr "✔"
+msgstr "✓"
 
-#: src/zeit/content/quiz/browser/questions.pt:50
+#: src/zeit/content/quiz/browser/questions.pt:31
+msgid "(not correct)"
+msgstr "✕"
+
+#: src/zeit/content/quiz/browser/questions.pt:60
 msgid "Apply sorting"
 msgstr "Sortierung speichern"
 

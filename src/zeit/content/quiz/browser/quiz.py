@@ -3,6 +3,7 @@
 # See also LICENSE.txt
 # $Id$
 
+import xml.sax.saxutils
 import gocept.form.action
 import zope.cachedescriptors.property
 import zope.formlib.form
@@ -94,8 +95,19 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
         self.request.response.redirect(next_url + '/@@questions.html')
 
 
-@zope.component.adapter(zeit.content.quiz.interfaces.IQuizContent,
+@zope.component.adapter(zeit.content.quiz.interfaces.IQuestion,
                         zeit.cms.browser.interfaces.ICMSLayer)
 @zope.interface.implementer(zope.publisher.interfaces.browser.IBrowserView)
-def display_title(context, request):
-    return context.title or context.__name__
+def question_display_title(context, request):
+    if context.title:
+        return xml.sax.saxutils.escape(context.title)
+    return context.question
+
+
+@zope.component.adapter(zeit.content.quiz.interfaces.IAnswer,
+                        zeit.cms.browser.interfaces.ICMSLayer)
+@zope.interface.implementer(zope.publisher.interfaces.browser.IBrowserView)
+def answer_display_title(context, request):
+    if context.title:
+        return xml.sax.saxutils.escape(context.title)
+    return context.answer

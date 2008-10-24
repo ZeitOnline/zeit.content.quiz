@@ -100,10 +100,8 @@ quiz first; let's do so by using the breadcrumb menu:
 >>> browser.getLink('Edit metadata').click()
 >>> browser.getControl('Title').value
 'Koch-Quiz'
->>> print browser.contents
-<?xml ...
-<!DOCTYPE ...
-<title> kochen – Edit quiz </title>...
+>>> print browser.title.strip()
+kochen – Edit quiz
 
 There is no read only view of the metadata:
 
@@ -131,7 +129,7 @@ entered values:
 
 These values can be changed:
 
->>> browser.getControl('Title').value = '1st question'
+>>> browser.getControl('Title').value = '1st question & ans'
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 
 We note that this question view does not have a check-in link:
@@ -176,7 +174,7 @@ The question gets displayed:
 <fieldset>
   <legend>Question</legend>...
   <span>Title</span>...
-  <div class="widget">1st question</div>...
+  <div class="widget">1st question &amp; ans</div>...
   <span>Text</span>...
   <div class="widget">&lt;p&gt;&lt;em&gt;foo&lt;/em&gt; bar&lt;/p&gt; </div>...
 </fieldset>...
@@ -218,7 +216,7 @@ filling in the title field:
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
 
->>> browser.getControl('Text').value = '<p>zweiter Test</p>er'
+>>> browser.getControl('Text').value = '<p>zweiter Test - Antwort</p>er'
 >>> browser.getControl('Add').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
@@ -227,14 +225,14 @@ Later, we can also edit both without filling in the title:
 
 >>> browser.getLink('kochen').click()
 >>> browser.getLink('Questions').click()
->>> browser.getLink('Question', index=1).click()
+>>> browser.getLink('zweiter Test').click()
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 
->>> browser.getLink('Answer').click()
->>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
+>>> browser.getLink('zweiter Test - Antwort').click()
+>>> browser.getControl('Text').value = '<p><em>ant</em> wort</p>'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Apply').click()
 >>> browser.url
@@ -249,7 +247,7 @@ submitting the form contained in the questions overview. In order to see the
 effect on answers, we have to create another one:
 
 >>> browser.getLink('Add answer', index=0).click()
->>> browser.getControl('Title').value = '2nd answer'
+>>> browser.getControl('Title').value = '2nd <answer>'
 >>> browser.getControl('Text').value = '<p>foobar</p>'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Correct?').selected
@@ -263,23 +261,64 @@ overview in the same order they were created:
 >>> browser.getLink('Questions').click()
 >>> print browser.contents
 <?xml version="1.0"?>
-<!DOCTYPE...
-<ol class="questions" id="sortable-questions">
-  ...1st question... 
-    <input type="hidden" name="__quiz__:list" value="first question" />...
-  <ol class="answers" id="sortable-answers-0">
-    ...1st answer</a>
-      <input type="hidden" name="first question:list" value="first answer" />
-    ...2nd answer</a> (correct)
-      <input type="hidden" name="first question:list" value="2nd answer" />...
-  </ol>
-  ...Question...
-    <input type="hidden" name="__quiz__:list" value="Question" />...
-  <ol class="answers" id="sortable-answers-1">
-    ...Answer</a> (correct)
-      <input type="hidden" name="Question:list" value="Answer" />...
-  </ol>...
-</ol>...
+    ...
+    <ol class="questions" id="sortable-questions">
+      <li class="question">
+        <a href="...">1st question &amp; ans</a>
+        <input type="hidden" name="__quiz__:list"
+               value="first question" />
+        <ol class="answers" id="sortable-answers-0">
+          <li class="answer">
+            <span class="not-correct">
+              (not correct)
+            </span>
+            <a href="...">1st answer</a>
+            <input type="hidden" name="first question:list"
+                   value="first answer" />
+          </li>
+          <li class="answer">
+            <span class="correct">
+              (correct)
+            </span>
+            <a href="...">2nd &lt;answer&gt;</a>
+            <input type="hidden" name="first question:list"
+                   value="2nd &lt;answer&gt;" />
+          </li>
+          <li class="add">
+            <a href="...">
+              Add answer
+            </a>
+          </li>
+        </ol>
+      </li>
+      <li class="question">
+        <a href="..."><p><em>foo</em> bar</p> </a>
+        <input type="hidden" name="__quiz__:list"
+               value="Question" />
+        <ol class="answers" id="sortable-answers-1">
+          <li class="answer">
+            <span class="correct">
+              (correct)
+            </span>
+            <a href="..."><p><em>ant</em> wort</p>
+</a>
+            <input type="hidden" name="Question:list"
+                   value="Answer" />
+          </li>
+          <li class="add">
+            <a href="...">
+              Add answer
+            </a>
+          </li>
+        </ol>
+      </li>
+      <li class="add">
+        <a href="...">
+          Add question
+        </a>
+      </li>
+    </ol>
+    ...
 
 As re-ordering is done via drag'n'drop we submit only the result here:
 
@@ -288,7 +327,7 @@ As re-ordering is done via drag'n'drop we submit only the result here:
 ...     '@@questions.html?apply=1&'
 ...     '__quiz__:list=Question&'
 ...     '__quiz__:list=first%20question&'
-...     'first%20question:list=2nd%20answer&'
+...     'first%20question:list=2nd%20<answer>&'
 ...     'first%20question:list=first%20answer&'
 ...     'Question:list=Answer')
 >>> print browser.contents
@@ -298,7 +337,7 @@ As re-ordering is done via drag'n'drop we submit only the result here:
  ...Question...
    ...Answer...
  ...1st question...
-   ...2nd answer...
+   ...2nd &lt;answer&gt;...
    ...1st answer...
 
 
@@ -314,13 +353,13 @@ Let's delete the untitled answer we just added:
 
 >>> browser.open(
 ...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
->>> browser.getLink('Answer').click()
+>>> browser.getLink('ant wort').click()
 >>> browser.getControl('Delete').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
 >>> browser.open(
 ...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
->>> browser.getLink('Answer')
+>>> browser.getLink('ant wort')
 Traceback (most recent call last):
 LinkNotFoundError
 
@@ -331,11 +370,11 @@ Let's delete the untitled question we just added:
 
 >>> browser.open(
 ...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
->>> browser.getLink('Question', index=1).click()
+>>> browser.getLink('foo bar').click()
 >>> browser.getControl('Delete').click()
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
->>> browser.getLink('Question', index=1)
+>>> browser.getLink('foo bar', index=1)
 Traceback (most recent call last):
 LinkNotFoundError
 
@@ -367,10 +406,10 @@ still has the same values:
 
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('1st question')
-<Link text='1st question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
+<Link text='1st question & ans' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
 >>> browser.getLink('1st question').click()
 >>> browser.getControl('Title').value
-'1st question'
+'1st question & ans'
 >>> browser.getControl('Text').value
 '<p><em>foo</em> bar</p>\r\n'
 

@@ -105,7 +105,11 @@
   <!-- quiz content -->
 
   <adapter
-    factory=".quiz.display_title"
+    factory=".quiz.question_display_title"
+    name="display_title"
+    />
+  <adapter
+    factory=".quiz.answer_display_title"
     name="display_title"
     />
 

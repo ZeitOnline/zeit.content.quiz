@@ -60,8 +60,8 @@ def quiz_for_content(context):
 
 class ContentBase(object):
     """Base class for questions and answers."""
-    
-    title = zeit.cms.content.property.Structure('.title')
+
+    title = zeit.cms.content.property.ObjectPathProperty('.title')
 
     def get_node(self, name):
         try:

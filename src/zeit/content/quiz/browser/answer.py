@@ -59,9 +59,9 @@ class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
 
     form_fields = (
         zope.formlib.form.Fields(
-            zeit.content.quiz.interfaces.IQuestion, prefix='q', 
+            zeit.content.quiz.interfaces.IQuestion, prefix='q',
             for_display=True).select(
-            'q.title', 'q.question') + 
+            'q.title', 'q.question') +
         zope.formlib.form.Fields(
             zeit.content.quiz.interfaces.IAnswer).select(
             'title', 'correct', 'answer', 'explanation'))

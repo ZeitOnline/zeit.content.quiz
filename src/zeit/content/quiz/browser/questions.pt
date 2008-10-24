@@ -1,4 +1,4 @@
-<div id="edit-form"
+<div id="edit-form" class="quiz"
   i18n:domain="zeit.content.quiz">
 
   <tal:replace replace="resource_library:zeit.content.quiz" />
@@ -16,17 +16,25 @@
     <ol class="questions" id="sortable-questions">
       <li tal:repeat="question context/values" class="question">
         <a tal:attributes="href string:${question/@@absolute_url}/@@edit.html"
-          tal:content="question/@@display_title" />
+          tal:content="structure question/@@display_title" />
         <input type="hidden" name="__quiz__:list"
           tal:attributes="value question/__name__" />
         <ol class="answers"
           tal:attributes="id string:sortable-answers-${repeat/question/index}">
           <li class="answer"
             tal:repeat="answer question/values">
+            <span class="correct"
+              tal:condition="answer/correct"
+              i18n:translate="">
+              (correct)
+            </span>
+            <span class="not-correct"
+              tal:condition="not:answer/correct"
+              i18n:translate="">
+              (not correct)
+            </span>
             <a tal:attributes="href string:${answer/@@absolute_url}/@@edit.html"
-              tal:content="answer/@@display_title" />
-            <tal:correct condition="answer/correct"
-              i18n:translate="">(correct)</tal:correct>
+              tal:content="structure answer/@@display_title" />
             <input type="hidden"
               tal:attributes="
               name string:${question/__name__}:list;
