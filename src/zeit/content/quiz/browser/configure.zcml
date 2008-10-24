@@ -104,11 +104,9 @@
 
   <!-- quiz content -->
 
-  <view
-     name="display_title"
-     for="..interfaces.IQuizContent"
-     factory=".quiz.display_title"
-     type="zeit.cms.browser.interfaces.ICMSLayer"
-     />
+  <adapter
+    factory=".quiz.display_title"
+    name="display_title"
+    />
 
 </configure>

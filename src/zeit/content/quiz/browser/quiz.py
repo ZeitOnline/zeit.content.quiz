@@ -94,7 +94,8 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
         self.request.response.redirect(next_url + '/@@questions.html')
 
 
+@zope.component.adapter(zeit.content.quiz.interfaces.IQuizContent,
+                        zeit.cms.browser.interfaces.ICMSLayer)
+@zope.interface.implementer(zope.publisher.interfaces.browser.IBrowserView)
 def display_title(context, request):
-    """Registered as a view on IQuizContent.
-    """
     return context.title or context.__name__
