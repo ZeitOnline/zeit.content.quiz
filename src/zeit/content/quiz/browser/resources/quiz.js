@@ -20,7 +20,7 @@ MochiKit.Signal.connect(window, 'onload', function() {
 
     var questions = getFirstElementByTagAndClassName('ol', 'questions');
     MochiKit.Signal.connect(questions, 'onclick', function(event) {
-        var item = event._event.target.parentNode
+        var item = getFirstParentByTagAndClassName(event.target(), 'li');
         if (item.dragging) {
             event.stop();
             item.dragging = false;
