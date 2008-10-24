@@ -338,10 +338,8 @@ To check-in the quiz we have to go back to the quiz:
 We now have a view tab:
 
 >>> browser.getLink('View metadata').click()
->>> print browser.contents
-<?xml ...
-<!DOCTYPE ...
-<title> kochen – View quiz metadata </title>...
+>>> print browser.title.strip()
+kochen – View quiz
 
 
 Checkout
