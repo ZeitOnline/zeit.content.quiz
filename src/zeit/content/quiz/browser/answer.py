@@ -13,6 +13,8 @@ import zope.lifecycleevent
 
 import zeit.wysiwyg.interfaces
 
+from zeit.cms.i18n import MessageFactory as _
+
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.answer
 import zeit.content.quiz.browser.quiz
@@ -34,6 +36,7 @@ class FormBase(object):
 
 class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
+    title = _("Add answer")
     factory = zeit.content.quiz.answer.Answer
     checkout = False
 
@@ -50,6 +53,8 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
 
 class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
+
+    title = _("Edit answer")
 
     def nextURL(self):
         return self.questions_url()

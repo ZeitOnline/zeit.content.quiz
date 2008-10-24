@@ -8,6 +8,7 @@ import zope.component
 import zope.event
 import zope.formlib.form
 import zope.lifecycleevent
+
 from zeit.cms.i18n import MessageFactory as _
 
 import zeit.wysiwyg.interfaces
@@ -27,6 +28,7 @@ class FormBase(object):
 
 class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
+    title = _("Add question")
     factory = zeit.content.quiz.question.Question
     checkout = False
     next_view = 'addAnswer.html'
@@ -38,5 +40,6 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
 class EditForm(zeit.content.quiz.browser.quiz.EditFormBase, FormBase):
 
+    title = _("Edit question")
     redirect_to_parent_after_edit = True
     redirect_to_view = 'questions.html'
