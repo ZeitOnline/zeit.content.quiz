@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
 import zc.form.field
 import zope.app.container.interfaces
@@ -42,7 +40,7 @@ class IWriteContainer(zope.app.container.interfaces.IWriteContainer):
         """
 
 
-class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata, 
+class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata,
                 zeit.cms.content.interfaces.IXMLContent,
                 IReadContainer):
     """Read methods for quiz."""
