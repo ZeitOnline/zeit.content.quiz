@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
 import gocept.form.grouped
 import os.path
@@ -12,13 +10,11 @@ import zope.event
 import zope.formlib.form
 import zope.lifecycleevent
 
-import zeit.wysiwyg.interfaces
-
-from zeit.cms.i18n import MessageFactory as _
-
-import zeit.content.quiz.interfaces
 import zeit.content.quiz.answer
 import zeit.content.quiz.browser.quiz
+import zeit.content.quiz.interfaces
+import zeit.wysiwyg.interfaces
+from zeit.content.quiz.i18n import MessageFactory as _
 
 
 class FormBase(object):

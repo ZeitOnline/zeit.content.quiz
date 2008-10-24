@@ -9,7 +9,7 @@ import zope.schema
 import zeit.cms.content.interfaces
 import zeit.cms.content.field
 
-from zeit.cms.i18n import MessageFactory as _
+from zeit.content.quiz.i18n import MessageFactory as _
 
 
 class IReadContainer(zope.app.container.interfaces.IReadContainer,

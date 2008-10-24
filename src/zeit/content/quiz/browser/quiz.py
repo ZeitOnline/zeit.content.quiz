@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
 import xml.sax.saxutils
 import gocept.form.action
@@ -14,10 +12,9 @@ import zeit.cms.content.browser.form
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
-from zeit.cms.i18n import MessageFactory as _
-
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.quiz
+from zeit.content.quiz.i18n import MessageFactory as _
 
 
 class Questions(object):

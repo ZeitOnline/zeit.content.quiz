@@ -14,7 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Development/Unknown\n"
-"POT-Creation-Date: Fri Oct 24 14:29:02 2008\n"
+"POT-Creation-Date: Fri Oct 24 15:44:12 2008\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
@@ -23,13 +23,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: zope/app/locales/extract.py\n"
 
-#: src/zeit/content/quiz/browser/answer.py:39
+#: src/zeit/content/quiz/browser/answer.py:31
 #: src/zeit/content/quiz/browser/questions.pt:44
 msgid "Add answer"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/answer.py:57
+#: src/zeit/content/quiz/browser/answer.py:54
 msgid "Edit answer"
+msgstr ""
+
+#: src/zeit/content/quiz/browser/answer.py:67
+msgid "Question"
+msgstr ""
+
+#: src/zeit/content/quiz/browser/answer.py:70
+msgid "Answer"
 msgstr ""
 
 #: src/zeit/content/quiz/browser/configure.zcml:12
@@ -53,12 +61,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/question.py:31
+#: src/zeit/content/quiz/browser/question.py:27
 #: src/zeit/content/quiz/browser/questions.pt:52
 msgid "Add question"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/question.py:43
+#: src/zeit/content/quiz/browser/question.py:39
 msgid "Edit question"
 msgstr ""
 
@@ -74,40 +82,41 @@ msgstr ""
 msgid "Apply sorting"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:51
+#: src/zeit/content/quiz/browser/quiz.py:48
 msgid "Add quiz"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:61
+#: src/zeit/content/quiz/browser/quiz.py:58
 msgid "Edit quiz"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:67
+#: src/zeit/content/quiz/browser/quiz.py:64
 msgid "View quiz"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:78
+#: src/zeit/content/quiz/browser/quiz.py:75
 msgid "Apply"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:83
+#: src/zeit/content/quiz/browser/quiz.py:80
 msgid "Delete"
 msgstr ""
 
-#: src/zeit/content/quiz/browser/quiz.py:85
+#: src/zeit/content/quiz/browser/quiz.py:82
 msgid "Really delete?"
 msgstr ""
 
-#: src/zeit/content/quiz/interfaces.py:63
+#: src/zeit/content/quiz/interfaces.py:61
 msgid "Title"
+msgstr ""
+
+#: src/zeit/content/quiz/interfaces.py:71
+#: src/zeit/content/quiz/interfaces.py:82
+msgid "Text"
 msgstr ""
 
 #: src/zeit/content/quiz/interfaces.py:81
 msgid "Correct?"
-msgstr ""
-
-#: src/zeit/content/quiz/interfaces.py:82
-msgid "Text"
 msgstr ""
 
 #: src/zeit/content/quiz/interfaces.py:84
