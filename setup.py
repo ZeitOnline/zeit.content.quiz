@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='zeit.content.quiz',
-    version='0.1.0dev',
+    version='0.1dev',
     author='gocept',
     author_email='mail@gocept.com',
     url='https://svn.gocept.com/repos/gocept-int/zeit.cms/zeit.content.quiz',
