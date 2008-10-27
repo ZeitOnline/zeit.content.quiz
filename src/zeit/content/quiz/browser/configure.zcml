@@ -75,7 +75,7 @@
     permission="zeit.EditContent"
     />
 
-  <gocept:pagelet
+  <browser:page
     name="edit.html"
     for="..interfaces.IQuestion"
     class=".question.EditForm"

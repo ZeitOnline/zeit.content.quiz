@@ -61,9 +61,14 @@ form for an answer:
 >>> browser.getLink('Add question').click()
 >>> browser.getControl('Title').value = 'first question'
 >>> browser.getControl('Text').value = '<p>test</p>er'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@addAnswer.html'
+>>> browser.getControl('Apply and add answer').click()
+>>> print browser.contents
+<?xml ...
+ <title> first question – Add answer </title>
+ ...
+        <li class="message">Added question.</li>
+        ...
+
 
 Add an answer
 -------------
@@ -82,9 +87,14 @@ Adding an answer redirects to the add form for the next answer:
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Text').value = '<p>test</p>er'
 >>> browser.getControl('Explanation').value = '<p>This is right.</p>'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@addAnswer.html'
+>>> browser.getControl('Apply and add').click()
+>>> print browser.contents
+<?xml ...
+ <title> first question – Add answer </title>
+ ...
+        <li class="message">Added answer.</li>
+        ...
+ 
 
 
 Editing a quiz
@@ -212,19 +222,15 @@ filling in the title field:
 
 >>> browser.getLink('Add question').click()
 >>> browser.getControl('Text').value = '<p>zweiter Test</p>er'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
+>>> browser.getControl('Apply and add').click()
 
 >>> browser.getControl('Text').value = '<p>zweiter Test - Antwort</p>er'
->>> browser.getControl('Add').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/Question/@@addAnswer.html'
+>>> browser.getControl(name='form.actions.apply').click()
+>>> print browser.title.strip()
+kochen – Quiz overview
 
 Later, we can also edit both without filling in the title:
 
->>> browser.getLink('kochen').click()
->>> browser.getLink('Questions').click()
 >>> browser.getLink('zweiter Test').click()
 >>> browser.getControl('Text').value = '<p><em>foo</em> bar</p>'
 >>> browser.getControl('Apply').click()
@@ -252,13 +258,11 @@ effect on answers, we have to create another one:
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Correct?').selected
 True
->>> browser.getControl('Add').click()
+>>> browser.getControl(name='form.actions.apply').click()
 
 Before any re-ordering, questions and answers are listed in the questions
 overview in the same order they were created:
 
->>> browser.getLink('kochen').click()
->>> browser.getLink('Questions').click()
 >>> print browser.contents
 <?xml version="1.0"?>
     ...
@@ -355,10 +359,13 @@ Let's delete the untitled answer we just added:
 ...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
 >>> browser.getLink('ant wort').click()
 >>> browser.getControl('Delete').click()
->>> browser.url
-'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html'
->>> browser.open(
-...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
+>>> print browser.contents
+<?xml ...
+ <title> kochen – Quiz overview </title>
+    ...
+    <li class="message">Item was deleted.</li>
+    ...
+
 >>> browser.getLink('ant wort')
 Traceback (most recent call last):
 LinkNotFoundError

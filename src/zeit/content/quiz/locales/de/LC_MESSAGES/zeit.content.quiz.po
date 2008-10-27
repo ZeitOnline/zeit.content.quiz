@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: zeit.content.quiz\n"
-"POT-Creation-Date: Fri Oct 24 15:44:12 2008\n"
+"POT-Creation-Date: Mon Oct 27 15:02:07 2008\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Christian Zagrodnick <cz@gocept.com>\n"
 "Language-Team: \n"
@@ -11,20 +11,46 @@ msgstr ""
 "X-Poedit-Language: German\n"
 "X-Poedit-Country: GERMANY\n"
 
-#: src/zeit/content/quiz/browser/answer.py:31
-#: src/zeit/content/quiz/browser/questions.pt:44
+#: src/zeit/content/quiz/browser/answer.py:29
+#: src/zeit/content/quiz/browser/questions.pt:37
 msgid "Add answer"
 msgstr "Antwort hinzufügen"
 
+#: src/zeit/content/quiz/browser/answer.py:39
+#: src/zeit/content/quiz/browser/question.py:38
+#: src/zeit/content/quiz/browser/quiz.py:79
+msgid "Apply"
+msgstr "Speichern"
+
+#: src/zeit/content/quiz/browser/answer.py:43
+#: src/zeit/content/quiz/browser/answer.py:50
+msgid "Added answer."
+msgstr "Antwort hinzugefügt."
+
+#: src/zeit/content/quiz/browser/answer.py:45
+#: src/zeit/content/quiz/browser/question.py:44
+msgid "Apply and add answer"
+msgstr "Speichern und Antwort hinzufügen …"
+
+#: src/zeit/content/quiz/browser/answer.py:52
+#: src/zeit/content/quiz/browser/question.py:51
+msgid "Cancel"
+msgstr "Abbrechen"
+
 #: src/zeit/content/quiz/browser/answer.py:54
+#: src/zeit/content/quiz/browser/question.py:53
+msgid "Cancelled"
+msgstr "Abgebrochen."
+
+#: src/zeit/content/quiz/browser/answer.py:70
 msgid "Edit answer"
 msgstr "Antwort bearbeiten"
 
-#: src/zeit/content/quiz/browser/answer.py:67
+#: src/zeit/content/quiz/browser/answer.py:83
 msgid "Question"
 msgstr "Frage"
 
-#: src/zeit/content/quiz/browser/answer.py:70
+#: src/zeit/content/quiz/browser/answer.py:86
 msgid "Answer"
 msgstr "Antwort"
 
@@ -50,64 +76,81 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: src/zeit/content/quiz/browser/question.py:27
-#: src/zeit/content/quiz/browser/questions.pt:52
+#: src/zeit/content/quiz/browser/questions.pt:45
 msgid "Add question"
 msgstr "Frage hinzufügen"
 
-#: src/zeit/content/quiz/browser/question.py:39
+#: src/zeit/content/quiz/browser/question.py:42
+#: src/zeit/content/quiz/browser/question.py:49
+msgid "Added question."
+msgstr "Frage hinzugefügt."
+
+#: src/zeit/content/quiz/browser/question.py:64
 msgid "Edit question"
 msgstr "Frage bearbeiten"
 
-#: src/zeit/content/quiz/browser/questions.pt:26
+#: src/zeit/content/quiz/browser/questions.pt:19
 msgid "(correct)"
 msgstr "✓"
 
-#: src/zeit/content/quiz/browser/questions.pt:31
+#: src/zeit/content/quiz/browser/questions.pt:24
 msgid "(not correct)"
 msgstr "✕"
 
-#: src/zeit/content/quiz/browser/questions.pt:60
+#: src/zeit/content/quiz/browser/questions.pt:54
 msgid "Apply sorting"
 msgstr "Sortierung speichern"
 
-#: src/zeit/content/quiz/browser/quiz.py:48
+#: src/zeit/content/quiz/browser/quiz.py:22
+msgid "Quiz overview"
+msgstr "Quiz-Überblick"
+
+#: src/zeit/content/quiz/browser/quiz.py:50
 msgid "Add quiz"
 msgstr "Quiz hinzufügen"
 
-#: src/zeit/content/quiz/browser/quiz.py:58
+#: src/zeit/content/quiz/browser/quiz.py:60
 msgid "Edit quiz"
 msgstr "Quiz bearbeiten"
 
-#: src/zeit/content/quiz/browser/quiz.py:64
+#: src/zeit/content/quiz/browser/quiz.py:66
 msgid "View quiz"
 msgstr "Quiz anzeigen"
 
-#: src/zeit/content/quiz/browser/quiz.py:75
-msgid "Apply"
-msgstr "Speichern"
-
-#: src/zeit/content/quiz/browser/quiz.py:80
+#: src/zeit/content/quiz/browser/quiz.py:84
 msgid "Delete"
 msgstr "Löschen"
 
-#: src/zeit/content/quiz/browser/quiz.py:82
-msgid "Really delete?"
-msgstr "Wirklich löschen?"
+#. Default: "Really delete?"
+#: src/zeit/content/quiz/browser/quiz.py:86
+msgid "delete-item-confirmation"
+msgstr "Soll der Eintrag wirklich gelöscht werden?"
 
-#: src/zeit/content/quiz/interfaces.py:61
+#: src/zeit/content/quiz/browser/quiz.py:94
+msgid "Item was deleted."
+msgstr "Der Eintrag wurde gelöscht."
+
+#: src/zeit/content/quiz/interfaces.py:62
 msgid "Title"
 msgstr "Titel"
 
-#: src/zeit/content/quiz/interfaces.py:71
-#: src/zeit/content/quiz/interfaces.py:82
+#: src/zeit/content/quiz/interfaces.py:63
+msgid "quiz-content-title-description"
+msgstr "Verwenden Sie den Titel, wenn die eigentliche Frage oder Antwort zu lang für die Übersichtsliste wird oder nicht sinnvoll dargestellt wird."
+
+#: src/zeit/content/quiz/interfaces.py:74
+#: src/zeit/content/quiz/interfaces.py:85
 msgid "Text"
 msgstr "Text"
 
-#: src/zeit/content/quiz/interfaces.py:81
+#: src/zeit/content/quiz/interfaces.py:84
 msgid "Correct?"
 msgstr "Richtig?"
 
-#: src/zeit/content/quiz/interfaces.py:84
+#: src/zeit/content/quiz/interfaces.py:87
 msgid "Explanation"
 msgstr "Erklärung"
+
+#~ msgid "Really delete?"
+#~ msgstr "Wirklich löschen?"
 

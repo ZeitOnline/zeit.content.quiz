@@ -19,6 +19,8 @@ from zeit.content.quiz.i18n import MessageFactory as _
 
 class Questions(object):
 
+    title = _('Quiz overview')
+
     @zope.cachedescriptors.property.Lazy
     def metadata(self):
         return zeit.cms.content.interfaces.ICommonMetadata(self.context)
@@ -71,6 +73,8 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
     """Base class for edit views of various sub-objects of a quiz.
     """
 
+    deleted = False
+
     @zope.formlib.form.action(
         _('Apply'), condition=zope.formlib.form.haveInputWidgets)
     def handle_edit_action(self, action, data):
@@ -79,17 +83,21 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
     @gocept.form.action.confirm(
         _('Delete'),
         name='delete',
-        confirm_message=_('Really delete?'),
+        confirm_message=_('delete-item-confirmation',
+                          default=u'Really delete?'),
         condition=zope.formlib.form.haveInputWidgets,
         )
     def handle_delete(self, action, data):
+        self.quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
         parent = self.context.__parent__
         del parent[self.context.__name__]
-        quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
-        next_url = zope.component.getMultiAdapter(
-            (quiz, self.request),
-            zope.traversing.browser.interfaces.IAbsoluteURL)()
-        self.request.response.redirect(next_url + '/@@questions.html')
+        self.status = _('Item was deleted.')
+        self.deleted = True
+
+    def nextURL(self):
+        if self.deleted:
+            return self.url(self.quiz, '@@questions.html')
+        return super(EditFormBase, self).nextURL()
 
 
 @zope.component.adapter(zeit.content.quiz.interfaces.IQuestion,

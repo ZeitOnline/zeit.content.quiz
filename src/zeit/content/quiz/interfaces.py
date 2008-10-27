@@ -58,17 +58,21 @@ class IQuizContent(zope.interface.Interface):
     """Sub-objects of a quiz.
     """
 
-    title = zope.schema.TextLine(title=_('Title'), required=False)
+    title = zope.schema.TextLine(
+        title=_('Title'),
+        description=_('quiz-content-title-description'),
+        required=False)
 
 
 class IReadQuestion(IQuizContent, IReadContainer):
     """Read methods for question."""
 
+    question = zc.form.field.HTMLSnippet(
+        title=_("Text"))
+
 
 class IWriteQuestion(IWriteContainer):
     """Write methods for question."""
-
-    question = zc.form.field.HTMLSnippet(title=_("Text"), required=False)
 
 
 class IQuestion(IReadQuestion, IWriteQuestion):
@@ -78,7 +82,12 @@ class IQuestion(IReadQuestion, IWriteQuestion):
 class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     """Answer content type."""
 
-    correct = zope.schema.Bool(title=_('Correct?'))
-    answer = zc.form.field.HTMLSnippet(title=_("Text"))
+    correct = zope.schema.Bool(
+        title=_('Correct?'))
+
+    answer = zc.form.field.HTMLSnippet(
+        title=_("Text"))
+
     explanation = zc.form.field.HTMLSnippet(
-        title=_("Explanation"), required=False)
+        title=_("Explanation"),
+        required=False)

@@ -21,9 +21,12 @@ class FormBase(object):
 
     def questions_url(self):
         quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
-        url = zope.component.getMultiAdapter(
-            (quiz, self.request), name="absolute_url")()
-        return url + '/@@questions.html'
+        return self.url(quiz, '@@questions.html')
+
+    field_groups = (
+        gocept.form.grouped.RemainingFields(
+            _('Question'),
+            css_class='full-width wide-widgets'),)
 
 
 class AddForm(FormBase, zeit.cms.browser.form.AddForm):
@@ -31,16 +34,34 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
     title = _("Add answer")
     factory = zeit.content.quiz.answer.Answer
     checkout = False
+    add_answer = False
 
     form_fields = (
         zope.formlib.form.Fields(
             zeit.content.quiz.interfaces.IAnswer).select(
             'title', 'correct', 'answer', 'explanation'))
 
+    @zope.formlib.form.action(_('Apply'),
+                              condition=zope.formlib.form.haveInputWidgets)
+    def handle_apply(self, action, data):
+        self.createAndAdd(data)
+        self.status = _('Added answer.')
+
+    @zope.formlib.form.action(_('Apply and add answer'),
+                              condition=zope.formlib.form.haveInputWidgets)
+    def handle_apply_and_add_answer(self, action, data):
+        self.createAndAdd(data)
+        self.add_answer = True
+        self.status = _('Added answer.')
+
+    @zope.formlib.form.action(_("Cancel"), validator=lambda *a: ())
+    def cancel(self, action, data):
+        self.status = _('Cancelled.')
+
     def nextURL(self):
-        url = zope.component.getMultiAdapter(
-            (self.context, self.request), name="absolute_url")()
-        return url + '/@@addAnswer.html'
+        if self.add_answer:
+            return self.url('@@addAnswer.html')
+        return self.cancelNextURL()
 
     def cancelNextURL(self):
         return self.questions_url()
@@ -65,9 +86,11 @@ class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
     field_groups = (
         gocept.form.grouped.Fields(
             title=_(u'Question'),
-            fields=('q.title', 'q.question')),
+            fields=('q.title', 'q.question'),
+            css_class='full-width wide-widgets'),
         gocept.form.grouped.RemainingFields(
-            title=_(u'Answer')),
+            title=_(u'Answer'),
+            css_class='full-width wide-widgets'),
         )
 
     def nextURL(self):
