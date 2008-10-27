@@ -45,6 +45,8 @@ Let's create a persistent container:
 >>> import transaction
 >>> root = getRootFolder()
 >>> pc = PersistentContainer()
+>>> pc
+<zeit.content.quiz.test.PersistentContainer object at 0x...>
 >>> root['pc'] = pc
 >>> transaction.commit()
 

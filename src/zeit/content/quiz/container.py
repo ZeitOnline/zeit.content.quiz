@@ -82,6 +82,9 @@ class Container(UserDict.DictMixin):
             # ElementTree does the Right Thing.
             self[key] = children[key]
 
+    def __repr__(self):
+        return object.__repr__(self)
+
 
 class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,
                 zope.app.container.contained.Contained):
