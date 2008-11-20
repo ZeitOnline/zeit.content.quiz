@@ -6,6 +6,7 @@
 ================
 
 - Icon hinzugefügt.
+- Permissions korrigiert.
 
 0.1 (2008-10-27)
 ================

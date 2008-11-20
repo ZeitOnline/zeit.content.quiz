@@ -20,7 +20,7 @@
   
   <browser:page
     for="zeit.cms.repository.interfaces.IFolder"
-    permission="zope.ManageContent"
+    permission="zeit.AddContent"
     class=".quiz.AddQuiz"
     name="zeit.content.quiz.Add"
     menu="zeit-add-menu" title="Quiz"
