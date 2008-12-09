@@ -122,7 +122,7 @@ currently used keys, and no duplicates are allowed:
 >>> pc.keys()
 ['foo', 'bar', 'baz']
 
->>> pc.updateOrder(object())
+>>> pc.updateOrder(object())  #doctest: +IGNORE_EXCEPTION_DETAIL
 Traceback (most recent call last):
 TypeError: iteration over non-sequence
 
