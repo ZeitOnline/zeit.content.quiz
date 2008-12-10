@@ -1,20 +1,16 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
 import lxml.objectify
-import zope.component
-import zope.interface
-
 import zeit.cms.connector
 import zeit.cms.content.adapter
 import zeit.cms.content.metadata
 import zeit.cms.interfaces
-import zeit.wysiwyg.interfaces
-
-import zeit.content.quiz.interfaces
 import zeit.content.quiz.container
+import zeit.content.quiz.interfaces
+import zeit.wysiwyg.interfaces
+import zope.component
+import zope.interface
 
 
 QUIZ_TEMPLATE = u"""\
