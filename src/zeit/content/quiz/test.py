@@ -1,16 +1,13 @@
 # Copyright (c) 2007-2008 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
 import os
-import unittest
-
 import persistent
-import zope.app.testing.functional
-import zope.testing.doctest
-
+import unittest
 import zeit.cms.testing
 import zeit.content.quiz.container
+import zope.app.testing.functional
+import zope.testing.doctest
 
 
 class PersistentContainer(persistent.Persistent,
