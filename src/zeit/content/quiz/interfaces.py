@@ -2,13 +2,11 @@
 # See also LICENSE.txt
 
 import zc.form.field
+import zeit.cms.content.field
+import zeit.cms.content.interfaces
 import zope.app.container.interfaces
 import zope.interface
 import zope.schema
-
-import zeit.cms.content.interfaces
-import zeit.cms.content.field
-
 from zeit.content.quiz.i18n import MessageFactory as _
 
 
