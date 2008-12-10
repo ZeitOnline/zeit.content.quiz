@@ -1,6 +1,7 @@
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
 
+import copy
 import zc.form.field
 import zeit.cms.content.field
 import zeit.cms.content.interfaces
@@ -43,6 +44,10 @@ class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata,
                 IReadContainer):
     """Read methods for quiz."""
 
+    commentsAllowed = zope.schema.Bool(
+        title=_("Comments allowed"),
+        default=True)
+    commentsAllowed.default = False
 
 class IWriteQuiz(IWriteContainer):
     """Write methods for quiz."""

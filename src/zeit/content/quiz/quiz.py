@@ -4,6 +4,7 @@
 import lxml.objectify
 import zeit.cms.connector
 import zeit.cms.content.adapter
+import zeit.cms.content.dav
 import zeit.cms.content.metadata
 import zeit.cms.interfaces
 import zeit.content.quiz.container
@@ -24,6 +25,10 @@ class Quiz(zeit.content.quiz.container.Container,
 
     zope.interface.implements(zeit.content.quiz.interfaces.IQuiz,
                               zeit.cms.interfaces.IEditorialContent)
+
+    commentsAllowed = zeit.cms.content.dav.DAVProperty(
+        zeit.content.quiz.interfaces.IQuiz['commentsAllowed'],
+        zeit.cms.interfaces.DOCUMENT_SCHEMA_NS, 'comments')
 
     default_template = QUIZ_TEMPLATE
 

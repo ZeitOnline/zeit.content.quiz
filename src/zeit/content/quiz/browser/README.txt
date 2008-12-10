@@ -20,7 +20,7 @@ To add a quiz we go to a folder:
 >>> menu.displayValue = ['Quiz']
 >>> browser.open(menu.value[0])
 
-We set the most important values:
+We set the most important values[#commentdefault]_:
 
 >>> browser.getControl('File name').value = 'kochen'
 >>> browser.getControl('Title').value = 'Koch-Quiz'
@@ -433,3 +433,9 @@ The answer is still there and has the same values:
 '<p><em>foh</em> bah</p>\r\n'
 >>> browser.getControl('Explanation').value
 '<p>\r\n  <em>This is really right.</em>\r\n</p>\r\n'
+
+
+.. [#commentdefault] The default for "allow comments" is off:
+
+    >>> browser.getControl('Comments').selected
+    False
