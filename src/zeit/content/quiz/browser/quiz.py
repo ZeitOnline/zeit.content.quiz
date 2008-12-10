@@ -1,19 +1,17 @@
 # Copyright (c) 2008 gocept gmbh & co. kg
 # See also LICENSE.txt
 
-import xml.sax.saxutils
 import gocept.form.action
-import zope.cachedescriptors.property
-import zope.formlib.form
-import zope.traversing.browser.interfaces
-
+import xml.sax.saxutils
 import zeit.cms.browser.form
 import zeit.cms.content.browser.form
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
-
 import zeit.content.quiz.interfaces
 import zeit.content.quiz.quiz
+import zope.cachedescriptors.property
+import zope.formlib.form
+import zope.traversing.browser.interfaces
 from zeit.content.quiz.i18n import MessageFactory as _
 
 
