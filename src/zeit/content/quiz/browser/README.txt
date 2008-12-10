@@ -27,7 +27,6 @@ We set the most important values:
 >>> browser.getControl('Ressort').displayValue = ['Gesundheit']
 >>> browser.getControl('Daily newsletter').selected = True
 >>> browser.getControl(name='form.authors.0.').value = 'Hans Sachs'
->>> browser.handleErrors = False
 >>> browser.getControl(name="form.actions.add").click()
 
 After adding the quiz we're at its metadata view.
