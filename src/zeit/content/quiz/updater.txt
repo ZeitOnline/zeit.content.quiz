@@ -40,6 +40,26 @@ We have a post now:
  'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
 
 
+When the HTTP-Server is not up the error will be thrown, so the user knows that
+something isn't working:
+
+>>> updater.update()  #doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+URLError: <urlopen error (61, 'Connection refused')>
+
+
+The same happens when an error code is returned from the server:
+
+>>> zeit.content.quiz.test.QuizUpdaterRequestHandler.response = 500
+>>> zeit.content.quiz.test.start_quiz_updater_httpd()
+>>> updater.update()
+Traceback (most recent call last):
+    ....
+HTTPError: HTTP Error 500: Internal Server Error
+
+
+
 
 >>> zope.app.component.hooks.setSite(old_site)
 

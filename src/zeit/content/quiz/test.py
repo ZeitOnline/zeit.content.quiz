@@ -37,15 +37,10 @@ class Contained(zeit.content.quiz.container.Contained):
     default_template = "<contained />"
 
 
-class QuizUpdaterHTTPServer(BaseHTTPServer.HTTPServer):
-
-    def log_message(self, format, *args):
-        pass
-
-
 class QuizUpdaterRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
 
     posts_received = []
+    response = 200
 
     def do_POST(self):
         length = int(self.headers['content-length'])
@@ -53,8 +48,11 @@ class QuizUpdaterRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
             path=self.path,
             data=self.rfile.read(length),
         ))
-        self.send_response(200)
+        self.send_response(self.response)
         self.end_headers()
+
+    def log_message(self, format, *args):
+        pass
 
 
 httpd_port = random.randint(30000, 40000)
@@ -63,7 +61,7 @@ httpd_port = random.randint(30000, 40000)
 def start_quiz_updater_httpd():
     def run():
         server_address = ('localhost', httpd_port)
-        httpd = QuizUpdaterHTTPServer(
+        httpd = BaseHTTPServer.HTTPServer(
             server_address, QuizUpdaterRequestHandler)
         httpd.handle_request()
     t = threading.Thread(target=run)
