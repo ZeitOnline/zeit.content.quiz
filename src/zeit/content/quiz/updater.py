@@ -19,12 +19,15 @@ class Updater(object):
        self.context = context
 
     def update(self):
-        response = urllib2.urlopen(self.get_url(), self.get_data())
+        url = self.get_url()
+        if url:
+            urllib2.urlopen(url, self.get_data())
 
     def get_url(self):
         config = zope.app.appsetup.product.getProductConfiguration(
             'zeit.content.quiz')
-        return config['url']
+        if config:
+            return config.get('url')
 
     def get_data(self):
         data = dict(
@@ -32,3 +35,11 @@ class Updater(object):
             action='preview',
             xml=zeit.cms.content.interfaces.IXMLSource(self.context))
         return urllib.urlencode(sorted(data.items()))
+
+
+@zope.component.adapter(
+    zeit.content.quiz.interfaces.IQuiz,
+    zeit.cms.checkout.interfaces.IAfterCheckinEvent)
+def update_after_checkin(context, event):
+    updater = zeit.content.quiz.interfaces.IQuizUpdater(context)
+    updater.update()

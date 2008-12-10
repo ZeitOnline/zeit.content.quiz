@@ -82,6 +82,13 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <!-- updater -->
   <adapter factory=".updater.Updater" />
+  <subscriber handler=".updater.update_after_checkin" />
+  <subscriber
+    for=".interfaces.IQuiz
+    zope.app.container.interfaces.IObjectAddedEvent"
+    handler=".updater.update_after_checkin"
+    />
 
 </configure>
