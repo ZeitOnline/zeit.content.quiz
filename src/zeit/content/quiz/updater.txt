@@ -1,0 +1,50 @@
+Quiz updating
+=============
+
+[#functional]_
+
+Updater
++++++++
+
+The updater talks to the quiz system via a HTTP post. Start up a test http
+server which logs posts:
+
+>>> import zeit.content.quiz.test
+>>> zeit.content.quiz.test.start_quiz_updater_httpd()
+
+Get a quiz and update it:
+
+>>> quiz = zeit.content.quiz.quiz.Quiz()
+>>> quiz.uniqueId = 'quiz-id'
+>>> updater = zeit.content.quiz.interfaces.IQuizUpdater(quiz)
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IQuizUpdater, updater)
+True
+>>> print updater.get_url()
+http://localhost:.../quizupdate
+>>> updater.update()
+
+
+We have a post now:
+
+>>> posts = zeit.content.quiz.test.QuizUpdaterRequestHandler.posts_received
+>>> len(posts)
+1
+>>> posts[0]['path']
+'/quizupdate'
+>>> import pprint
+>>> import cgi
+>>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
+{'action': ['preview'],
+ 'quiz_id': ['quiz-id'],
+ 'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
+
+
+
+>>> zope.app.component.hooks.setSite(old_site)
+
+.. [#functional]
+
+    >>> import zope.app.component.hooks
+    >>> old_site = zope.app.component.hooks.getSite()
+    >>> zope.app.component.hooks.setSite(getRootFolder())

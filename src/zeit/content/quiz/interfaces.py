@@ -91,3 +91,15 @@ class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     explanation = zc.form.field.HTMLSnippet(
         title=_("Explanation"),
         required=False)
+
+
+class IQuizUpdater(zope.interface.Interface):
+    """Update the quiz in the actual quiz system."""
+
+    def update():
+        """Update the quiz for preview.
+
+        Note that update() will create a quiz instance in the remote system
+        implicily if there is none.
+
+        """

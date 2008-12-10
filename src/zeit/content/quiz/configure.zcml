@@ -82,4 +82,6 @@
 
   <i18n:registerTranslations directory="locales" />
 
+  <adapter factory=".updater.Updater" />
+
 </configure>
