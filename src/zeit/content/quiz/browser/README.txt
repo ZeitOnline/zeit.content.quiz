@@ -86,7 +86,6 @@ Adding an answer redirects to the add form for the next answer:
 >>> browser.getControl('Title').value = 'first answer'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Text').value = '<p>test</p>er'
->>> browser.getControl('Explanation').value = '<p>This is right.</p>'
 >>> browser.getControl('Apply and add').click()
 >>> print browser.contents
 <?xml ...
@@ -167,8 +166,6 @@ entered values:
 True
 >>> browser.getControl('Text').value
 '<p>test</p>er\r\n'
->>> browser.getControl('Explanation').value
-'<p>This is right.</p>\r\n'
 
 We note that the answer view does not have a check-in link either:
 
@@ -196,7 +193,6 @@ These displayed values of the answer can be changed:
 >>> browser.getControl('Correct?').selected
 False
 >>> browser.getControl('Text').value = ''
->>> browser.getControl('Explanation').value = '<p><em>This is really right.</em></p>'
 
 As the text field is required we get an error message when we click on
 apply:
@@ -431,8 +427,6 @@ The answer is still there and has the same values:
 '1st answer'
 >>> browser.getControl('Text').value
 '<p><em>foh</em> bah</p>\r\n'
->>> browser.getControl('Explanation').value
-'<p>\r\n  <em>This is really right.</em>\r\n</p>\r\n'
 
 
 .. [#commentdefault] The default for "allow comments" is off:

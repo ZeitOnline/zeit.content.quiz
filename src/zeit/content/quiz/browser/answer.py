@@ -39,7 +39,7 @@ class AddForm(FormBase, zeit.cms.browser.form.AddForm):
     form_fields = (
         zope.formlib.form.Fields(
             zeit.content.quiz.interfaces.IAnswer).select(
-            'title', 'correct', 'answer', 'explanation'))
+            'title', 'correct', 'answer'))
 
     @zope.formlib.form.action(_('Apply'),
                               condition=zope.formlib.form.haveInputWidgets)
@@ -81,7 +81,7 @@ class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
             'q.title', 'q.question') +
         zope.formlib.form.Fields(
             zeit.content.quiz.interfaces.IAnswer).select(
-            'title', 'correct', 'answer', 'explanation'))
+            'title', 'correct', 'answer'))
 
     field_groups = (
         gocept.form.grouped.Fields(

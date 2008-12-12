@@ -91,10 +91,6 @@ class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     answer = zc.form.field.HTMLSnippet(
         title=_("Text"))
 
-    explanation = zc.form.field.HTMLSnippet(
-        title=_("Explanation"),
-        required=False)
-
 
 class IQuizUpdater(zope.interface.Interface):
     """Update the quiz in the actual quiz system."""

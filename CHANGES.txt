@@ -8,6 +8,7 @@ Changes
 - Kompatibel mit Python 2.5
 - Benachrichtigen des Quizsystems beim Einchecken und Preview.
 - »Kommentare erlaubt« standardmäßig nicht aktiv.
+- Erklärung zu Antworten entfernt.
 
 0.2 (2008-11-20)
 ================

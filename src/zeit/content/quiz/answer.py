@@ -39,14 +39,6 @@ class Answer(zeit.content.quiz.container.Contained,
     def answer(self, value):
         return self.convert.from_html(self.get_node('text'), value)
 
-    @rwproperty.getproperty
-    def explanation(self):
-        return self.convert.to_html(self.get_node('explanation'))
-
-    @rwproperty.setproperty
-    def explanation(self, value):
-        return self.convert.from_html(self.get_node('explanation'), value)
-
 
 
 answerFactory = zeit.content.quiz.container.xml_tree_content_adapter(Answer)
