@@ -31,7 +31,7 @@ class Updater(object):
 
     def get_data(self):
         data = dict(
-            quiz_id=self.context.uniqueId,
+            quiz_id=self.context.uniqueId.replace('http://xml.zeit.de', '', 1),
             action='preview',
             xml=zeit.cms.content.interfaces.IXMLSource(self.context))
         return urllib.urlencode(sorted(data.items()))

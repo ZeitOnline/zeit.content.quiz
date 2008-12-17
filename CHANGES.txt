@@ -2,8 +2,10 @@
 Changes
 =======
 
-0.4 (unreleased)
-================
+0.3.1 (2008-12-17)
+==================
+
+- Benachrichtigen des Quizsystems ohne http://xml.zeit.de in der Id.
 
 0.3 (2008-12-12)
 ================

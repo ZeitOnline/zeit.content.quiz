@@ -15,7 +15,7 @@ server which logs posts:
 Get a quiz and update it:
 
 >>> quiz = zeit.content.quiz.quiz.Quiz()
->>> quiz.uniqueId = 'quiz-id'
+>>> quiz.uniqueId = 'http://xml.zeit.de/quiz-id'
 >>> updater = zeit.content.quiz.interfaces.IQuizUpdater(quiz)
 >>> zope.interface.verify.verifyObject(
 ...     zeit.content.quiz.interfaces.IQuizUpdater, updater)
@@ -36,7 +36,7 @@ We have a post now:
 >>> import cgi
 >>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
 {'action': ['preview'],
- 'quiz_id': ['quiz-id'],
+ 'quiz_id': ['/quiz-id'],
  'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
 
 
@@ -74,7 +74,7 @@ The quiz is updated on checkin:
 1
 >>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
 {'action': ['preview'],
- 'quiz_id': ['quiz-id'],
+ 'quiz_id': ['/quiz-id'],
  'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
 
 When we add a quiz to the repository it'll also be updated:
@@ -91,7 +91,7 @@ When we add a quiz to the repository it'll also be updated:
 1
 >>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
 {'action': ['preview'],
- 'quiz_id': ['http://xml.zeit.de/quiz'],
+ 'quiz_id': ['/quiz'],
  'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
 
 
