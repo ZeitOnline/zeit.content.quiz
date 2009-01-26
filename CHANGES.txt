@@ -2,7 +2,7 @@
 Changes
 =======
 
-0.4 (unreleased)
+0.4 (2009-01-26)
 ================
 
 - Nur noch eine Antwort kann pro Frage richtig sein.
