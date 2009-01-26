@@ -95,6 +95,17 @@ Adding an answer redirects to the add form for the next answer:
         ...
  
 
+It is not possible to add another correct answer:
+
+>>> browser.getControl('Title').value = 'second true answer'
+>>> browser.getControl('Correct?').click()
+>>> browser.getControl('Text').value = 'bla'
+>>> browser.getControl('Apply and add').click()
+>>> print browser.contents
+<?xml ...
+         <li class="error">Correct?: Only one answer may be correct.</li>
+         ...
+
 
 Editing a quiz
 ==============
@@ -339,6 +350,32 @@ As re-ordering is done via drag'n'drop we submit only the result here:
  ...1st question...
    ...2nd &lt;answer&gt;...
    ...1st answer...
+
+
+Setting a second answer to "correct"
+====================================
+
+It is not possible to set a second answer to "correct"
+
+>>> browser.getLink('1st answer').click()
+>>> browser.getControl('Correct').click()
+>>> browser.getControl('Apply').click()
+>>> print browser.contents
+<?xml ...
+         <li class="error">Correct?: Only one answer may be correct.</li>
+         ...
+
+But we can of course save the other correct answer:
+
+>>> browser.open(
+...     'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@questions.html')
+>>> browser.getLink('2nd <answer>').click()
+>>> browser.getControl('Correct').selected
+True
+>>> browser.getControl('Apply').click()
+>>> print browser.contents
+<?xml...
+    ...No changes...
 
 
 Deleting questions and answers

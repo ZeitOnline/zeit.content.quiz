@@ -2,6 +2,7 @@
 # See also LICENSE.txt
 
 import copy
+import inspect
 import zc.form.field
 import zeit.cms.content.field
 import zeit.cms.content.interfaces
@@ -49,6 +50,7 @@ class IReadQuiz(zeit.cms.content.interfaces.ICommonMetadata,
         default=True)
     commentsAllowed.default = False
 
+
 class IWriteQuiz(IWriteContainer):
     """Write methods for quiz."""
 
@@ -82,11 +84,35 @@ class IQuestion(IReadQuestion, IWriteQuestion):
     """Question content type."""
 
 
+class OnlyOneMayBeCorrect(zope.schema.ValidationError):
+
+    def doc(self):
+        return _('Only one answer may be correct.')
+
+
+def only_one_may_be_correct(value):
+    if not value:
+        # We're not correct, so that's good
+        return True
+
+    field = inspect.stack()[2][0].f_locals['self']
+    answer = IAnswer(field.context, None)
+    #if answer is None:
+    question = IQuestion(field.context)
+
+    for existing_answer in question.values():
+        if existing_answer.correct and existing_answer != answer:
+            raise OnlyOneMayBeCorrect()
+
+    return True
+
+
 class IAnswer(zeit.cms.content.interfaces.IXMLRepresentation, IQuizContent):
     """Answer content type."""
 
     correct = zope.schema.Bool(
-        title=_('Correct?'))
+        title=_('Correct?'),
+        constraint=only_one_may_be_correct)
 
     answer = zc.form.field.HTMLSnippet(
         title=_("Text"))

@@ -29,6 +29,20 @@ True
 True
 
 
+An answer can be added to a question (which can be added to a quiz):
+
+>>> import zeit.content.quiz.question
+>>> import zeit.content.quiz.quiz
+>>> quiz = zeit.content.quiz.quiz.Quiz()
+>>> question = zeit.content.quiz.question.Question()
+>>> quiz['q'] = question
+>>> answer = zeit.content.quiz.answer.Answer()
+>>> question['a'] = answer
+>>> question['a'] == answer
+True
+>>> question['a'] != answer
+False
+
 Clean up
 ========
 

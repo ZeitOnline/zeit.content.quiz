@@ -39,6 +39,13 @@ class Answer(zeit.content.quiz.container.Contained,
     def answer(self, value):
         return self.convert.from_html(self.get_node('text'), value)
 
+    def __eq__(self, other):
+        if not zeit.content.quiz.interfaces.IAnswer.providedBy(other):
+            return False
+        return self.xml == other.xml
+
+    def __ne__(self, other):
+        return not (self == other)
 
 
 answerFactory = zeit.content.quiz.container.xml_tree_content_adapter(Answer)

@@ -5,6 +5,8 @@ Changes
 0.4 (unreleased)
 ================
 
+- Nur noch eine Antwort kann pro Frage richtig sein.
+
 0.3.1 (2008-12-17)
 ==================
 
