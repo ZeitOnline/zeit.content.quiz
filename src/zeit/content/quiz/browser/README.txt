@@ -20,7 +20,7 @@ To add a quiz we go to a folder:
 >>> menu.displayValue = ['Quiz']
 >>> browser.open(menu.value[0])
 
-We set the most important values[#commentdefault]_:
+We set the most important values[#commentdefault]_[#browsing-location]_:
 
 >>> browser.getControl('File name').value = 'kochen'
 >>> browser.getControl('Title').value = 'Koch-Quiz'
@@ -29,7 +29,7 @@ We set the most important values[#commentdefault]_:
 >>> browser.getControl(name='form.authors.0.').value = 'Hans Sachs'
 >>> browser.getControl(name="form.actions.add").click()
 
-After adding the quiz we're at its metadata view.
+After adding the quiz we're at its metadata view[#browsing-location]_:
 
 >>> browser.url
 'http://localhost/++skin++cms/workingcopy/zope.user/kochen/@@edit.html'
@@ -49,7 +49,7 @@ We go to the questions overview of the quiz and add a question:
 >>> browser.getLink('Add question').click()
 
 Suppose we did so by mistake; after we cancel adding the question, we are
-taken back to the questions overview:
+taken back to the questions overview[#browsing-location]_:
 
 >>> browser.getControl('Cancel').click()
 >>> browser.url
@@ -86,6 +86,9 @@ Adding an answer redirects to the add form for the next answer:
 >>> browser.getControl('Title').value = 'first answer'
 >>> browser.getControl('Correct?').click()
 >>> browser.getControl('Text').value = '<p>test</p>er'
+
+[#browsing-location]_
+
 >>> browser.getControl('Apply and add').click()
 >>> print browser.contents
 <?xml ...
@@ -139,7 +142,7 @@ Exisiting questions can be reached from the Questions tab:
 <Link text='first question' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/@@edit.html'>
 
 Clicking on the links opens an edit form which contains the previously
-entered values:
+entered values[#browsing-location]_:
 
 >>> browser.getLink('first question').click()
 >>> browser.getControl('Title').value
@@ -178,7 +181,8 @@ True
 >>> browser.getControl('Text').value
 '<p>test</p>er\r\n'
 
-We note that the answer view does not have a check-in link either:
+We note that the answer view does not have a check-in link
+either[#browsing-location]_:
 
 >>> browser.getLink('Checkin')
 Traceback (most recent call last):
@@ -470,3 +474,15 @@ The answer is still there and has the same values:
 
     >>> browser.getControl('Comments').selected
     False
+
+
+.. [#browsing-location] Make sure there is a browsing location
+
+    >>> ajax = Browser()
+    >>> ajax.addHeader('Authorization', 'Basic user:userpw')
+    >>> base = browser.url.rsplit('/', 1)[0]
+    >>> url = base + '/@@default-browsing-location?type_filter=images'
+    >>> ajax.open(url)
+    >>> print ajax.contents
+    <h1>http://xml.zeit.de/online/2007/01</h1>
+    ...
