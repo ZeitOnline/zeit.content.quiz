@@ -28,8 +28,8 @@ need concrete implementations of them for this demonstration:
 ...
 ...     default_template = "<contained />"
 
->>> from zeit.content.quiz.test import \
-...     PersistentContainer, Container, Contained
+>>> from zeit.content.quiz.tests import (
+...     PersistentContainer, Container, Contained)
 
 >>> import zope.component
 >>> contained_factory = zeit.content.quiz.container.xml_tree_content_adapter(
@@ -46,7 +46,7 @@ Let's create a persistent container:
 >>> root = getRootFolder()
 >>> pc = PersistentContainer()
 >>> pc
-<zeit.content.quiz.test.PersistentContainer object at 0x...>
+<zeit.content.quiz.tests.PersistentContainer object at 0x...>
 >>> root['pc'] = pc
 >>> transaction.commit()
 

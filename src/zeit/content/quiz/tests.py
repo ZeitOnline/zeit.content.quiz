@@ -2,9 +2,9 @@
 # See also LICENSE.txt
 
 import BaseHTTPServer
-import random
 import os
 import persistent
+import random
 import threading
 import unittest
 import zeit.cms.testing
