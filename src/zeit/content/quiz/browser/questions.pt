@@ -1,5 +1,5 @@
 <div id="edit-form" class="quiz"
-  i18n:domain="zeit.content.quiz">
+  i18n:domain="zeit.cms">
 
   <tal:replace replace="resource_library:zeit.content.quiz" />
 

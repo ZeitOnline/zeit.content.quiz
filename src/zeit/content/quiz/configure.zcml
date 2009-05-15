@@ -1,6 +1,6 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope"
-  xmlns:i18n="http://namespaces.zope.org/i18n">
+  xmlns="http://namespaces.zope.org/zope">
+
 
   <!-- Quiz -->
   <adapter factory=".quiz.quizFactory" name="quiz" />
@@ -79,8 +79,6 @@
       set_schema="zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate"
       permission="zeit.EditContent" />
   </class>
-
-  <i18n:registerTranslations directory="locales" />
 
   <!-- updater -->
   <adapter factory=".updater.Updater" />
