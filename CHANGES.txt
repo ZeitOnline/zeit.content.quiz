@@ -5,6 +5,8 @@ Changes
 0.4.1 (2009-05-15)
 ==================
 
+- QuizSource hinzugefügt.
+
 - Anpassungen für zeit.cms 1.20
 
 - Alle ``test.py`` nach ``tests.py`` umbenannt.
