@@ -14,3 +14,22 @@ True
 ...     zeit.cms.interfaces.IEditorialContent, zeit.content.quiz.quiz.Quiz())
 True
 
+[#functional]_:
+
+>>> import zope.component
+>>> import zeit.cms.content._bootstrapinterfaces
+>>> quiz_source = zope.component.getUtility(
+...     zeit.cms.content._bootstrapinterfaces.INamedCMSContentSource,
+...     name='quiz')
+>>> quiz_source
+<zeit.content.quiz.source.QuizSource object at 0x...>
+
+>>> quiz_source.verify_interface(zeit.content.quiz.quiz.Quiz())
+True
+>>> quiz_source.verify_interface(object)
+False
+
+.. [#functional]_
+
+    >>> import zeit.cms.testing
+    >>> zeit.cms.testing.set_site()

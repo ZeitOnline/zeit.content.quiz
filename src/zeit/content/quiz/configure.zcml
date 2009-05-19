@@ -32,6 +32,11 @@
     type="zeit.cms.interfaces.ICMSContentType"
     />
 
+  <utility
+    component=".source.quizSource"
+    name="quiz"
+    />
+
   <!-- non-persistent container -->
   <subscriber handler=".container.content_modified" />
 
