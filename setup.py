@@ -26,7 +26,7 @@ setup(
         'zc.form',
         'zeit.cms>=1.20',
         'zeit.connector',
-        'zeit.connector',
+        'zeit.wysiwyg',
         'zope.annotation',
         'zope.app.container',
         'zope.app.pagetemplate',

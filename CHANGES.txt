@@ -2,7 +2,12 @@
 Changes
 =======
 
-0.4.2 (2009-15-19)
+0.4.3 (2009-06-04)
+==================
+
+- Abhängigkeit zu zeit.wysiwyg hinzugefügt.
+
+0.4.2 (2009-05-19)
 ==================
 
 - CMSContentSource für Quizes inzugefügt.
