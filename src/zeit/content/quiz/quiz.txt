@@ -17,9 +17,9 @@ True
 [#functional]_:
 
 >>> import zope.component
->>> import zeit.cms.content._bootstrapinterfaces
+>>> import zeit.cms.content.interfaces
 >>> quiz_source = zope.component.getUtility(
-...     zeit.cms.content._bootstrapinterfaces.INamedCMSContentSource,
+...     zeit.cms.content.interfaces.INamedCMSContentSource,
 ...     name='quiz')
 >>> quiz_source
 <zeit.content.quiz.source.QuizSource object at 0x...>

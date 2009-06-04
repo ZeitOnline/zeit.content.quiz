@@ -124,7 +124,7 @@ quiz first; let's do so by using the breadcrumb menu:
 >>> browser.getControl('Title').value
 'Koch-Quiz'
 >>> print browser.title.strip()
-kochen – Edit quiz
+Koch-Quiz – Edit quiz
 
 There is no read only view of the metadata:
 
@@ -238,7 +238,7 @@ filling in the title field:
 >>> browser.getControl('Text').value = '<p>zweiter Test - Antwort</p>er'
 >>> browser.getControl(name='form.actions.apply').click()
 >>> print browser.title.strip()
-kochen – Quiz overview
+Koch-Quiz – Quiz overview
 
 Later, we can also edit both without filling in the title:
 
@@ -398,7 +398,7 @@ Let's delete the untitled answer we just added:
 >>> browser.getControl('Delete').click()
 >>> print browser.contents
 <?xml ...
- <title> kochen – Quiz overview </title>
+ <title> Koch-Quiz – Quiz overview </title>
     ...
     <li class="message">Item was deleted.</li>
     ...
@@ -435,7 +435,7 @@ We now have a view tab:
 
 >>> browser.getLink('View metadata').click()
 >>> print browser.title.strip()
-kochen – View quiz
+Koch-Quiz – View quiz
 
 
 Checkout
