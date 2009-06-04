@@ -455,7 +455,7 @@ still has the same values:
 >>> browser.getControl('Title').value
 '1st question & ans'
 >>> browser.getControl('Text').value
-'<p><em>foo</em> bar</p>\r\n'
+'<p><em>foo</em> bar</p>'
 
 The answer is still there and has the same values:
 
@@ -467,7 +467,7 @@ The answer is still there and has the same values:
 >>> browser.getControl('Title').value
 '1st answer'
 >>> browser.getControl('Text').value
-'<p><em>foh</em> bah</p>\r\n'
+'<p><em>foh</em> bah</p>'
 
 
 .. [#commentdefault] The default for "allow comments" is off:
