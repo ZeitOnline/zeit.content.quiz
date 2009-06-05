@@ -24,7 +24,7 @@ setup(
         'setuptools',
         'z3c.etestbrowser',
         'zc.form',
-        'zeit.cms>=1.20',
+        'zeit.cms>=1.21.5',
         'zeit.connector',
         'zeit.wysiwyg',
         'zope.annotation',

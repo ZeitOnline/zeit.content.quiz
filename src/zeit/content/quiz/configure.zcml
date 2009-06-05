@@ -1,10 +1,10 @@
 <configure
-  xmlns="http://namespaces.zope.org/zope">
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:grok="http://namespaces.zope.org/grok">
 
+  <grok:grok package="." />
 
   <!-- Quiz -->
-  <adapter factory=".quiz.quizFactory" name="quiz" />
-  <adapter factory=".quiz.resourceFactory" />
   <adapter factory=".quiz.quiz_for_content" />
 
   <class class=".quiz.Quiz">

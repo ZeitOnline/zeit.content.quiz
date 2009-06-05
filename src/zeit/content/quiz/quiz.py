@@ -1,6 +1,8 @@
 # Copyright (c) 2008-2009 gocept gmbh & co. kg
 # See also LICENSE.txt
 
+import zeit.cms.type
+from zeit.cms.i18n import MessageFactory as _
 import lxml.objectify
 import zeit.cms.connector
 import zeit.cms.content.adapter
@@ -41,13 +43,12 @@ class Quiz(zeit.content.quiz.container.Container,
         return self
 
 
-quizFactory = zeit.cms.content.adapter.xmlContentFactory(Quiz)
+class QuizType(zeit.cms.type.XMLContentTypeDeclaration):
 
-
-resourceFactory = zeit.cms.connector.xmlContentToResourceAdapterFactory(
-    'quiz')
-resourceFactory = zope.component.adapter(
-    zeit.content.quiz.interfaces.IQuiz)(resourceFactory)
+    factory = Quiz
+    interface = zeit.content.quiz.interfaces.IQuiz
+    title = _('Quiz')
+    type = 'quiz'
 
 
 @zope.component.adapter(zeit.content.quiz.interfaces.IQuizContent)
