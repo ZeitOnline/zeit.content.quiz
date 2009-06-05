@@ -37,7 +37,7 @@ class Question(zeit.content.quiz.container.Container,
 
     @rwproperty.setproperty
     def question(self, value):
-        return self.convert.from_html(self.get_node('text'), value)
+        self.convert.from_html(self.get_node('text'), value)
 
     def _iter_xml_children(self):
         for child in self.xml.getchildren():
