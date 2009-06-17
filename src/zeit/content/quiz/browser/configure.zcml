@@ -71,7 +71,7 @@
 
   <resourceLibrary
      name="zeit.content.quiz"
-     require="zeit.cms.DragAndDrop mochikit.Sortable">
+     require="zeit.cms mochikit.Sortable">
     <directory source="resources" include="quiz.js quiz.css" />
   </resourceLibrary>
 
