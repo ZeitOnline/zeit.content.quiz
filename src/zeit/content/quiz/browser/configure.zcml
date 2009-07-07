@@ -14,6 +14,15 @@
     name="zmi_icon"
     width="18"
     height="18"
+    file="quiz_old.png"
+    layer="zeit.cms.browser.interfaces.ICMSOldStyles"
+    />
+
+  <browser:icon
+    for="..interfaces.IQuiz"
+    name="zmi_icon"
+    width="18"
+    height="18"
     file="quiz.png"
     layer="zeit.cms.browser.interfaces.ICMSLayer"
     />
