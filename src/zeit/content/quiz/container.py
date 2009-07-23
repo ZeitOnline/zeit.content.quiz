@@ -3,7 +3,7 @@
 
 import UserDict
 import lxml.objectify
-import zope.app.container.interfaces
+import zope.container.contained
 import zope.component
 import zope.interface
 import zope.lifecycleevent
@@ -87,7 +87,7 @@ class Container(UserDict.DictMixin):
 
 
 class Contained(zeit.cms.content.xmlsupport.XMLRepresentationBase,
-                zope.app.container.contained.Contained):
+                zope.container.contained.Contained):
     """Object in a container."""
 
     def __init__(self, xml_source=None, xml=None):
