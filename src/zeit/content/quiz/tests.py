@@ -2,8 +2,8 @@
 # See also LICENSE.txt
 
 import BaseHTTPServer
-import os
 import persistent
+import pkg_resources
 import random
 import threading
 import unittest
@@ -71,7 +71,7 @@ def start_quiz_updater_httpd():
 
 
 QuizLayer = zope.app.testing.functional.ZCMLLayer(
-    os.path.join(os.path.dirname(__file__), 'ftesting.zcml'),
+    pkg_resources.resource_filename(__name__, 'ftesting.zcml'),
     __name__, 'QuizLayer', allow_teardown=True)
 
 
