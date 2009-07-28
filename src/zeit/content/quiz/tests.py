@@ -7,8 +7,10 @@ import persistent
 import random
 import threading
 import unittest
+import zeit.cms.content.tests.test_contentsource
 import zeit.cms.testing
 import zeit.content.quiz.container
+import zeit.content.quiz.source
 import zope.app.testing.functional
 import zope.testing.doctest
 
@@ -73,6 +75,16 @@ QuizLayer = zope.app.testing.functional.ZCMLLayer(
     __name__, 'QuizLayer', allow_teardown=True)
 
 
+class QuizSourceTest(
+    zeit.cms.content.tests.test_contentsource.ContentSourceTest):
+
+    layer = QuizLayer
+
+    source = zeit.content.quiz.source.quizSource
+    expected_types = ['quiz']
+
+
+
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(zope.testing.doctest.DocTestSuite(
@@ -89,4 +101,5 @@ def test_suite():
             'zeit.content.quiz': {
                 'url': 'http://localhost:%s/quizupdate' % httpd_port}},
         layer=QuizLayer))
+    suite.addTest(unittest.makeSuite(QuizSourceTest))
     return suite

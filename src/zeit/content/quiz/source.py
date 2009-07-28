@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (c) 2009 gocept gmbh & co. kg
 # See also LICENSE.txt
 
@@ -10,10 +9,7 @@ class QuizSource(zeit.cms.content.contentsource.CMSContentSource):
     """A source containing folders."""
 
     name = 'quiz'
-
-    def verify_interface(self, value):
-        return zeit.content.quiz.interfaces.IQuiz.providedBy(value)
+    check_interfaces = (zeit.content.quiz.interfaces.IQuiz,)
 
 
 quizSource = QuizSource()
-
