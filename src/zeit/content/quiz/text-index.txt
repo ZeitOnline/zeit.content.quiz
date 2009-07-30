@@ -1,0 +1,58 @@
+================
+ Searchable Text
+================
+
+Interface test for answer:
+
+>>> import zeit.content.quiz.interfaces
+>>> import zeit.content.quiz.answer
+>>> import zope.interface.verify
+>>> import zope.publisher.browser
+
+Set up
+======
+
+The HTML-Properties need an interaction:
+
+>>> request = zope.publisher.browser.TestRequest()
+>>> zope.security.management.newInteraction(request)
+
+Test
+====
+
+>>> zope.interface.verify.verifyObject(
+...     zeit.content.quiz.interfaces.IAnswer, zeit.content.quiz.answer.Answer())
+True
+>>> zope.interface.verify.verifyObject(
+...     zope.app.container.interfaces.IContained, 
+...     zeit.content.quiz.answer.Answer())
+True
+
+
+Create Quiz and show searchable Text
+
+>>> import zeit.content.quiz.question
+>>> import zeit.content.quiz.quiz
+>>> quiz = zeit.content.quiz.quiz.Quiz()
+>>> question = zeit.content.quiz.question.Question()
+>>> question.question= "<p>Here comes a question</p>"
+>>> quiz['q'] = question
+>>> answer = zeit.content.quiz.answer.Answer()
+>>> question['a'] = answer
+>>> question['a'] == answer
+True
+>>> question['a'] != answer
+False
+>>> adapter = zope.index.text.interfaces.ISearchableText(quiz)
+
+>>> import lxml.etree
+>>> adapter.getSearchableText()
+[u'Here comes a question']
+
+
+
+
+Clean up
+========
+
+>>> zope.security.management.endInteraction()

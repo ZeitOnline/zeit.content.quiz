@@ -94,6 +94,7 @@ def test_suite():
         'container.txt',
         'question.txt',
         'quiz.txt',
+        'text-index.txt',
         layer=QuizLayer))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
         'updater.txt',

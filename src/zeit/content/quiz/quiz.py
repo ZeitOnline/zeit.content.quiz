@@ -10,6 +10,7 @@ import zeit.cms.content.dav
 import zeit.cms.content.metadata
 import zeit.cms.interfaces
 import zeit.content.quiz.container
+import grokcore.component
 import zeit.content.quiz.interfaces
 import zeit.wysiwyg.interfaces
 import zope.component
@@ -76,3 +77,17 @@ class ContentBase(object):
     @property
     def convert(self):
         return zeit.wysiwyg.interfaces.IHTMLConverter(self)
+
+class SearchableText(grokcore.component.Adapter):
+    """SearchableText for a quiz."""
+
+    grokcore.component.context(zeit.content.quiz.interfaces.IQuiz)
+    grokcore.component.implements(zope.index.text.interfaces.ISearchableText)
+
+    def getSearchableText(self):
+        main_text = []
+        for p in self.context.xml.xpath("//question//p"):
+            text = unicode(p).strip()
+            if text:
+                main_text.append(text)
+        return main_text
