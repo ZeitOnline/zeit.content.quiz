@@ -39,12 +39,10 @@ class QuizFormBase(object):
     form_fields = (
         zope.formlib.form.FormFields(
             zeit.cms.interfaces.ICMSContent,
-            zeit.cms.syndication.interfaces.IAutomaticMetadataUpdate,
-            zeit.cms.content.interfaces.ICommonMetadata
+            zeit.cms.content.interfaces.ICommonMetadata,
         ).omit('commentsAllowed') +
         zope.formlib.form.FormFields(
             zeit.content.quiz.interfaces.IQuiz).select('commentsAllowed'))
-
 
 
 class AddQuiz(QuizFormBase,

@@ -2,10 +2,15 @@
 Changes
 =======
 
-0.5 (2009-07-28)
+0.5.1 (unreleased)
 ==================
 
-- Volltextindexierung für SOLR 
+- NoAutomaticMetadataUpdate entfernt.
+
+0.5 (2009-07-28)
+================
+
+- Volltextindexierung für SOLR.
 
 0.4.7 (2009-07-28)
 ==================
