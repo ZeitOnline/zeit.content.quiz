@@ -92,7 +92,7 @@ When we add a quiz to the repository it'll also be updated:
 >>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
 {'action': ['preview'],
  'quiz_id': ['/quiz'],
- 'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
+ 'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">...</quiz>\n']}
 
 
 >>> zope.app.component.hooks.setSite(old_site)
