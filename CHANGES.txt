@@ -3,7 +3,7 @@ Changes
 =======
 
 
-0.5.1 (unreleased)
+0.5.1 (2010-05-03)
 ==================
 
 - Using versions from the ZTK.
