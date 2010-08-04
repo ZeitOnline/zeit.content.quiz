@@ -6,14 +6,11 @@ Quiz updating
 Updater
 +++++++
 
-The updater talks to the quiz system via a HTTP post. Start up a test http
-server which logs posts:
-
->>> import zeit.content.quiz.tests
->>> zeit.content.quiz.tests.start_quiz_updater_httpd()
+The updater talks to the quiz system via a HTTP post. 
 
 Get a quiz and update it:
 
+>>> import zeit.content.quiz.quiz
 >>> quiz = zeit.content.quiz.quiz.Quiz()
 >>> quiz.uniqueId = 'http://xml.zeit.de/quiz-id'
 >>> updater = zeit.content.quiz.interfaces.IQuizUpdater(quiz)
@@ -27,6 +24,7 @@ http://localhost:.../quizupdate
 
 We have a post now:
 
+>>> import zeit.content.quiz.tests
 >>> posts = zeit.content.quiz.tests.QuizUpdaterRequestHandler.posts_received
 >>> len(posts)
 1
@@ -40,19 +38,10 @@ We have a post now:
  'xml': ['<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<quiz xmlns:py="http://codespeak.net/lxml/objectify/pytype">\n</quiz>\n']}
 
 
-When the HTTP-Server is not up the error will be thrown, so the user knows that
-something isn't working:
-
->>> updater.update()  #doctest: +IGNORE_EXCEPTION_DETAIL
-Traceback (most recent call last):
-    ...
-URLError: <urlopen error (61, 'Connection refused')>
-
-
-The same happens when an error code is returned from the server:
+When the HTTP-Server returns an error the error will be thrown, so the user
+knows that something isn't working:
 
 >>> zeit.content.quiz.tests.QuizUpdaterRequestHandler.response = 500
->>> zeit.content.quiz.tests.start_quiz_updater_httpd()
 >>> updater.update()
 Traceback (most recent call last):
     ....
@@ -66,7 +55,6 @@ Events
 The quiz is updated on checkin:
 
 >>> posts[:] = []
->>> zeit.content.quiz.tests.start_quiz_updater_httpd()
 >>> import zeit.cms.checkout.interfaces
 >>> zope.event.notify(
 ...     zeit.cms.checkout.interfaces.AfterCheckinEvent(quiz, None, None))
@@ -80,7 +68,6 @@ The quiz is updated on checkin:
 When we add a quiz to the repository it'll also be updated:
 
 >>> posts[:] = []
->>> zeit.content.quiz.tests.start_quiz_updater_httpd()
 >>> quiz.uniqueId = None
 >>> import zope.component
 >>> import zeit.cms.repository.interfaces

@@ -57,22 +57,39 @@ class QuizUpdaterRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         pass
 
 
-httpd_port = random.randint(30000, 40000)
+QuizHTTPLayer, httpd_port = zeit.cms.testing.HTTPServerLayer(
+    QuizUpdaterRequestHandler)
 
 
-def start_quiz_updater_httpd():
-    def run():
-        server_address = ('localhost', httpd_port)
-        httpd = BaseHTTPServer.HTTPServer(
-            server_address, QuizUpdaterRequestHandler)
-        httpd.handle_request()
-    t = threading.Thread(target=run)
-    t.start()
+product_config = """\
+<product-config zeit.content.quiz>
+    url http://localhost:%s/quizupdate
+</product-config>
+""" % (httpd_port,)
 
 
-QuizLayer = zope.app.testing.functional.ZCMLLayer(
-    pkg_resources.resource_filename(__name__, 'ftesting.zcml'),
-    __name__, 'QuizLayer', allow_teardown=True)
+QuizZCMLLayer = zeit.cms.testing.ZCMLLayer(
+    'ftesting.zcml',
+    product_config=zeit.cms.testing.cms_product_config + product_config)
+
+
+class QuizLayer(QuizZCMLLayer, QuizHTTPLayer):
+
+    @classmethod
+    def setUp(cls):
+        pass
+
+    @classmethod
+    def tearDown(cls):
+        pass
+
+    @classmethod
+    def testSetUp(cls):
+        pass
+
+    @classmethod
+    def testTearDown(cls):
+        pass
 
 
 class QuizSourceTest(
@@ -82,7 +99,6 @@ class QuizSourceTest(
 
     source = zeit.content.quiz.source.quizSource
     expected_types = ['quiz']
-
 
 
 def test_suite():
@@ -98,9 +114,6 @@ def test_suite():
         layer=QuizLayer))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
         'updater.txt',
-        product_config={
-            'zeit.content.quiz': {
-                'url': 'http://localhost:%s/quizupdate' % httpd_port}},
         layer=QuizLayer))
     suite.addTest(unittest.makeSuite(QuizSourceTest))
     return suite

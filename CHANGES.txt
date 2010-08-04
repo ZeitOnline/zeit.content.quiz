@@ -6,7 +6,7 @@ Changes
 0.5.2 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix tests after zeit.cms changes (#7549).
 
 
 0.5.1 (2010-05-03)
