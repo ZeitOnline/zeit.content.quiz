@@ -3,7 +3,7 @@ Changes
 =======
 
 
-0.5.2 (unreleased)
+0.5.2 (2010-08-09)
 ==================
 
 - Fix tests after zeit.cms changes (#7549).
