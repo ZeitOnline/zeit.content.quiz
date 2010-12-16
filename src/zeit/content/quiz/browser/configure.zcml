@@ -80,7 +80,7 @@
 
   <resourceLibrary
      name="zeit.content.quiz"
-     require="zeit.cms mochikit.Sortable">
+     require="zeit.cms mochikit">
     <directory source="resources" include="quiz.js quiz.css" />
   </resourceLibrary>
 

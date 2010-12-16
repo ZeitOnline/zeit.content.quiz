@@ -6,7 +6,7 @@ Changes
 0.5.3 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix javascript library dependencies.
 
 
 0.5.2 (2010-08-09)
