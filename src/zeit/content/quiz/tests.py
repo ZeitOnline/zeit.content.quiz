@@ -1,11 +1,7 @@
 # Copyright (c) 2007-2009 gocept gmbh & co. kg
 # See also LICENSE.txt
 
-import BaseHTTPServer
 import persistent
-import pkg_resources
-import random
-import threading
 import unittest
 import zeit.cms.content.tests.test_contentsource
 import zeit.cms.testing
@@ -39,7 +35,7 @@ class Contained(zeit.content.quiz.container.Contained):
     default_template = "<contained />"
 
 
-class QuizUpdaterRequestHandler(BaseHTTPServer.BaseHTTPRequestHandler):
+class QuizUpdaterRequestHandler(zeit.cms.testing.BaseHTTPRequestHandler):
 
     posts_received = []
     response = 200
