@@ -3,7 +3,7 @@ Changes
 =======
 
 
-0.5.4 (unreleased)
+0.5.4 (2011-11-13)
 ==================
 
 - Fix brown bag release
