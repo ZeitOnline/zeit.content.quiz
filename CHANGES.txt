@@ -6,7 +6,7 @@ Changes
 0.5.4 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix brown bag release
 
 
 0.5.3 (2011-11-13)
