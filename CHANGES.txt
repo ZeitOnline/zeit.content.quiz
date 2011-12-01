@@ -6,7 +6,8 @@ Changes
 0.5.5 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Update to use etree instead of objectify for HTML conversion/wysiwyg
+  (via #10027).
 
 
 0.5.4 (2011-11-13)

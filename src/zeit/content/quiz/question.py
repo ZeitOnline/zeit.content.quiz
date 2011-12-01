@@ -1,20 +1,16 @@
-# -*- coding: utf-8 -*-
-# Copyright (c) 2008-2009 gocept gmbh & co. kg
+# Copyright (c) 2008-2011 gocept gmbh & co. kg
 # See also LICENSE.txt
-# $Id$
 
-import lxml.objectify
+import lxml.etree
 import rwproperty
+import zeit.cms.content.property
+import zeit.content.quiz.container
+import zeit.content.quiz.interfaces
+import zeit.content.quiz.quiz
+import zeit.wysiwyg.html
 import zope.app.container.interfaces
 import zope.component
 import zope.interface
-
-import zeit.cms.content.property
-import zeit.wysiwyg.html
-
-import zeit.content.quiz.interfaces
-import zeit.content.quiz.container
-import zeit.content.quiz.quiz
 
 
 QUESTION_TEMPLATE = u"""\
@@ -61,6 +57,6 @@ class QuestionHTMLContent(zeit.wysiwyg.html.HTMLContentBase):
         try:
             node = self.context.xml['text']
         except AttributeError:
-            node = lxml.objectify.Element('text')
+            node = lxml.etree.Element('text')
             self.context.xml.append(node)
         return node
