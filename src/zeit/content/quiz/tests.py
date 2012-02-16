@@ -7,7 +7,6 @@ import zeit.cms.content.tests.test_contentsource
 import zeit.cms.testing
 import zeit.content.quiz.container
 import zeit.content.quiz.source
-import zope.app.testing.functional
 import zope.testing.doctest
 
 
