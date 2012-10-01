@@ -117,10 +117,9 @@ Editing a quiz
 Editing quiz metadata
 ---------------------
 
-We can edit the metadata of the quiz on its edit tab. We have to move to the
-quiz first; let's do so by using the breadcrumb menu:
+We can edit the metadata of the quiz on its edit tab.
 
->>> browser.getLink('kochen').click()
+>>> browser.open('http://localhost/++skin++cms/workingcopy/zope.user/kochen')
 >>> browser.getLink('Edit metadata').click()
 >>> browser.getControl('Title').value
 'Koch-Quiz'
@@ -429,7 +428,7 @@ Check-in
 
 To check-in the quiz we have to go back to the quiz:
 
->>> browser.getLink('kochen').click()
+>>> browser.open('http://localhost/++skin++cms/workingcopy/zope.user/kochen')
 >>> browser.getLink('Checkin').click()
 
 We now have a view tab:
@@ -460,7 +459,7 @@ still has the same values:
 
 The answer is still there and has the same values:
 
->>> browser.getLink('kochen').click()
+>>> browser.open('http://localhost/++skin++cms/workingcopy/zope.user/kochen')
 >>> browser.getLink('Questions').click()
 >>> browser.getLink('1st answer')
 <Link text='1st answer' url='http://localhost/++skin++cms/workingcopy/zope.user/kochen/first%20question/first%20answer/@@edit.html'>
