@@ -56,8 +56,10 @@ The quiz is updated on checkin:
 
 >>> posts[:] = []
 >>> import zeit.cms.checkout.interfaces
->>> zope.event.notify(
-...     zeit.cms.checkout.interfaces.AfterCheckinEvent(quiz, None, None))
+>>> import zeit.cms.testing
+>>> with zeit.cms.testing.interaction():
+...     zope.event.notify(
+...         zeit.cms.checkout.interfaces.AfterCheckinEvent(quiz, None, None))
 >>> len(posts)
 1
 >>> pprint.pprint(cgi.parse_qs(posts[0]['data']))
