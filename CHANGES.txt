@@ -6,7 +6,7 @@ Changes
 0.5.6 (unreleased)
 ==================
 
-- Nothing changed yet.
+- Fix tests to deal with required keywords (#12478).
 
 
 0.5.5 (2011-12-01)
