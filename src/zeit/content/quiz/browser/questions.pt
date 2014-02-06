@@ -1,8 +1,6 @@
 <div id="edit-form" class="quiz"
   i18n:domain="zeit.cms">
 
-  <tal:replace replace="resource_library:zeit.content.quiz" />
-
   <form method="POST" class="edit-form"
     tal:attributes="action view/@@absolute_url">
     <div class="field-group">

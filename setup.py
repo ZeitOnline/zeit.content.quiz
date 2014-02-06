@@ -24,7 +24,7 @@ setup(
         'setuptools',
         'z3c.etestbrowser',
         'zc.form',
-        'zeit.cms>=1.25',
+        'zeit.cms>=2.14.0.dev0',
         'zeit.connector',
         'zeit.wysiwyg',
         'zope.annotation',
@@ -44,4 +44,10 @@ setup(
         'zope.security',
         'zope.testing',
         'zope.traversing',
-    ])
+    ],
+    entry_points={
+        'fanstatic.libraries': [
+            'zeit_content_quiz=zeit.content.quiz.browser.resources:lib',
+        ],
+    },
+)
