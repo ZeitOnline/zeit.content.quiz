@@ -1,6 +1,7 @@
 # Copyright (c) 2007-2009 gocept gmbh & co. kg
 # See also LICENSE.txt
 
+from zeit.cms.testing import copy_inherited_functions
 import persistent
 import unittest
 import zeit.cms.content.tests.test_contentsource
@@ -88,12 +89,16 @@ class QuizLayer(QuizZCMLLayer, QuizHTTPLayer):
 
 
 class QuizSourceTest(
-    zeit.cms.content.tests.test_contentsource.ContentSourceTest):
+    zeit.cms.content.tests.test_contentsource.ContentSourceBase,
+    zeit.cms.testing.FunctionalTestCase):
 
     layer = QuizLayer
 
     source = zeit.content.quiz.source.quizSource
     expected_types = ['quiz']
+
+    copy_inherited_functions(
+        zeit.cms.content.tests.test_contentsource.ContentSourceBase, locals())
 
 
 def test_suite():
