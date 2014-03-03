@@ -32,6 +32,7 @@ class FormBase(object):
 class AddForm(FormBase, zeit.cms.browser.form.AddForm):
 
     title = _("Add answer")
+    widgets_of_new_object = False
     factory = zeit.content.quiz.answer.Answer
     checkout = False
     add_answer = False
