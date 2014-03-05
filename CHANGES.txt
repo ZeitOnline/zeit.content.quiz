@@ -6,7 +6,7 @@ Changes
 0.5.8 (unreleased)
 ==================
 
-- Update to new AddForm API (VIV-303).
+- zeit.content.image has its own egg now.
 
 
 0.5.7 (2014-02-10)
