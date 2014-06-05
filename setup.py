@@ -24,7 +24,7 @@ setup(
         'setuptools',
         'z3c.etestbrowser',
         'zc.form',
-        'zeit.cms>=2.15.0.dev0',
+        'zeit.cms>=2.20.0.dev0',
         'zeit.content.quiz',
         'zeit.connector',
         'zeit.wysiwyg',
