@@ -3,7 +3,7 @@ Changes
 =======
 
 
-0.5.9 (unreleased)
+0.5.9 (2014-06-05)
 ==================
 
 - Use gocept.httpserverlayer.custom to avoid port collisions in tests.
