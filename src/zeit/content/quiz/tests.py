@@ -2,6 +2,7 @@
 # See also LICENSE.txt
 
 from zeit.cms.testing import copy_inherited_functions
+import gocept.httpserverlayer.custom
 import persistent
 import unittest
 import zeit.cms.content.tests.test_contentsource
@@ -35,7 +36,7 @@ class Contained(zeit.content.quiz.container.Contained):
     default_template = "<contained />"
 
 
-class QuizUpdaterRequestHandler(zeit.cms.testing.BaseHTTPRequestHandler):
+class QuizUpdaterRequestHandler(gocept.httpserverlayer.custom.RequestHandler):
 
     posts_received = []
     response = 200
@@ -53,46 +54,37 @@ class QuizUpdaterRequestHandler(zeit.cms.testing.BaseHTTPRequestHandler):
         pass
 
 
-QuizHTTPLayer, httpd_port = zeit.cms.testing.HTTPServerLayer(
-    QuizUpdaterRequestHandler)
+HTTP_LAYER = gocept.httpserverlayer.custom.Layer(
+    QuizUpdaterRequestHandler, name='HTTPLayer', module=__name__)
 
 
 product_config = """\
 <product-config zeit.content.quiz>
-    url http://localhost:%s/quizupdate
+    url http://localhost:{port}/quizupdate
 </product-config>
-""" % (httpd_port,)
+"""
 
 
-QuizZCMLLayer = zeit.cms.testing.ZCMLLayer(
+class ZCMLLayer(zeit.cms.testing.ZCML_Layer):
+
+    defaultBases = (HTTP_LAYER,)
+
+    def setUp(self):
+        self.product_config = self.product_config.format(
+            port=self['http_port'])
+        super(ZCMLLayer, self).setUp()
+
+
+ZCML_LAYER = ZCMLLayer(
     'ftesting.zcml',
     product_config=zeit.cms.testing.cms_product_config + product_config)
-
-
-class QuizLayer(QuizZCMLLayer, QuizHTTPLayer):
-
-    @classmethod
-    def setUp(cls):
-        pass
-
-    @classmethod
-    def tearDown(cls):
-        pass
-
-    @classmethod
-    def testSetUp(cls):
-        pass
-
-    @classmethod
-    def testTearDown(cls):
-        pass
 
 
 class QuizSourceTest(
     zeit.cms.content.tests.test_contentsource.ContentSourceBase,
     zeit.cms.testing.FunctionalTestCase):
 
-    layer = QuizLayer
+    layer = ZCML_LAYER
 
     source = zeit.content.quiz.source.quizSource
     expected_types = ['quiz']
@@ -111,9 +103,9 @@ def test_suite():
         'question.txt',
         'quiz.txt',
         'text-index.txt',
-        layer=QuizLayer))
+        layer=ZCML_LAYER))
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
         'updater.txt',
-        layer=QuizLayer))
+        layer=ZCML_LAYER))
     suite.addTest(unittest.makeSuite(QuizSourceTest))
     return suite

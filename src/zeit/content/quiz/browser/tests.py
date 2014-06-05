@@ -11,5 +11,5 @@ def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(zeit.cms.testing.FunctionalDocFileSuite(
         'README.txt',
-        layer=zeit.content.quiz.tests.QuizLayer))
+        layer=zeit.content.quiz.tests.ZCML_LAYER))
     return suite
