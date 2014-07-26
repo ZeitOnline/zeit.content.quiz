@@ -87,7 +87,7 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
         confirm_message=_('delete-item-confirmation',
                           default=u'Really delete?'),
         condition=zope.formlib.form.haveInputWidgets,
-        )
+    )
     def handle_delete(self, action, data):
         self.quiz = zeit.content.quiz.interfaces.IQuiz(self.context)
         parent = self.context.__parent__

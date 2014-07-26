@@ -92,7 +92,7 @@ class EditForm(FormBase, zeit.content.quiz.browser.quiz.EditFormBase):
         gocept.form.grouped.RemainingFields(
             title=_(u'Answer'),
             css_class='full-width wide-widgets'),
-        )
+    )
 
     def nextURL(self):
         return self.questions_url()

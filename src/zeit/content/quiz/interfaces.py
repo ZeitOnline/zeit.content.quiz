@@ -97,7 +97,7 @@ def only_one_may_be_correct(value):
 
     field = inspect.stack()[2][0].f_locals['self']
     answer = IAnswer(field.context, None)
-    #if answer is None:
+    # if answer is None:
     question = IQuestion(field.context)
 
     for existing_answer in question.values():

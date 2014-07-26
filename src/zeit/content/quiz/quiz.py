@@ -78,6 +78,7 @@ class ContentBase(object):
     def convert(self):
         return zeit.wysiwyg.interfaces.IHTMLConverter(self)
 
+
 class SearchableText(grokcore.component.Adapter):
     """SearchableText for a quiz."""
 

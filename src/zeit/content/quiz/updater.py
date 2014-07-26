@@ -16,7 +16,7 @@ class Updater(object):
     zope.interface.implements(zeit.content.quiz.interfaces.IQuizUpdater)
 
     def __init__(self, context):
-       self.context = context
+        self.context = context
 
     def update(self):
         url = self.get_url()
