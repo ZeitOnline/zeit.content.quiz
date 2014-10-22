@@ -5,13 +5,13 @@
 
   <include package="zeit.cms" file="ftesting.zcml" />
 
+  <include package="zeit.content.quiz" />
+  <include package="zeit.content.quiz.browser" />
+
   <include package="zeit.wysiwyg" />
   <include package="zeit.wysiwyg.browser" />
 
   <include package="zeit.content.image" />
   <include package="zeit.content.image.browser" />
-
-  <include package="zeit.content.quiz" />
-  <include package="zeit.content.quiz.browser" />
 
 </configure>
