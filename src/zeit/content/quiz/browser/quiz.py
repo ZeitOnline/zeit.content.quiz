@@ -79,7 +79,15 @@ class EditFormBase(zeit.cms.browser.form.EditForm):
     @zope.formlib.form.action(
         _('Apply'), condition=zope.formlib.form.haveInputWidgets)
     def handle_edit_action(self, action, data):
-        self.applyChanges(data)
+        """Mandatory overwrite to keep the action.
+
+        When overwriting one action, we must overwrite *all* actions, since
+        they are only stored locally and no super call is made to retrieve
+        other actions. Thus, when we overwrite "delete", we must also overwrite
+        "apply", otherwise this action will be forgotten.
+
+        """
+        super(EditFormBase, self).handle_edit_action.success(data)
 
     @gocept.form.action.confirm(
         _('Delete'),
