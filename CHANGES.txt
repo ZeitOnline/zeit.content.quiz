@@ -6,7 +6,8 @@ Changes
 0.5.11 (unreleased)
 ===================
 
-- Nothing changed yet.
+- Update tests since mock connector now yields trailing slashes for folder ids
+  (FRIED-37).
 
 
 0.5.10 (2014-11-14)

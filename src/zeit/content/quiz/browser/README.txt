@@ -486,5 +486,5 @@ The answer is still there and has the same values:
     >>> url = base + '/@@default-browsing-location?type_filter=images'
     >>> ajax.open(url)
     >>> print ajax.contents
-    <h1>http://xml.zeit.de/online/2007/01</h1>
+    <h1>http://xml.zeit.de/online/2007/01/</h1>
     ...
