@@ -1,6 +1,3 @@
-# Copyright (c) 2008-2009 gocept gmbh & co. kg
-# See also LICENSE.txt
-
 import zeit.cms.type
 from zeit.cms.i18n import MessageFactory as _
 import lxml.objectify

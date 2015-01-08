@@ -1,6 +1,3 @@
-# Copyright (c) 2008-2011 gocept gmbh & co. kg
-# See also LICENSE.txt
-
 import lxml.etree
 import rwproperty
 import zeit.cms.content.property
