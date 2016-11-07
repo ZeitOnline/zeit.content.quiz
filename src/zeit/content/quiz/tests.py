@@ -78,8 +78,8 @@ ZCML_LAYER = ZCMLLayer(
 
 
 class QuizSourceTest(
-    zeit.cms.content.tests.test_contentsource.ContentSourceBase,
-    zeit.cms.testing.FunctionalTestCase):
+        zeit.cms.content.tests.test_contentsource.ContentSourceBase,
+        zeit.cms.testing.FunctionalTestCase):
 
     layer = ZCML_LAYER
 
