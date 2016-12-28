@@ -15,10 +15,7 @@ Add a quiz
 
 To add a quiz we go to a folder:
 
->>> browser.open('http://localhost/++skin++cms/repository/online/2007/01')
->>> menu = browser.getControl(name='add_menu')
->>> menu.displayValue = ['Quiz']
->>> browser.open(menu.value[0])
+>>> browser.open('http://localhost/++skin++cms/repository/online/2007/01/@@zeit.content.quiz.Add')
 
 We set the most important values[#commentdefault]_[#browsing-location]_:
 

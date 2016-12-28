@@ -47,6 +47,7 @@ class QuizType(zeit.cms.type.XMLContentTypeDeclaration):
     interface = zeit.content.quiz.interfaces.IQuiz
     title = _('Quiz')
     type = 'quiz'
+    addform = zeit.cms.type.SKIP_ADD
 
 
 @zope.component.adapter(zeit.content.quiz.interfaces.IQuizContent)

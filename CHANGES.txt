@@ -6,7 +6,7 @@ Changes
 0.5.12 (unreleased)
 ===================
 
-- Nothing changed yet.
+- MAINT: Remove quiz from add menu.
 
 
 0.5.11 (2014-12-17)

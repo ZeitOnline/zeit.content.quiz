@@ -26,15 +26,14 @@
     file="quiz.png"
     layer="zeit.cms.browser.interfaces.ICMSLayer"
     />
-  
+
   <browser:page
     for="zeit.cms.repository.interfaces.IFolder"
     permission="zeit.AddContent"
     class=".quiz.AddQuiz"
     name="zeit.content.quiz.Add"
-    menu="zeit-add-menu" title="Quiz"
     />
-  
+
   <browser:page
     name="edit.html"
     for="..interfaces.IQuiz"
