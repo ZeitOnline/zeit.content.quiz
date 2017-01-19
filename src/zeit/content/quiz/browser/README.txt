@@ -471,7 +471,7 @@ The answer is still there and has the same values:
 
 .. [#commentdefault] The default for "allow comments" is off:
 
-    >>> browser.getControl('Comments').selected
+    >>> browser.getControl('Comments allowed').selected
     False
 
 
