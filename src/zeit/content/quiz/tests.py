@@ -64,7 +64,7 @@ product_config = """\
 
 class ZCMLLayer(zeit.cms.testing.ZCMLLayer):
 
-    defaultBases = (HTTP_LAYER,)
+    defaultBases = zeit.cms.testing.ZCMLLayer.defaultBases + (HTTP_LAYER,)
 
     def setUp(self):
         self.product_config = self.product_config.format(
